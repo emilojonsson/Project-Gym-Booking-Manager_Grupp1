@@ -11,12 +11,17 @@ using System.Threading.Tasks;
 #endif
 namespace Gym_Booking_Manager
 {
+    //
     internal class GroupSchedule
     {
-        public List<GroupActivity> activities;
+        public List<GroupActivity> activities = new List<GroupActivity>();
         public void ViewSchedule(ReservingEntity user)
         {
             //Todo
+            foreach(GroupActivity activity in activities)
+            {
+                Console.WriteLine(activity);
+            }
         }
         public void AddActivity(ReservingEntity user, string activityDetails)
         {
@@ -29,6 +34,10 @@ namespace Gym_Booking_Manager
         public void RemoveActivity(ReservingEntity user, string activityID)
         {
             //Todo
+        }
+        public override string ToString()
+        {
+            return $"{activities}";
         }
 
     }
