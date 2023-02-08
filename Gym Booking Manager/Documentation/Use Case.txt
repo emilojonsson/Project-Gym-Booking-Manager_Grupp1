@@ -16,7 +16,7 @@
 |                     |          | trainers). Some reservable resources can also be impacted.  |
 |                     |          |                                                             |
 | View Equipment/Space| Staff    | Display reservation data regarding a particular item.       |
-|      		          | Customer | Items include space (halls/lanes/rooms), equipment,         |
+|      		      | Customer | Items include space (halls/lanes/rooms), equipment,         |
 |                     | Service  | staff (coach, PT). Although customers should not have       |
 |                     |          | full access to item time table, they may need               |
 |                     |          | availability information indirectly.                        |
