@@ -10,6 +10,7 @@ namespace Gym_Booking_Manager
     {
         static void Main(string[] args)
         {
+            Menu menu = new Menu();
             User userContext;
         }
 
