@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;#if DEBUG
 [assembly: InternalsVisibleTo("Tests")]
 #endif
 namespace Gym_Booking_Manager
-{    public class Menu    {        public Menu()        {            string userInput = "";
+{    //RunSoftware    public class Menu    {        // startUp()        // metod menu()        public Menu()        {            string userInput = "";
             while (userInput != "q")
             {
                 // TODO - skapa en säkerhetsåtgärd för inloggning på Customer och Staff
@@ -29,6 +29,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
+                                
                                 break;
                             case "2":
                                 // Code to view equipment                                
