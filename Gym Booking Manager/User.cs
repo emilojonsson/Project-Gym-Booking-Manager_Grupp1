@@ -11,14 +11,14 @@ using static Gym_Booking_Manager.Space;
 #endif
 namespace Gym_Booking_Manager
 {
-    //
     internal abstract class User
     {
+        // uniqueID
         public string uniqueID { get; set; }
         public string name { get; set; } // Here the "field" is private, but properties (access of the field) public here - this constellation being purely declarative without change in functionality
         public string phone { get; set; }
         public string email { get; set; }
-        public string status { get; set; }  
+        public string status { get; set; }
 
         protected User(string name, string uniqueID, string phone, string email, string status)
         {
