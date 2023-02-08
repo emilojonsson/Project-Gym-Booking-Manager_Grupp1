@@ -29,7 +29,7 @@ namespace Gym_Booking_Manager
             this.activityDetails = activityDetails;
             this.timeSlot = new Calendar();
             this.space = space;
-            this.trainer = trainer;
+            this.instructor = trainer;
             this.equipment = equipment;
         }
 
