@@ -10,7 +10,7 @@ namespace Gym_Booking_Manager
     {
         static void Main(string[] args)
         {
-            User userContext;
+
         }
 
         // Static methods for the program
