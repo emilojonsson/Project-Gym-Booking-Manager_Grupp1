@@ -60,7 +60,7 @@ namespace Gym_Booking_Manager
             schedule1.activities.Add(activity4);
             schedule1.activities.Add(activity5);
 
-            Menu m1 = new Menu();
+            Menu m1 = new Menu();            m1.Run();
         }
     }
 }
