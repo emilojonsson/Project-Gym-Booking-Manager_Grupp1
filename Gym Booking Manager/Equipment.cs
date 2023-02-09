@@ -16,9 +16,7 @@ namespace Gym_Booking_Manager
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         private Category category;
         private String name;
-        private readonly Calendar calendar;
-
-        public Equipment(Category category, string name)
+        private readonly Calendar calendar;        public string? NewEquipment { get; }        public Equipment(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -35,9 +33,7 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }
-
-        public int CompareTo(Equipment? other)
+        }        public Equipment(string? newEquipment)        {            NewEquipment = newEquipment;        }        public int CompareTo(Equipment? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;

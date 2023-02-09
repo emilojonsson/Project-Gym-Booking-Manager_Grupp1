@@ -14,12 +14,12 @@ namespace Gym_Booking_Manager
     //
     internal class GroupSchedule
     {
-        public List<GroupActivity> activities = new List<GroupActivity>();
+        public List<Activity> activities = new List<Activity>();
         public void ViewSchedule(ReservingEntity user)
         {
             //Todo
 
-            foreach(GroupActivity activity in activities)
+            foreach(Activity activity in activities)
             {
                 if (activity.participants.Contains(user))
                 {
@@ -49,7 +49,7 @@ namespace Gym_Booking_Manager
         public void RemoveActivity(ReservingEntity user, string activityID)
         {
             //Todo
-            foreach (GroupActivity activity in activities)
+            foreach (Activity activity in activities)
             {
                 if (user.status == "Member")
                 {
