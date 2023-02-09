@@ -3,11 +3,59 @@ using System.Runtime.CompilerServices;#if DEBUG
 [assembly: InternalsVisibleTo("Tests")]
 #endif
 namespace Gym_Booking_Manager
+<<<<<<< HEAD
 {    internal class Menu    {        public void Run()        {            string userInput = "";            bool quit = false;            while (!quit)            {                Console.WriteLine("\nWelcome to the menu:");                Console.WriteLine("1. Member");                Console.WriteLine("2. Non-member");                Console.WriteLine("3. Staff");                Console.WriteLine("q. Quit program");                Console.Write("Enter your choice: ");                userInput = Console.ReadLine();                switch (userInput)                {                    case "1":                        choiceMember();                        break;                    case "2":                        choiceNonMember();                        break;                    case "3":                        choiceStaff();                        break;                    case "q":                        quit = true;                        break;                    default:                        Console.WriteLine("\nInvalid option");                        break;                }            }        }
+=======
+{    //RunSoftware    public class Menu    {        // startUp()        // metod menu()        public Menu()        {            string userInput = "";
+            while (userInput != "q")
+            {
+                // TODO - skapa en säkerhetsåtgärd för inloggning på Customer och Staff
+                Console.WriteLine("Welcome to the menu:");
+                Console.WriteLine("1. Member");
+                Console.WriteLine("2. Non-member");
+                Console.WriteLine("3. Staff");
+                Console.WriteLine("q. Quit program");
+                Console.Write("Enter your choice: ");
+                userInput = Console.ReadLine();
+>>>>>>> 4e123ac8ea99f62b8e8006c642e4b11c526eaf9a
 
 
+<<<<<<< HEAD
         // Fundera på om funktionen ska returnera data för att bli testbar
         private void choiceMember()        {            Console.WriteLine("\n--- Member ---");            Console.WriteLine("1. View schedule");       // Samla view schedule, equipment, PT(?) och space här            Console.WriteLine("2. Make a reservation");  // Kom vidare till att se vad som går att reservera            Console.WriteLine("3. Edit reservation");            Console.WriteLine("q. Go back");            Console.Write("Enter your choice: ");            string userInput = Console.ReadLine();            switch (userInput)            {                case "1":                    // Code to view schedule                    break;                case "2":                    // Code to view equipment                    break;                case "3":                    // Code to view space                    break;                case "q":                    // Go back to main menu                    Run();                    break;                default:                    Console.WriteLine("\nInvalid option");                    break;            }        }
+=======
+                        switch (userInput)
+                        {
+                            case "1":
+                                // Code to view schedule
+                                
+                                break;
+                            case "2":
+                                // Code to view equipment                                
+                                break;
+                            case "3":
+                                // Code to view space
+                                break;
+                            case "4":
+                                // Code to make a reservation
+                                break;
+                            case "5":
+                                // Code to edit reservation
+                                break;
+                            case "q":
+                                break;
+                            default:
+                                Console.WriteLine("Invalid option");
+                                break;
+                        }
+                        break;
+                    case "2":
+                        Console.WriteLine("--- Non-member ---");
+                        Console.WriteLine("1. Purchase subscription"); // Registrera ny användare och tidslängd på sub.
+                        Console.WriteLine("q. Go back");
+                        Console.Write("Enter your choice: ");
+                        userInput = Console.ReadLine();
+>>>>>>> 4e123ac8ea99f62b8e8006c642e4b11c526eaf9a
 
         private void choiceNonMember()        {            Console.WriteLine("\n--- Non-member ---");            Console.WriteLine("1. Purchase subscription"); // Registrera ny användare och tidslängd på sub.            Console.WriteLine("q. Go back");            Console.Write("Enter your choice: ");            string userInput = Console.ReadLine();            switch (userInput)            {                case "1":                    // Code to purchase subscription                    break;                case "q":                    Run();                    break;                default:                    Console.WriteLine("\nInvalid option");                    break;            }        }
 
