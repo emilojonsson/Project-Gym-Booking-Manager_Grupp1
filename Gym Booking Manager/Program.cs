@@ -34,26 +34,45 @@ namespace Gym_Booking_Manager
             ReservingEntity user4 = new ReservingEntity("Daniel Damp", "1003", "103", "d.d@gmail.com", "Staff");
             ReservingEntity user5 = new ReservingEntity("Erik Erdogan", "1004", "104", "e.e@gmail.com", "Staff");
             ReservingEntity user6 = new ReservingEntity("Fredrik Fransson", "1005", "105", "f.f@gmail.com", "Service");
-            GroupActivity activity1 = new GroupActivity("Danspass", "a01", space5, trainer1, equipment2);
-            GroupActivity activity2 = new GroupActivity("Jympapass", "a02", space1, trainer2, equipment3);
-            GroupActivity activity3 = new GroupActivity("Tennisträning", "a03", space3, trainer3, equipment1);
-            GroupActivity activity4 = new GroupActivity("Löparpass", "a04", space2, trainer4, equipment4);
-            GroupActivity activity5 = new GroupActivity("Gymträning", "a05", space6, trainer4, equipment6);
-            activity1.participants.Add(user1);
-            activity1.participants.Add(user2);
-            activity2.participants.Add(user1);
-            activity2.participants.Add(user2);
-            activity2.participants.Add(user3);
-            activity3.participants.Add(user1);
-            activity3.participants.Add(user3);
-            activity4.participants.Add(user2);
-            activity4.participants.Add(user1);
+            DatabaseTemp data1 = new DatabaseTemp();
+            data1.equipmentObjects.Add(equipment1);
+            data1.equipmentObjects.Add(equipment2);
+            data1.equipmentObjects.Add(equipment3);
+            data1.equipmentObjects.Add(equipment4);
+            data1.equipmentObjects.Add(equipment5);
+            data1.equipmentObjects.Add(equipment6);
+            data1.spaceObjects.Add(space1);
+            data1.spaceObjects.Add(space2);
+            data1.spaceObjects.Add(space3);
+            data1.spaceObjects.Add(space4);
+            data1.spaceObjects.Add(space5);
+            data1.spaceObjects.Add(space6);
+            data1.trainerObjects.Add(trainer1);
+            data1.trainerObjects.Add(trainer2);
+            data1.trainerObjects.Add(trainer3);
+            data1.trainerObjects.Add(trainer4);
+            data1.userObjects.Add(user1);
+            data1.userObjects.Add(user2);
+            data1.userObjects.Add(user3);
+            data1.userObjects.Add(user4);
+            data1.userObjects.Add(user5);
+            data1.userObjects.Add(user6);
+            DateTime testTime= DateTime.Now;
             GroupSchedule schedule1 = new GroupSchedule();
+            GroupActivity activity1 = new GroupActivity("Danspass", "a01", 20, testTime,user1, space5, trainer1, equipment2);
+            GroupActivity activity2 = new GroupActivity("Jympapass", "a02", 20, testTime, user2, space1, trainer2, equipment3);
+            GroupActivity activity3 = new GroupActivity("Tennisträning", "a03", 20, testTime, user3, space3, trainer3, equipment1);
+            GroupActivity activity4 = new GroupActivity("Löparträning", "a04", 20, testTime,user3, space2, trainer4, equipment4);
+            GroupActivity activity5 = new GroupActivity("Gymträning", "a05", 20, testTime, user1, space6, trainer4, equipment6);
             schedule1.activities.Add(activity1);
             schedule1.activities.Add(activity2);
             schedule1.activities.Add(activity3);
             schedule1.activities.Add(activity4);
             schedule1.activities.Add(activity5);
+            data1.scheduleObjects.Add(schedule1);
+
+
+
 
             string userInput = "";
             while (userInput != "q")
@@ -86,7 +105,7 @@ namespace Gym_Booking_Manager
                                 break;
                             case "2":
                                 // Make a reservation
-                                activity3.SignUp(user5);
+                                //activity3.SignUp(user5);
                                 break;
                             case "3":
                                 // Edit reservation

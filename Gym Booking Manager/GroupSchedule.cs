@@ -17,7 +17,7 @@ namespace Gym_Booking_Manager
         public List<GroupActivity> activities = new List<GroupActivity>();
         public void ViewSchedule(ReservingEntity user)
         {
-            //Todo
+            //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
 
             foreach(GroupActivity activity in activities)
             {
@@ -27,19 +27,23 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-        public void AddActivity(ReservingEntity user)
+        public void AddActivity(ReservingEntity user, DatabaseTemp data)
         {
             Console.WriteLine("Ange information om aktiviteten:");
             string? activityDetails = Console.ReadLine();
+            
             DateTime uniqueTimeToID = DateTime.Now;
-            string activityID = uniqueTimeToID.ToString("yyyy/MM//dd HH:mm");
+            string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); //choose this for now. it is at least unique
+            
             Console.WriteLine("Ange hur många deltagare det maximalt kan vara på aktiviteten:");
-            int participantsLimit = int.Parse(Console.ReadLine());
+            int participantLimit = int.Parse(Console.ReadLine());
+            
             Console.WriteLine("Ange vilken timme aktiviteten ska starta:");
-            DateTime startTime = DateTime.Parse(Console.ReadLine());
-            Calendar changethisnameofvariabel = new Calendar(startTime, user);
-            //Console.WriteLine("Ange vilken tränarroll du kommer att ha till denna aktivitet:");
-            //Trainer traintest = 
+            DateTime timeSlot = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine(data.spaceObjects[0]);
+            //Todo trainer/space/equipment
+            
+            activities.Add(new GroupActivity(activityID, activityDetails, participantLimit, timeSlot, user, null, null, null));
 
         }
         public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID)

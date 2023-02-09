@@ -11,25 +11,24 @@ namespace Gym_Booking_Manager
     {
         public string activityID;
         public string activityDetails;
-        public int participantLimit = 20; //To be changed later...
+        public int participantLimit;
         public List<ReservingEntity> participants = new List<ReservingEntity>();
         public Calendar timeSlot;
         //public DateTime currentDateTime = DateTime.Now; // Test var
         public Trainer instructor;
         public Space space;
         public Equipment equipment;
-        //public GroupActivity(string activityID, string activityDetails)
-        //{
-        //    this.activityID = activityID;
-        //    this.activityDetails = activityDetails;
-        //    this.timeSlot = new Calendar();
-        //    this.space = new Space(Space.Category.Hall, "TestSpace");
-        //}
-        public GroupActivity(string activityID, string activityDetails, Space space, Trainer trainer, Equipment equipment)
+
+        public GroupActivity() 
+        {
+
+        }
+        public GroupActivity(string activityID, string activityDetails,int participantLimit, DateTime timeSlot, ReservingEntity owner, Space space, Trainer trainer, Equipment equipment)
         {
             this.activityID = activityID;
             this.activityDetails = activityDetails;
-            this.timeSlot = new Calendar();
+            this.participantLimit = participantLimit;
+            this.timeSlot = new Calendar(timeSlot, owner);
             this.space = space;
             this.instructor = trainer;
             this.equipment = equipment;
