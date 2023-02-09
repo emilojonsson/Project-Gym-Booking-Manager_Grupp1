@@ -73,7 +73,25 @@ namespace Gym_Booking_Manager
 
         public void MakeReservation(IReservingEntity owner)
         {
+            string input = "";
+            string passname = "";
+            Console.WriteLine("[1] Small");
+            Console.WriteLine("[2] Large");
+            Console.Write("Enter your choice: ");
+            input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    Category small = Category.Small;
+                    passname = Console.ReadLine();
 
+                    break;
+                case "2":
+                    Category large = Category.Large;
+                    passname = Console.ReadLine();
+
+                    break;
+            }
         }
 
         public void CancelReservation()

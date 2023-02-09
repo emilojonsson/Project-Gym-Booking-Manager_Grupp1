@@ -58,17 +58,21 @@ namespace Gym_Booking_Manager
             data1.userObjects.Add(user6);
             DateTime testTime = DateTime.Now;
             GroupSchedule schedule1 = new GroupSchedule();
-            GroupActivity activity1 = new GroupActivity("Danspass", "a01", 20, testTime, user1, space5, trainer1, equipment2);
-            GroupActivity activity2 = new GroupActivity("Jympapass", "a02", 20, testTime, user2, space1, trainer2, equipment3);
-            GroupActivity activity3 = new GroupActivity("Tennisträning", "a03", 20, testTime, user3, space3, trainer3, equipment1);
-            GroupActivity activity4 = new GroupActivity("Löparträning", "a04", 20, testTime, user3, space2, trainer4, equipment4);
-            GroupActivity activity5 = new GroupActivity("Gymträning", "a05", 20, testTime, user1, space6, trainer4, equipment6);
+            Activity activity1 = new Activity("Danspass", "a01", 20, testTime, user1, space5, trainer1, equipment2);
+            Activity activity2 = new Activity("Jympapass", "a02", 20, testTime, user2, space1, trainer2, equipment3);
+            Activity activity3 = new Activity("Tennisträning", "a03", 20, testTime, user3, space3, trainer3, equipment1);
+            Activity activity4 = new Activity("Löparträning", "a04", 20, testTime, user3, space2, trainer4, equipment4);
+            Activity activity5 = new Activity("Gymträning", "a05", 20, testTime, user1, space6, trainer4, equipment6);
             schedule1.activities.Add(activity1);
             schedule1.activities.Add(activity2);
             schedule1.activities.Add(activity3);
             schedule1.activities.Add(activity4);
             schedule1.activities.Add(activity5);
             data1.scheduleObjects.Add(schedule1);
+
+
+            Menu m1 = new Menu();
+            m1.Run();
 
             string userInput = "";
             while (userInput != "q")

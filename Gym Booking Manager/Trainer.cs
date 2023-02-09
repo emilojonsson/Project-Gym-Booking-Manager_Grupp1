@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 
 #if DEBUG
@@ -66,13 +67,33 @@ namespace Gym_Booking_Manager
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-                // Do something?
+                Console.WriteLine(reservation);
             }
 
         }
 
         public void MakeReservation(IReservingEntity owner)
         {
+            //supervised training session and consultation
+            string input = "";
+            string passname = "";
+            Console.WriteLine("[1] Supervised training session");
+            Console.WriteLine("[2] Consultation");
+            Console.Write("Enter your choice: ");
+            input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    Category trainer = Category.Trainer;
+                    passname = Console.ReadLine();
+                    
+                    break;
+                case "2":
+                    Category consultation = Category.Consultation;
+                    passname = Console.ReadLine();
+
+                    break;
+            }
 
         }
 
