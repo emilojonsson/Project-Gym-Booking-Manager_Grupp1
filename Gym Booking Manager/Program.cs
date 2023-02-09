@@ -55,6 +55,12 @@ namespace Gym_Booking_Manager
             schedule1.activities.Add(activity4);
             schedule1.activities.Add(activity5);
 
+
+
+
+
+
+
             string userInput = "";
             while (userInput != "q")
             {
