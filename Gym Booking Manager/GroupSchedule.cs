@@ -23,9 +23,20 @@ namespace Gym_Booking_Manager
                 Console.WriteLine(activity);
             }
         }
-        public void AddActivity(ReservingEntity user, string activityDetails)
+        public void AddActivity(ReservingEntity user)
         {
-            //Todo
+            Console.WriteLine("Ange information om aktiviteten:");
+            string? activityDetails = Console.ReadLine();
+            DateTime uniqueTimeToID = DateTime.Now;
+            string activityID = uniqueTimeToID.ToString("yyyy/MM//dd HH:mm");
+            Console.WriteLine("Ange hur många deltagare det maximalt kan vara på aktiviteten:");
+            int participantsLimit = int.Parse(Console.ReadLine());
+            Console.WriteLine("Ange vilken timme aktiviteten ska starta:");
+            DateTime startTime = DateTime.Parse(Console.ReadLine());
+            Calendar changethisnameofvariabel = new Calendar(startTime, user);
+            //Console.WriteLine("Ange vilken tränarroll du kommer att ha till denna aktivitet:");
+            //Trainer traintest = 
+
         }
         public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID)
         {

@@ -20,10 +20,16 @@ namespace Gym_Booking_Manager
     {
         private readonly List<Reservation> reservations;
 
-        public Calendar()
+        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {
             this.reservations = new List<Reservation>();
         }
+        public Calendar(DateTime timeSlot, ReservingEntity Owner) //this is to be used when creating an Activity
+        {
+            this.reservations = new List<Reservation> {new Reservation(Owner, timeSlot)};
+
+        }
+
 
         // Leaving this method for now. Idea being it may be useful to get entries within a "start" and "end" time/date range.
         // Need parameters if so.
