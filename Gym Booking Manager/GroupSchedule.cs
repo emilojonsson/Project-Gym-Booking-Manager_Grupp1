@@ -26,7 +26,7 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-        public void AddActivity(ReservingEntity user, DatabaseTemp data)
+        public void AddActivity(ReservingEntity owner, DatabaseTemp data)
         {
             Console.WriteLine("Ange information om aktiviteten:");
             string? activityDetails = Console.ReadLine();
@@ -61,10 +61,10 @@ namespace Gym_Booking_Manager
             }
             int addedEquipment = int.Parse(Console.ReadLine());
 
-            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, user, data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
-            data.spaceObjects[addedSpace].MakeReservation(user, timeSlot);
-            data.trainerObjects[addedTrainer].MakeReservation(user, timeSlot);
-            data.equipmentObjects[addedEquipment].MakeReservation(user, timeSlot);
+            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, owner, data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+            data.spaceObjects[addedSpace].MakeReservation(owner, timeSlot);
+            data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot);
+            data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot);
         }
 
         // TODO - Ska kunna användas av member och staff
