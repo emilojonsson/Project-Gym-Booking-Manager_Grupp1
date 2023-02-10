@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 #endif
 namespace Gym_Booking_Manager
 {
-    //
     internal class GroupSchedule
     {
         public List<Activity> activities = new List<Activity>();
@@ -46,10 +45,23 @@ namespace Gym_Booking_Manager
             activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, user, null, null, null));
 
         }
-        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID)
+
+        // TODO - Ska kunna användas av member och staff
+        // - ombokning/avbokning
+        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID) 
         {
-            //Todo
+            foreach(Activity activity in activities)            {                if(user.status == "Member")                {                    if (activity.activityID == activityID)
+                    {
+                        //activity.participants.Update(user);
+                        //Console.WriteLine(" ");
+                        //break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The Activity was not found in the schedule.");
+                    }                }                else if(user.status == "Staff")                {                    // TODO                }            }
         }
+
         public void RemoveActivity(ReservingEntity user, string activityID)
         {
             //Todo
