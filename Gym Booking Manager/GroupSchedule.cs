@@ -71,7 +71,11 @@ namespace Gym_Booking_Manager
         // - ombokning/avbokning
         public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID) 
         {
-            foreach(Activity activity in activities)            {                if(user.status == "Member")                {                    if (activity.activityID == activityID)
+            foreach(Activity activity in activities)
+            {
+                if(user.status == "Member")
+                {
+                    if (activity.activityID == activityID)
                     {
                         //activity.participants.Update(user);
                         //Console.WriteLine(" ");
@@ -80,7 +84,14 @@ namespace Gym_Booking_Manager
                     else
                     {
                         Console.WriteLine($"The Activity was not found in the schedule.");
-                    }                }                else if(user.status == "Staff")                {                    // TODO                }            }
+                    }
+                }
+
+                else if(user.status == "Staff")
+                {
+                    // TODO
+                }
+            }
         }
 
         public void RemoveActivity(ReservingEntity user, string activityID)
