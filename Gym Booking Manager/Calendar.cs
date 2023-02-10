@@ -14,11 +14,13 @@ using System.Threading.Tasks;
 #if DEBUG
 [assembly: InternalsVisibleTo("Tests")]
 #endif
-namespace Gym_Booking_Manager
+namespace Gym_Booking_Manager 
 {
     internal class Calendar
     {
-        private readonly List<Reservation> reservations;        private DateTime dateTime; // Becca skrev in tillfälligt        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
+        public List<Reservation> reservations;
+        //private readonly List<Reservation> reservations;
+        private DateTime dateTime; // Becca skrev in tillfälligt        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {
             this.reservations = new List<Reservation>();
         }        public Calendar(DateTime dateTime)        {            this.dateTime = dateTime;        }        public Calendar(DateTime timeSlot, ReservingEntity Owner) //this is to be used when creating an Activity

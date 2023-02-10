@@ -15,8 +15,8 @@ namespace Gym_Booking_Manager
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         private Category category;
-        private String name;
-        private readonly Calendar calendar;        public string? NewEquipment { get; }        public Equipment(Category category, string name)
+        public String name;
+        public Calendar calendar;        //private readonly Calendar calendar;        public string? NewEquipment { get; }        public Equipment(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -71,27 +71,8 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void MakeReservation(IReservingEntity owner)
-        {
-            string input = "";
-            string passname = "";
-            Console.WriteLine("[1] Small");
-            Console.WriteLine("[2] Large");
-            Console.Write("Enter your choice: ");
-            input = Console.ReadLine();
-            switch (input)
-            {
-                case "1":
-                    Category small = Category.Small;
-                    passname = Console.ReadLine();
+        public void MakeReservation(ReservingEntity owner, DateTime dateTime)        {            calendar.reservations.Add(new Reservation(owner, dateTime));
 
-                    break;
-                case "2":
-                    Category large = Category.Large;
-                    passname = Console.ReadLine();
-
-                    break;
-            }
         }
 
         public void CancelReservation()

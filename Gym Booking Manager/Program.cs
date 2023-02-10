@@ -11,7 +11,8 @@ namespace Gym_Booking_Manager
     internal class Program
     {
         static void Main(string[] args)
-        {            Space space1 = new Space(Space.Category.Hall, "Jympaområdet");
+        {
+            Space space1 = new Space(Space.Category.Hall, "Jympaområdet");
             Space space2 = new Space(Space.Category.Hall, "Uppvärmingsdelen");
             Space space3 = new Space(Space.Category.Lane, "Tennisområdet");
             Space space4 = new Space(Space.Category.Lane, "Paddelytan");
@@ -70,6 +71,9 @@ namespace Gym_Booking_Manager
             schedule1.activities.Add(activity5);
             data1.scheduleObjects.Add(schedule1);
 
+            schedule1.AddActivity(user1, data1);
+            schedule1.activities[5].SignUp(user1);
+            Console.WriteLine(data1.equipmentObjects[0].calendar.reservations[0]);
 
             Menu m1 = new Menu();
             m1.Run();

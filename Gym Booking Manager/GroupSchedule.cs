@@ -40,11 +40,32 @@ namespace Gym_Booking_Manager
             
             Console.WriteLine("Ange vilken timme aktiviteten ska starta:");
             DateTime timeSlot = DateTime.Parse(Console.ReadLine());
-            Console.WriteLine(data.spaceObjects[0]);
-            //Todo trainer/space/equipment
-            
-            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, user, null, null, null));
 
+            Console.WriteLine("Ange siffra för vilken yta som ska reserveras för aktiviteten:");
+            foreach(Space space in data.spaceObjects)
+            {
+                Console.WriteLine($"{data.spaceObjects.IndexOf(space)} - {space.name}");
+            }
+            int addedSpace = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Ange siffra för vilken träningsprofil som ska reserveras för aktiviteten:");
+            foreach (Trainer trainer in data.trainerObjects)
+            {
+                Console.WriteLine($"{data.trainerObjects.IndexOf(trainer)} - {trainer.name}");
+            }
+            int addedTrainer = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Ange siffra för vilken utrustning som ska reserveras för aktiviteten:");
+            foreach (Equipment equipment in data.equipmentObjects)
+            {
+                Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment)} - {equipment.name}");
+            }
+            int addedEquipment = int.Parse(Console.ReadLine());
+
+            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, user, data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+            data.spaceObjects[addedSpace].MakeReservation(user, timeSlot);
+            data.trainerObjects[addedTrainer].MakeReservation(user, timeSlot);
+            data.equipmentObjects[addedEquipment].MakeReservation(user, timeSlot);
         }
         public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID)
         {

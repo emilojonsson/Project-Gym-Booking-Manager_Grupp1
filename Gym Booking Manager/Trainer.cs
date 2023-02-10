@@ -16,8 +16,13 @@ namespace Gym_Booking_Manager
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         private Category category;
-        private String name;
-        private readonly Calendar calendar;        public string? NewInstructor { get; } // Becca skrev in tillfälligt        public Trainer(Category category, string name)
+        public String name;
+        public Calendar calendar;
+        //private readonly Calendar calendar;
+
+        public string? NewInstructor { get; } // Becca skrev in tillfälligt
+
+        public Trainer(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -34,7 +39,14 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }        public Trainer(string? newInstructor)        {            NewInstructor = newInstructor;        }        public int CompareTo(Trainer? other)
+        }
+
+        public Trainer(string? newInstructor)
+        {
+            NewInstructor = newInstructor;
+        }
+
+        public int CompareTo(Trainer? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;
@@ -72,28 +84,29 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void MakeReservation(IReservingEntity owner)
+        public void MakeReservation(ReservingEntity owner, DateTime timeSlot)
         {
+            calendar.reservations.Add(new Reservation(owner, timeSlot));
             //supervised training session and consultation
-            string input = "";
-            string passname = "";
-            Console.WriteLine("[1] Supervised training session");
-            Console.WriteLine("[2] Consultation");
-            Console.Write("Enter your choice: ");
-            input = Console.ReadLine();
-            switch (input)
-            {
-                case "1":
-                    Category trainer = Category.Trainer;
-                    passname = Console.ReadLine();
-                    
-                    break;
-                case "2":
-                    Category consultation = Category.Consultation;
-                    passname = Console.ReadLine();
+            //string input = "";
+            //string passname = "";
+            //Console.WriteLine("[1] Supervised training session");
+            //Console.WriteLine("[2] Consultation");
+            //Console.Write("Enter your choice: ");
+            //input = Console.ReadLine();
+            //switch (input)
+            //{
+            //    case "1":
+            //        Category trainer = Category.Trainer;
+            //        passname = Console.ReadLine();
 
-                    break;
-            }
+            //        break;
+            //    case "2":
+            //        Category consultation = Category.Consultation;
+            //        passname = Console.ReadLine();
+
+            //        break;
+            //}
 
         }
 
