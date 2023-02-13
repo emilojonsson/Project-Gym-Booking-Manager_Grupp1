@@ -18,12 +18,21 @@ namespace Gym_Booking_Manager
         public void ViewSchedule(ReservingEntity user)
         {
             //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
-
-            foreach(Activity activity in activities)
+            if (user.status == "Member")
             {
-                if (activity.participants.Contains(user))
+                foreach (Activity activity in activities)
                 {
-                    Console.WriteLine(activity);    
+                    if (activity.participants.Contains(user))
+                    {
+                        Console.WriteLine(activity);
+                    }
+                }
+            }
+            if (user.status == "Staff")
+            {
+                foreach (Activity activity in activities)
+                {
+                    Console.WriteLine(activity);
                 }
             }
         }
