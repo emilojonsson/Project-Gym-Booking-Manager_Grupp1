@@ -36,6 +36,10 @@ namespace Gym_Booking_Manager
             equipmentObjects = gymDatabase.Read<Equipment>(); //Load DataBase to list trainerObjects
             userObjects = LoadViaDataContractSerialization<List<ReservingEntity>>("user.xml");
             activities = LoadViaDataContractSerialization<List<Activity>>("activity.xml");
+            foreach(Activity a in activities)
+            {
+                schedule.activities.Add(a);
+            }
        
         }
         //Method to Save current objects to DataBase!
