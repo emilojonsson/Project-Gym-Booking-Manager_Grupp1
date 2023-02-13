@@ -38,8 +38,10 @@ namespace Gym_Booking_Manager
                         ReservingEntity member = data1.userObjects[0];
                         Console.WriteLine("--- Member ---");
                         Console.WriteLine("1. View schedule");       // Samla view schedule, equipment, PT(?) och space här
-                        Console.WriteLine("2. Make a reservation");  // Kom vidare till att se vad som går att reservera
-                        Console.WriteLine("3. Edit reservation");
+                        Console.WriteLine("2. Sign Up to activity");  // Kom vidare till att se vad som går att reservera
+                        Console.WriteLine("3. Make a reservation");  // Kom vidare till att se vad som går att reservera
+                        Console.WriteLine("4. Edit reservation"); // Cancel resevation or make a new!!!
+                        Console.WriteLine("5. Cancel Activity");
                         Console.WriteLine("q. Go back");
                         Console.Write("Enter your choice: ");
                         userInput = Console.ReadLine();
@@ -49,15 +51,20 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
-                                //schedule1.ViewSchedule(user4);
+                                data1.schedule.ViewSchedule(member);
                                 break;
                             case "2":
-                                // Make a reservation
+                                // Signup to activity
                                 //activity3.SignUp(user5);
                                 break;
                             case "3":
-                                // Edit reservation
+                                // Implement Method "make reservation" method for space,equimpent and trainer!!
+                                //Behöver skriva ut alternativ till användaren
                                 break;
+                            case "4":
+                                // Implemetnera metoden 
+                            case "5":
+                                //implementera remove activity
                             case "q":
                                 break;
                             default:
@@ -77,6 +84,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to purchase subscription
+                                //Make a temorary member 
                                 break;
                             case "q":
                                 break;
@@ -91,12 +99,15 @@ namespace Gym_Booking_Manager
                         Console.WriteLine("1. View schedule");             // Se alla pass, bokningsbart eller fullbokat
                         Console.WriteLine("2. View equipment");            // Se vilka equipments som går att boka
                         Console.WriteLine("3. View space");                // Se lediga lokaler
-                        Console.WriteLine("4. Make a reservation");        // Reservera PT, gruppass, equipments, lokal
-                        Console.WriteLine("5. Edit reservation");          // Redigera reservation
-                        Console.WriteLine("6. View log");                  // Se de anställdas loggar
-                        Console.WriteLine("7. Edit schedule");             // Uppdatera schemat för de anställda
-                        Console.WriteLine("8. Restrict equipment");        // Registrera avstängda maskiner/lokaler
-                        Console.WriteLine("9. User management");           // Användarhantering
+                        Console.WriteLine("4. Add activity");              // Reservera PT, gruppass, equipments, lokal
+                        Console.WriteLine("5. Modify activity");
+                        Console.WriteLine("6. Remove acticity");
+                        Console.WriteLine("7. make reservation");
+                        Console.WriteLine("8. Edit reservation");          // Redigera reservation
+                        Console.WriteLine("9. View log");                  // Se de anställdas loggar
+                        Console.WriteLine("10. Edit schedule");             // Uppdatera schemat för de anställda
+                        Console.WriteLine("11. Restrict equipment");        // Registrera avstängda maskiner/lokaler
+                        Console.WriteLine("12. User management");           // Användarhantering, purchase subscription to members
                         Console.WriteLine("q. Go back");
                         Console.Write("Enter your choice: ");
                         userInput = Console.ReadLine();
@@ -116,18 +127,28 @@ namespace Gym_Booking_Manager
                                 data1.schedule.AddActivity(staff, data1);
                                 break;
                             case "5":
-                                // Code to edit reservation
+                                // Code to Modify activity
                                 break;
                             case "6":
-                                // Code to view log
+                                // Code to Modify activity
                                 break;
                             case "7":
-                                // Code to edit schedule
+                                // Code to Modify activity
                                 break;
                             case "8":
-                                // Code to restrict equipment
+                                // Code to view log
                                 break;
                             case "9":
+                                // Code to edit schedule
+                                break;
+                            case "10":
+                                // Code to restrict equipment
+                                //flytta från space list to restricted list!
+                                break;
+                            case "11":
+                                // Code to user management
+                                break;
+                            case "12":
                                 // Code to user management
                                 break;
                             case "q":
@@ -140,7 +161,8 @@ namespace Gym_Booking_Manager
                     case "4":
                         User service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
                         Console.WriteLine("--- Service ---");
-                        Console.WriteLine("1. Purchase subscription"); 
+                        Console.WriteLine("1. View Restrictions");
+                        Console.WriteLine("2. Drop Restrictions");
                         Console.WriteLine("q. Go back");
                         Console.Write("Enter your choice: ");
                         userInput = Console.ReadLine();
@@ -148,7 +170,10 @@ namespace Gym_Booking_Manager
                         switch (userInput)
                         {
                             case "1":
-                                // Code to purchase subscription
+                                // View Restrictions
+                                break;
+                            case "2":
+                                // Code to Drop Restrictions
                                 break;
                             case "q":
                                 break;
@@ -160,5 +185,6 @@ namespace Gym_Booking_Manager
                 }
             }
         }
+        //Add method below if needed!!!
     }
 }

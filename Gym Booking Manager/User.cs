@@ -12,6 +12,8 @@ using static Gym_Booking_Manager.Space;
 #endif
 namespace Gym_Booking_Manager
 {
+    //Merge this class with ReservingEntity
+    //Glöm inte lägga [DataMember] på variavlarna
     [DataContract]
     internal abstract class User
     {

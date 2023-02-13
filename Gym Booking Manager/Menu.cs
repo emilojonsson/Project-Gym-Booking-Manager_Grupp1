@@ -19,7 +19,7 @@ namespace Gym_Booking_Manager
             Console.WriteLine("q. Quit program");
             Console.Write("Enter your choice: ");
             userInput = Console.ReadLine();
-
+            //Add a while loop!
             switch (userInput)
             {
                 case "1":

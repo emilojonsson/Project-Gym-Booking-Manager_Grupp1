@@ -28,6 +28,8 @@ namespace Gym_Booking_Manager
         
         public GroupSchedule schedule = new GroupSchedule();
 
+        //Add New list, restricter objects!!
+
         //Method to load current DataBase to program!
         public void LoadDataBase()
         {
