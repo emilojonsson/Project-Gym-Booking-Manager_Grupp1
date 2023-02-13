@@ -78,8 +78,8 @@ namespace Gym_Booking_Manager
             Reservation namn1 = new Reservation(user2, testTime);
             trainer1.calendar.reservations.Add(namn);
             trainer1.calendar.reservations.Add(namn1);
-            trainer1.CancelReservation(user1);
-            Console.WriteLine(trainer1.calendar.reservations[0]);
+            //trainer1.CancelReservation(user1);
+            //Console.WriteLine(trainer1.calendar.reservations[0]);
 
             Menu m1 = new Menu();
             m1.Run();
