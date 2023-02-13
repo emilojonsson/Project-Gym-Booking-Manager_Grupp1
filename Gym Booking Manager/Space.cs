@@ -82,14 +82,14 @@ namespace Gym_Booking_Manager
             Studio
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-               // Do something?
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
@@ -99,9 +99,13 @@ namespace Gym_Booking_Manager
             calendar.reservations.Add(new Reservation(owner, timeSlot));
         }
 
-        public void CancelReservation(DatabaseTemp data1, int posInList)
+        public void CancelReservation(ReservingEntity owner)
         {
-            //calendar.reservations.Remove(data1.spaceObjects[posInList]);
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Space to the database.

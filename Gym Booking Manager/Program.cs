@@ -71,9 +71,15 @@ namespace Gym_Booking_Manager
             schedule1.activities.Add(activity5);
             data1.scheduleObjects.Add(schedule1);
 
-            schedule1.AddActivity(user1, data1);
-            schedule1.activities[5].SignUp(user1);
-            Console.WriteLine(data1.equipmentObjects[0].calendar.reservations[0]);
+            //schedule1.AddActivity(user1, data1);
+            //schedule1.activities[5].SignUp(user1);
+            //Console.WriteLine(data1.equipmentObjects[0].calendar.reservations[0]);
+            Reservation namn = new Reservation(user1, testTime);
+            Reservation namn1 = new Reservation(user2, testTime);
+            trainer1.calendar.reservations.Add(namn);
+            trainer1.calendar.reservations.Add(namn1);
+            trainer1.CancelReservation(user1);
+            Console.WriteLine(trainer1.calendar.reservations[0]);
 
             Menu m1 = new Menu();
             m1.Run();
