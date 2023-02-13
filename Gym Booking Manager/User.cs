@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using static Gym_Booking_Manager.Space;
@@ -11,13 +12,19 @@ using static Gym_Booking_Manager.Space;
 #endif
 namespace Gym_Booking_Manager
 {
+    [DataContract]
     internal abstract class User
     {
         // uniqueID
+        [DataMember]
         public string uniqueID { get; set; }
+        [DataMember]
         public string name { get; set; } // Here the "field" is private, but properties (access of the field) public here - this constellation being purely declarative without change in functionality
+        [DataMember]
         public string phone { get; set; }
+        [DataMember]
         public string email { get; set; }
+        [DataMember]
         public string status { get; set; }
 
         protected User(string name, string uniqueID, string phone, string email, string status)

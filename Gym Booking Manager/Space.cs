@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,17 +22,20 @@ namespace Gym_Booking_Manager
     // As alluded to from previous paragraphs, implementing IComparable<T> is not exhaustive to cover all "comparisons".
     // Refer to official C# documentation to determine what interface to implement to allow use with
     // the class/method/operator that you want.
+    [DataContract]
     internal class Space : IReservable, ICSVable, IComparable<Space> 
     {
+        void IReservable.CancelReservation()
+        {
+            throw new NotImplementedException();
+        }
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
+        [DataMember]
         private Category category;
-        public String name;
-        public Calendar calendar;
-        //private readonly Calendar calendar;
-
-        public string? NewSpace { get; } // Becca skrev in tillfälligt
-
-        public Space(Category category, string name)
+        [DataMember]
+        private String name;
+        [DataMember]
+        private readonly Calendar calendar;        public Space(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -48,14 +52,7 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }
-
-        public Space(string? newSpace)
-        {
-            NewSpace = newSpace;
-        }
-
-        public int CompareTo(Space? other)
+        }        public int CompareTo(Space? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;
@@ -82,14 +79,14 @@ namespace Gym_Booking_Manager
             Studio
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-               // Do something?
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
@@ -99,9 +96,13 @@ namespace Gym_Booking_Manager
             calendar.reservations.Add(new Reservation(owner, timeSlot));
         }
 
-        public void CancelReservation(DatabaseTemp data1, int posInList)
+        public void CancelReservation(ReservingEntity owner)
         {
-            //calendar.reservations.Remove(data1.spaceObjects[posInList]);
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Space to the database.

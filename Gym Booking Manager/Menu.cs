@@ -10,42 +10,11 @@ namespace Gym_Booking_Manager
     {
         public void Run()
         {
-            string userInput = "";
-            bool quit = false;
-
-            while (!quit)
-            {
-                Console.WriteLine("\nWelcome to the menu:");
-                Console.WriteLine("1. Member");
-                Console.WriteLine("2. Non-member");
-                Console.WriteLine("3. Staff");
-                Console.WriteLine("q. Quit program");
-                Console.Write("Enter your choice: ");
-                userInput = Console.ReadLine();
-
-                switch (userInput)
-                {
-                    case "1":
-                        choiceMember();
-                        break;
-                    case "2":
-                        choiceNonMember();
-                        break;
-                    case "3":
-                        choiceStaff();
-                        break;
-                    case "q":
-                        quit = true;
-                        break;
-                    default:
-                        Console.WriteLine("\nInvalid option");
-                        break;
-                }
-            }
+            string userInput = "";            Console.WriteLine("\nWelcome to the menu:");            Console.WriteLine("1. Member");            Console.WriteLine("2. Non-member");            Console.WriteLine("3. Staff");            Console.WriteLine("q. Quit program");            Console.Write("Enter your choice: ");            userInput = Console.ReadLine();            switch (userInput)            {                case "1":                    choiceMember();                    break;                case "2":                    choiceNonMember();                    break;                case "3":                    choiceStaff();                    break;                case "q":                    break;                default:                    Console.WriteLine("\nInvalid option");                    Run();                    break;            }
         }
 
 
-        // Fundera på om funktionen ska returnera data för att bli testbar
+        // Fundera på om funktionerna ska returnera data för att bli testbar
         private void choiceMember()
         {
             Console.WriteLine("\n--- Member ---");
@@ -73,6 +42,7 @@ namespace Gym_Booking_Manager
                     break;
                 default:
                     Console.WriteLine("\nInvalid option");
+                    choiceMember();
                     break;
             }
         }
@@ -95,6 +65,7 @@ namespace Gym_Booking_Manager
                     break;
                 default:
                     Console.WriteLine("\nInvalid option");
+                    choiceNonMember();
                     break;
             }
         }
@@ -149,6 +120,7 @@ namespace Gym_Booking_Manager
                     break;
                 default:
                     Console.WriteLine("\nInvalid option");
+                    choiceStaff();
                     break;
             }
         }

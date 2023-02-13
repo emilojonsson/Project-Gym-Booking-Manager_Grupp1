@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
@@ -12,17 +13,16 @@ using static System.Collections.Specialized.BitVector32;
 #endif
 namespace Gym_Booking_Manager
 {
+    [DataContract]
     internal class Trainer : IReservable, ICSVable, IComparable<Trainer>
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
+        [DataMember]
         private Category category;
-        public String name;
-        public Calendar calendar;
-        //private readonly Calendar calendar;
-
-        public string? NewInstructor { get; } // Becca skrev in tillfälligt
-
-        public Trainer(Category category, string name)
+        [DataMember]
+        private String name;
+        [DataMember]
+        private readonly Calendar calendar;        public Trainer(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -39,14 +39,7 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }
-
-        public Trainer(string? newInstructor)
-        {
-            NewInstructor = newInstructor;
-        }
-
-        public int CompareTo(Trainer? other)
+        }        public int CompareTo(Trainer? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;
@@ -72,14 +65,14 @@ namespace Gym_Booking_Manager
             Consultation
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-                Console.WriteLine(reservation);
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
@@ -110,9 +103,13 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void CancelReservation()
+        public void CancelReservation(ReservingEntity owner)
         {
-
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Trainer to the database.
