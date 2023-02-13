@@ -33,14 +33,17 @@ namespace Gym_Booking_Manager
         static private readonly char sep = Path.DirectorySeparatorChar;
         static private readonly string storage = $"GymDB{sep}storage";
         static private readonly string fpathSpace = $"{storage}{sep}space.csv";
+        static private readonly string fpathTrainer = $"{storage}{sep}trainer.csv";
+        static private readonly string fpathEquipment = $"{storage}{sep}equipment.csv";
+
         // private filepath1, 2, 3 etc...
 
         public LocalStorage()
         {
             Directory.CreateDirectory(storage);
             this.spaces = new DbSet<Space>(fpathSpace);
-            this.trainer = new DbSet<Trainer>(fpathSpace);
-            this.equipment = new DbSet<Equipment>(fpathSpace);
+            this.trainer = new DbSet<Trainer>(fpathTrainer);
+            this.equipment = new DbSet<Equipment>(fpathEquipment);
         }
 
         public bool Create<T>(T entity)
