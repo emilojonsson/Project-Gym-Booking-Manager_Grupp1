@@ -20,10 +20,19 @@ namespace Gym_Booking_Manager
     {
         public List<Reservation> reservations;
         //private readonly List<Reservation> reservations;
-        private DateTime dateTime; // Becca skrev in tillfälligt        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
+        private DateTime dateTime; // Becca skrev in tillfälligt
+
+        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {
             this.reservations = new List<Reservation>();
-        }        public Calendar(DateTime dateTime)        {            this.dateTime = dateTime;        }        public Calendar(DateTime timeSlot, ReservingEntity Owner) //this is to be used when creating an Activity
+        }
+
+        public Calendar(DateTime dateTime)
+        {
+            this.dateTime = dateTime;
+        }
+
+        public Calendar(DateTime timeSlot, ReservingEntity Owner) //this is to be used when creating an Activity
         {
             this.reservations = new List<Reservation> {new Reservation(Owner, timeSlot)};
         }
