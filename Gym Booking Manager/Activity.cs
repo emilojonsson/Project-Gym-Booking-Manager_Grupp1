@@ -27,7 +27,10 @@ namespace Gym_Booking_Manager
         public Space space;
         [DataMember]
         public Equipment equipment;
-        public Activity()        {        }
+        public Activity()
+        {
+
+        }
         public Activity(string activityID, string activityDetails, int participantLimit, DateTime timeSlot, ReservingEntity owner, Space space, Trainer trainer, Equipment equipment)
         {
             this.activityID = activityID;
@@ -50,16 +53,49 @@ namespace Gym_Booking_Manager
             {
                 Console.WriteLine("Participant limit reached for this activity.");
             }
-        }        public void modifyActivity(DatabaseTemp data)
-        {            Console.WriteLine("Enter the new activity details:");            string updatedDetails = Console.ReadLine();
-            Console.WriteLine("Enter the new participant limit:");            int updatedLimit = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM):");
+        }
+
+        public void ModifyActivity(DatabaseTemp data)
+        {
+            Console.WriteLine("Enter the new activity details:");
+            string updatedDetails = Console.ReadLine();
+
+            Console.WriteLine("Enter the new participant limit:");
+            int updatedLimit = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM):");
             string updatedTime = Console.ReadLine();
-            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime));
-            Console.WriteLine("Enter the new trainer's name: ");
-            foreach(Trainer trainer in data.trainerObjects)            {                Console.WriteLine(trainer);            }            int updatedTrainer = int.Parse(Console.ReadLine());            Console.WriteLine("Enter the new space name:");            foreach (Space space in data.spaceObjects)            {                Console.WriteLine(space);            }            int updatedSpace = int.Parse(Console.ReadLine());            Console.WriteLine("Enter the new equipment name:");            foreach (Equipment equipment in data.equipmentObjects)            {                Console.WriteLine(equipment);            }
+
+            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime));
+
+            Console.WriteLine("Enter the new trainer's name: ");
+            foreach(Trainer trainer in data.trainerObjects)
+            {
+                Console.WriteLine(trainer);
+            }
+            int updatedTrainer = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the new space name:");
+            foreach (Space space in data.spaceObjects)
+            {
+                Console.WriteLine(space);
+            }
+            int updatedSpace = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the new equipment name:");
+            foreach (Equipment equipment in data.equipmentObjects)
+            {
+                Console.WriteLine(equipment);
+            }
             int updatedEquipment = int.Parse(Console.ReadLine());
-            this.activityDetails = updatedDetails;            this.participantLimit = updatedLimit;            this.timeSlot = updatedCalendar;            this.trainer = data.trainerObjects[updatedTrainer];            this.equipment = data.equipmentObjects[updatedEquipment]; ;            this.space = data.spaceObjects[updatedSpace]; ;        }
+
+            this.activityDetails = updatedDetails;
+            this.participantLimit = updatedLimit;
+            this.timeSlot = updatedCalendar;
+            this.trainer = data.trainerObjects[updatedTrainer];
+            this.equipment = data.equipmentObjects[updatedEquipment]; ;
+            this.space = data.spaceObjects[updatedSpace]; ;
+        }
 
 
         //public override string ToString()
