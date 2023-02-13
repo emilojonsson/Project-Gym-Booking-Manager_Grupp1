@@ -22,7 +22,9 @@ namespace Gym_Booking_Manager
         [DataMember]
         private String name;
         [DataMember]
-        private readonly Calendar calendar;        public Trainer(Category category, string name)
+        private readonly Calendar calendar;
+
+        public Trainer(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -39,7 +41,9 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }        public int CompareTo(Trainer? other)
+        }
+
+        public int CompareTo(Trainer? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;

@@ -22,7 +22,7 @@ namespace Gym_Booking_Manager
         public Calendar timeSlot;
         //public DateTime currentDateTime = DateTime.Now; // Test var
         [DataMember]
-        public Trainer instructor;
+        public Trainer trainer;
         [DataMember]
         public Space space;
         [DataMember]
