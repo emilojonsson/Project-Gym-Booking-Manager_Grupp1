@@ -20,8 +20,6 @@ namespace Gym_Booking_Manager
         public Calendar calendar;
         //private readonly Calendar calendar;
 
-        public string? NewInstructor { get; } // Becca skrev in tillfälligt
-
         public Trainer(Category category, string name)
         {
             this.category = category;
@@ -39,11 +37,6 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }
-
-        public Trainer(string? newInstructor)
-        {
-            NewInstructor = newInstructor;
         }
 
         public int CompareTo(Trainer? other)

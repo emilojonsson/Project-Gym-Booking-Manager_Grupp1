@@ -71,12 +71,12 @@ namespace Gym_Booking_Manager
             schedule1.activities.Add(activity5);
             data1.scheduleObjects.Add(schedule1);
 
-            schedule1.AddActivity(user1, data1);
-            schedule1.activities[5].SignUp(user1);
-            Console.WriteLine(data1.equipmentObjects[0].calendar.reservations[0]);
+            Console.WriteLine(activity4);
+            activity4.modifyActivity(data1);
+            Console.WriteLine(activity4);
 
-            Menu m1 = new Menu();
-            m1.Run();
+            //Menu m1 = new Menu();
+            //m1.Run();
 
             string userInput = "";
             while (userInput != "q")

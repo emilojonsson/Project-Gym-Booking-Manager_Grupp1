@@ -22,14 +22,15 @@ namespace Gym_Booking_Manager
     // Refer to official C# documentation to determine what interface to implement to allow use with
     // the class/method/operator that you want.
     internal class Space : IReservable, ICSVable, IComparable<Space> 
-    {
+    {        void IReservable.CancelReservation()
+        {
+            throw new NotImplementedException();
+        }
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         private Category category;
         public String name;
         public Calendar calendar;
         //private readonly Calendar calendar;
-
-        public string? NewSpace { get; } // Becca skrev in tillfälligt
 
         public Space(Category category, string name)
         {
@@ -48,11 +49,6 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }
-
-        public Space(string? newSpace)
-        {
-            NewSpace = newSpace;
         }
 
         public int CompareTo(Space? other)

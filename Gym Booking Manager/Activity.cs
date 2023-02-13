@@ -14,7 +14,7 @@ namespace Gym_Booking_Manager
         public List<ReservingEntity> participants = new List<ReservingEntity>();
         public Calendar timeSlot;
         //public DateTime currentDateTime = DateTime.Now; // Test var
-        public Trainer instructor;
+        public Trainer trainer;
         public Space space;
         public Equipment equipment;
         public Activity()
@@ -28,7 +28,7 @@ namespace Gym_Booking_Manager
             this.participantLimit = participantLimit;
             this.timeSlot = new Calendar(timeSlot, owner);
             this.space = space;
-            this.instructor = trainer;
+            this.trainer = trainer;
             this.equipment = equipment;
         }
 
@@ -45,34 +45,30 @@ namespace Gym_Booking_Manager
             }
         }
 
-        public void modifyActivity()
+        public void modifyActivity(DatabaseTemp data)
         {
             Console.WriteLine("Enter the new activity details:");
-            string newDetails = Console.ReadLine();
+            string updatedDetails = Console.ReadLine();
 
             Console.WriteLine("Enter the new participant limit:");
-            int newLimit = int.Parse(Console.ReadLine());
+            int updatedLimit = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM:SS):");
-            string newTime = Console.ReadLine();
+            Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM):");
+            string updatedTime = Console.ReadLine();
 
-            Calendar newCalendar = new Calendar(DateTime.Parse(newTime));
+            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime));
 
-            Console.WriteLine("Enter the new instructor name:");
-            string newInstructor = Console.ReadLine();
+            Console.WriteLine("Enter the new trainer's name: ");
+            foreach(Trainer trainer in data.trainerObjects)            {                Console.WriteLine(trainer);            }            int updatedTrainer = int.Parse(Console.ReadLine());            Console.WriteLine("Enter the new space name:");            foreach (Space space in data.spaceObjects)            {                Console.WriteLine(space);            }            int updatedSpace = int.Parse(Console.ReadLine());            Console.WriteLine("Enter the new equipment name:");
+            foreach (Equipment equipment in data.equipmentObjects)            {                Console.WriteLine(equipment);            }
+            int updatedEquipment = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter the new equipment name:");
-            string newEquipment = Console.ReadLine();
-
-            Console.WriteLine("Enter the new space name:");
-            string newSpace = Console.ReadLine();
-
-            this.activityDetails = newDetails;
-            this.participantLimit = newLimit;
-            this.timeSlot = newCalendar;
-            //this.instructor = new Trainer(newInstructor);
-            //this.equipment = new Equipment(newEquipment);
-            //this.space = new Space(newSpace);
+            this.activityDetails = updatedDetails;
+            this.participantLimit = updatedLimit;
+            this.timeSlot = updatedCalendar;
+            this.trainer = data.trainerObjects[updatedTrainer];
+            this.space = data.spaceObjects[updatedSpace];
+            this.equipment = data.equipmentObjects[updatedEquipment];
         }
 
 
@@ -83,7 +79,7 @@ namespace Gym_Booking_Manager
 
         public override string ToString()
         {
-            return $"{nameof(activityDetails)}:{activityDetails},{nameof(instructor)}:{instructor},{nameof(participantLimit)}:{participantLimit}, Number of Participants: {participants.Count}"; 
+            return $"{nameof(activityDetails)}:{activityDetails},{nameof(trainer)}:{trainer},{nameof(participantLimit)}:{participantLimit}, Number of Participants: {participants.Count}"; 
         }
 
     }
