@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 #if DEBUG
 [assembly: InternalsVisibleTo("Tests")]
 #endif
-namespace Gym_Booking_Manager
+namespace Gym_Booking_Manager 
 {
     [DataContract]
     internal class Calendar

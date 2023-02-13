@@ -25,13 +25,17 @@ namespace Gym_Booking_Manager
     [DataContract]
     internal class Space : IReservable, ICSVable, IComparable<Space> 
     {
+        void IReservable.CancelReservation()
+        {
+            throw new NotImplementedException();
+        }
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
         private Category category;
         [DataMember]
         private String name;
         [DataMember]
-        private readonly Calendar calendar;        public string? NewSpace { get; } // Becca skrev in tillfälligt        public Space(Category category, string name)
+        private readonly Calendar calendar;        public Space(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -48,7 +52,7 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }        public Space(string? newSpace)        {            NewSpace = newSpace;        }        public int CompareTo(Space? other)
+        }        public int CompareTo(Space? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;
@@ -75,50 +79,30 @@ namespace Gym_Booking_Manager
             Studio
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-               // Do something?
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
 
-        public void MakeReservation(IReservingEntity owner)
+        public void MakeReservation(ReservingEntity owner, DateTime timeSlot)
         {
-            string input = "";
-            string passname = "";
-            Console.WriteLine("[1] Hall");
-            Console.WriteLine("[2] Lane");
-            Console.WriteLine("[3] Studio");
-            Console.Write("Enter your choice: ");
-            input = Console.ReadLine();
-            switch (input)
-            {
-                case "1":
-                    Category hall = Category.Hall;
-                    passname = Console.ReadLine();
-
-                    break;
-                case "2":
-                    Category lane = Category.Lane;
-                    passname = Console.ReadLine();
-
-                    break;
-                case "3":
-                    Category studio = Category.Studio;
-                    passname = Console.ReadLine();
-
-                    break;
-            }
+            calendar.reservations.Add(new Reservation(owner, timeSlot));
         }
 
-        public void CancelReservation()
+        public void CancelReservation(ReservingEntity owner)
         {
-
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Space to the database.

@@ -64,44 +64,31 @@ namespace Gym_Booking_Manager
             Large
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-                // Do something?
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
 
-        public void MakeReservation(IReservingEntity owner)
+        public void MakeReservation(ReservingEntity owner, DateTime dateTime)
         {
-            string input = "";
-            string passname = "";
-            Console.WriteLine("[1] Small");
-            Console.WriteLine("[2] Large");
-            Console.Write("Enter your choice: ");
-            input = Console.ReadLine();
-            switch (input)
-            {
-                case "1":
-                    Category small = Category.Small;
-                    passname = Console.ReadLine();
+            calendar.reservations.Add(new Reservation(owner, dateTime));
 
-                    break;
-                case "2":
-                    Category large = Category.Large;
-                    passname = Console.ReadLine();
-
-                    break;
-            }
         }
 
-        public void CancelReservation()
+        public void CancelReservation(ReservingEntity owner)
         {
-
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Space to the database.

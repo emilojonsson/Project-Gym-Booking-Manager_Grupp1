@@ -22,7 +22,7 @@ namespace Gym_Booking_Manager
         [DataMember]
         private String name;
         [DataMember]
-        private readonly Calendar calendar;        public string? NewInstructor { get; } // Becca skrev in tillfälligt        public Trainer(Category category, string name)
+        private readonly Calendar calendar;        public Trainer(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -39,7 +39,7 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }        public Trainer(string? newInstructor)        {            NewInstructor = newInstructor;        }        public int CompareTo(Trainer? other)
+        }        public int CompareTo(Trainer? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;
@@ -65,46 +65,51 @@ namespace Gym_Booking_Manager
             Consultation
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-                Console.WriteLine(reservation);
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
 
-        public void MakeReservation(IReservingEntity owner)
+        public void MakeReservation(ReservingEntity owner, DateTime timeSlot)
         {
+            calendar.reservations.Add(new Reservation(owner, timeSlot));
             //supervised training session and consultation
-            string input = "";
-            string passname = "";
-            Console.WriteLine("[1] Supervised training session");
-            Console.WriteLine("[2] Consultation");
-            Console.Write("Enter your choice: ");
-            input = Console.ReadLine();
-            switch (input)
-            {
-                case "1":
-                    Category trainer = Category.Trainer;
-                    passname = Console.ReadLine();
-                    
-                    break;
-                case "2":
-                    Category consultation = Category.Consultation;
-                    passname = Console.ReadLine();
+            //string input = "";
+            //string passname = "";
+            //Console.WriteLine("[1] Supervised training session");
+            //Console.WriteLine("[2] Consultation");
+            //Console.Write("Enter your choice: ");
+            //input = Console.ReadLine();
+            //switch (input)
+            //{
+            //    case "1":
+            //        Category trainer = Category.Trainer;
+            //        passname = Console.ReadLine();
 
-                    break;
-            }
+            //        break;
+            //    case "2":
+            //        Category consultation = Category.Consultation;
+            //        passname = Console.ReadLine();
+
+            //        break;
+            //}
 
         }
 
-        public void CancelReservation()
+        public void CancelReservation(ReservingEntity owner)
         {
-
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Trainer to the database.
