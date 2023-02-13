@@ -16,7 +16,12 @@ namespace Gym_Booking_Manager
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         private Category category;
         public String name;
-        public Calendar calendar;        //private readonly Calendar calendar;        public string? NewEquipment { get; }        public Equipment(Category category, string name)
+        public Calendar calendar;
+        //private readonly Calendar calendar;
+
+        public string? NewEquipment { get; }
+
+        public Equipment(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -33,7 +38,14 @@ namespace Gym_Booking_Manager
             }
 
             this.calendar = new Calendar();
-        }        public Equipment(string? newEquipment)        {            NewEquipment = newEquipment;        }        public int CompareTo(Equipment? other)
+        }
+
+        public Equipment(string? newEquipment)
+        {
+            NewEquipment = newEquipment;
+        }
+
+        public int CompareTo(Equipment? other)
         {
             // If other is not a valid object reference, this instance is greater.
             if (other == null) return 1;
@@ -59,25 +71,31 @@ namespace Gym_Booking_Manager
             Large
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-                // Do something?
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
 
-        public void MakeReservation(ReservingEntity owner, DateTime dateTime)        {            calendar.reservations.Add(new Reservation(owner, dateTime));
+        public void MakeReservation(ReservingEntity owner, DateTime dateTime)
+        {
+            calendar.reservations.Add(new Reservation(owner, dateTime));
 
         }
 
-        public void CancelReservation()
+        public void CancelReservation(ReservingEntity owner)
         {
-
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Space to the database.

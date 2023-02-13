@@ -65,14 +65,14 @@ namespace Gym_Booking_Manager
             Consultation
         }
 
-        public void ViewTimeTable()
+        public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
             List<Reservation> tableSlice = this.calendar.GetSlice();
             // Show?
             foreach (Reservation reservation in tableSlice)
             {
-                Console.WriteLine(reservation);
+                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
             }
 
         }
@@ -103,9 +103,13 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void CancelReservation()
+        public void CancelReservation(ReservingEntity owner)
         {
-
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCansel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
         }
 
         // Consider how and when to add a new Trainer to the database.

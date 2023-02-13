@@ -8,7 +8,6 @@ namespace Gym_Booking_Manager
 {
     internal class ReservingEntity : User, IReservingEntity, ICSVable
     {
-        
         public ReservingEntity(string name, string uniqueID, string phone, string email, string status) : base(name, uniqueID, phone, email, status)
         {
         }
