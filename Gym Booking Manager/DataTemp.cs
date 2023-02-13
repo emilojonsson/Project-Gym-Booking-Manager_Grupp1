@@ -25,6 +25,8 @@ namespace Gym_Booking_Manager
         public List<Activity> activities = new List<Activity>();
 
         public List<ReservingEntity> userObjects = new List<ReservingEntity>();
+        
+        public GroupSchedule schedule = new GroupSchedule();
 
         //Method to load current DataBase to program!
         public void LoadDataBase()

@@ -10,7 +10,34 @@ namespace Gym_Booking_Manager
     {
         public void Run()
         {
-            string userInput = "";            Console.WriteLine("\nWelcome to the menu:");            Console.WriteLine("1. Member");            Console.WriteLine("2. Non-member");            Console.WriteLine("3. Staff");            Console.WriteLine("q. Quit program");            Console.Write("Enter your choice: ");            userInput = Console.ReadLine();            switch (userInput)            {                case "1":                    choiceMember();                    break;                case "2":                    choiceNonMember();                    break;                case "3":                    choiceStaff();                    break;                case "q":                    break;                default:                    Console.WriteLine("\nInvalid option");                    Run();                    break;            }
+            string userInput = "";
+
+            Console.WriteLine("\nWelcome to the menu:");
+            Console.WriteLine("1. Member");
+            Console.WriteLine("2. Non-member");
+            Console.WriteLine("3. Staff");
+            Console.WriteLine("q. Quit program");
+            Console.Write("Enter your choice: ");
+            userInput = Console.ReadLine();
+
+            switch (userInput)
+            {
+                case "1":
+                    choiceMember();
+                    break;
+                case "2":
+                    choiceNonMember();
+                    break;
+                case "3":
+                    choiceStaff();
+                    break;
+                case "q":
+                    break;
+                default:
+                    Console.WriteLine("\nInvalid option");
+                    Run();
+                    break;
+            }
         }
 
 
@@ -98,7 +125,7 @@ namespace Gym_Booking_Manager
                     // Code to view space
                     break;
                 case "4":
-                    // Code to make a reservation
+                    
                     break;
                 case "5":
                     // Code to edit reservation

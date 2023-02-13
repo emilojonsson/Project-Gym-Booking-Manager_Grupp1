@@ -59,7 +59,7 @@ namespace Gym_Booking_Manager
             Console.WriteLine("Enter the new trainer's name: ");
             foreach(Trainer trainer in data.trainerObjects)            {                Console.WriteLine(trainer);            }            int updatedTrainer = int.Parse(Console.ReadLine());            Console.WriteLine("Enter the new space name:");            foreach (Space space in data.spaceObjects)            {                Console.WriteLine(space);            }            int updatedSpace = int.Parse(Console.ReadLine());            Console.WriteLine("Enter the new equipment name:");            foreach (Equipment equipment in data.equipmentObjects)            {                Console.WriteLine(equipment);            }
             int updatedEquipment = int.Parse(Console.ReadLine());
-            this.activityDetails = newDetails;            this.participantLimit = newLimit;            this.timeSlot = newCalendar;            this.instructor = new Trainer(newInstructor);            this.equipment = new Equipment(newEquipment);            this.space = new Space(newSpace);        }
+            this.activityDetails = updatedDetails;            this.participantLimit = updatedLimit;            this.timeSlot = updatedCalendar;            this.trainer = data.trainerObjects[updatedTrainer];            this.equipment = data.equipmentObjects[updatedEquipment]; ;            this.space = data.spaceObjects[updatedSpace]; ;        }
 
 
         //public override string ToString()

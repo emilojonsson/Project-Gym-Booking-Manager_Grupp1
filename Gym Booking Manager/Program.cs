@@ -108,7 +108,7 @@ namespace Gym_Booking_Manager
                                 // Code to view space
                                 break;
                             case "4":
-                                // Code to make a reservation
+                                data1.schedule.AddActivity(data1.userObjects[0], data1);
                                 break;
                             case "5":
                                 // Code to edit reservation

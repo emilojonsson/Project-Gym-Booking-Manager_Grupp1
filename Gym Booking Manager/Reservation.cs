@@ -11,9 +11,9 @@ namespace Gym_Booking_Manager
     internal class Reservation
     {
         [DataMember]
-        private readonly ReservingEntity owner;
+        public ReservingEntity owner;
         [DataMember]
-        private readonly DateTime timeSlot;
+        public DateTime timeSlot;
         public Reservation (ReservingEntity owner, DateTime timeSlot)
         {
             this.owner = owner;

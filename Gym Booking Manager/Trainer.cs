@@ -18,11 +18,11 @@ namespace Gym_Booking_Manager
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
-        private Category category;
+        public Category category;
         [DataMember]
-        private String name;
+        public String name;
         [DataMember]
-        private readonly Calendar calendar;
+        public Calendar calendar;
 
         public Trainer(Category category, string name)
         {
