@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,9 +17,11 @@ using System.Threading.Tasks;
 #endif
 namespace Gym_Booking_Manager
 {
+    [DataContract]
     internal class Calendar
     {
-        private readonly List<Reservation> reservations;        private DateTime dateTime; // Becca skrev in tillfälligt        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
+        [DataMember]
+        private readonly List<Reservation> reservations;        [DataMember]        private DateTime dateTime; // Becca skrev in tillfälligt        public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {
             this.reservations = new List<Reservation>();
         }        public Calendar(DateTime dateTime)        {            this.dateTime = dateTime;        }        public Calendar(DateTime timeSlot, ReservingEntity Owner) //this is to be used when creating an Activity

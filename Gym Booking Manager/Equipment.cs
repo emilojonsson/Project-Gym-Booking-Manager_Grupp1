@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,11 +12,15 @@ using System.Threading.Tasks;
 #endif
 namespace Gym_Booking_Manager
 {
+    [DataContract]
     internal class Equipment : IReservable, ICSVable, IComparable<Equipment>
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
+        [DataMember]
         private Category category;
+        [DataMember]
         private String name;
+        [DataMember]
         private readonly Calendar calendar;        public string? NewEquipment { get; }        public Equipment(Category category, string name)
         {
             this.category = category;
