@@ -16,6 +16,7 @@ namespace Gym_Booking_Manager
     [DataContract]
     internal class Trainer : IReservable, ICSVable, IComparable<Trainer>
     {
+        List<Trainer> test = new List<Trainer>();
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
         public Category category;
@@ -55,7 +56,7 @@ namespace Gym_Booking_Manager
 
         public override string ToString()
         {
-            return this.CSVify(); // TODO: Don't use CSVify. Make it more readable.
+            return $"{name}"; // TODO: Don't use CSVify. Make it more readable.
         }
 
         // Every class C to be used for DbSet<C> should have the ICSVable interface and the following implementation.
@@ -68,7 +69,7 @@ namespace Gym_Booking_Manager
             Trainer,
             Consultation
         }
-
+        
         public void ViewTimeTable(ReservingEntity owner)
         {
             // Fetch
@@ -84,6 +85,7 @@ namespace Gym_Booking_Manager
         public void MakeReservation(ReservingEntity owner, DateTime timeSlot)
         {
             calendar.reservations.Add(new Reservation(owner, timeSlot));
+            //calendar.BookReservation(owner, startTime, durationMinutes);
             //supervised training session and consultation
             //string input = "";
             //string passname = "";
@@ -115,6 +117,27 @@ namespace Gym_Booking_Manager
             del = Int32.Parse(Console.ReadLine());
             calendar.reservations.Remove(calendar.reservations[del]);
         }
+
+        //public void Load(string entity, string filePath)
+        //{
+        //    char sep = Path.DirectorySeparatorChar;
+        //    string storage = $"GymDB{sep}storage";
+        //    Directory.CreateDirectory(storage);
+        //    string fpathUser = $"{storage}{sep}trainer.csv";
+
+        //    using (StreamReader infile = new StreamReader(fpathUser))
+        //    {
+        //        string line;
+        //        while ((line = infile.ReadLine()) != null)
+        //        {
+        //            string[] attrs = line.Split('|');
+        //            Trainer newtest = new Trainer(attrs[0], attrs[1]);
+        //            test.Add(newtest);
+        //            Console.WriteLine(attrs[0], attrs[1]);
+
+        //        }
+        //    }
+        //}
 
         // Consider how and when to add a new Trainer to the database.
         // Maybe define a method to persist it? Any other reasonable schemes?

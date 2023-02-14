@@ -64,7 +64,7 @@ namespace Gym_Booking_Manager
 
         public override string ToString()
         {
-            return this.CSVify(); // TODO: Don't use CSVify. Make it more readable.
+            return $"{name}"; // TODO: Don't use CSVify. Make it more readable.
         }
 
         // Every class C to be used for DbSet<C> should have the ICSVable interface and the following implementation.
@@ -94,6 +94,7 @@ namespace Gym_Booking_Manager
         public void MakeReservation(ReservingEntity owner, DateTime timeSlot)
         {
             calendar.reservations.Add(new Reservation(owner, timeSlot));
+            //calendar.BookReservation(owner, startTime, durationMinutes);
         }
 
         public void CancelReservation(ReservingEntity owner)
