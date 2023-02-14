@@ -85,7 +85,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to purchase subscription
-                                data1.UserManagement(data1.userObjects[0]);
+                                data1.UserManagement(nonMember);
                                 break;
                             case "q":
                                 break;
@@ -117,6 +117,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
+                                data1.schedule.ViewSchedule(staff);
                                 break;
                             case "2":
                                 // Code to view equipment

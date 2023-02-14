@@ -154,36 +154,26 @@ namespace Gym_Booking_Manager
                         if (count == answerInt)
                         {
                             activity.participants.Remove(user);
-                            Console.WriteLine($"Användaren {user.name} was removed from activity {activity.activityID}");
+                            Console.WriteLine($"Användaren {user.name} är nu avanmäld från {activity.activityDetails}");
                             break;
                         }
                     }
                 }
-
-                //if (activity.activityID == activityID)
-                //{
-                //    activity.participants.Remove(user);
-                //    Console.WriteLine($"The User {user.name} was removed from activity {activity.activityID}");
-                //    break;
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"The User was not found in the schedule.");
-                //}
             }
             else if (user.status == "Staff")
             {
-                //if (activity.activityID == activityID)
-                //{
-                //    activities.Remove(activity);
-                //    Console.WriteLine($"The activity with ID {activityID} has been removed from the schedule.");
-                //    // Here we need a method so that the activity gets removed from the Database!!
-                //    break;
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"The activity with ID {activityID} was not found in the schedule.");
-                //}
+                Console.WriteLine("Nedan listas de gruppaktiviteter som finns i schemat:");
+                int count = 1;
+                foreach (Activity activity in activities)
+                {
+                    Console.WriteLine($"{count}. {activity.activityDetails}, starttid: {activity.timeSlot.reservations[0].startTime}"); //for now an activity can only have one reservation, but beware of future changes...
+                    count++;
+                }
+                Console.WriteLine("Ange den gruppaktivitet som ska tas bort:");
+                int answerInt = int.Parse(Console.ReadLine()) - 1;
+
+                Console.WriteLine($"Gruppaktiviteten {activities[answerInt].activityDetails} är nu borttaget från schemat");
+                activities.RemoveAt(answerInt);
             }
         }
 
