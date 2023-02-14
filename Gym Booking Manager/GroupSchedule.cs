@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
@@ -117,7 +118,7 @@ namespace Gym_Booking_Manager
         }
 
 
-        public void RemoveActivity(ReservingEntity user, string activityID)
+        public void RemoveActivity(ReservingEntity user)
         {
             if (user.status == "Member")
             {
@@ -153,38 +154,78 @@ namespace Gym_Booking_Manager
                         if (count == answerInt)
                         {
                             activity.participants.Remove(user);
-                            Console.WriteLine($"Användaren {user.name} was removed from activity {activity.activityID}");
+                            Console.WriteLine($"Användaren {user.name} är nu avanmäld från {activity.activityDetails}");
                             break;
                         }
                     }
                 }
-
-                //if (activity.activityID == activityID)
-                //{
-                //    activity.participants.Remove(user);
-                //    Console.WriteLine($"The User {user.name} was removed from activity {activity.activityID}");
-                //    break;
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"The User was not found in the schedule.");
-                //}
             }
             else if (user.status == "Staff")
             {
-                //if (activity.activityID == activityID)
-                //{
-                //    activities.Remove(activity);
-                //    Console.WriteLine($"The activity with ID {activityID} has been removed from the schedule.");
-                //    // Here we need a method so that the activity gets removed from the Database!!
-                //    break;
-                //}
-                //else
-                //{
-                //    Console.WriteLine($"The activity with ID {activityID} was not found in the schedule.");
-                //}
+                Console.WriteLine("Nedan listas de gruppaktiviteter som finns i schemat:");
+                int count = 1;
+                foreach (Activity activity in activities)
+                {
+                    Console.WriteLine($"{count}. {activity.activityDetails}, starttid: {activity.timeSlot.reservations[0].startTime}"); //for now an activity can only have one reservation, but beware of future changes...
+                    count++;
+                }
+                Console.WriteLine("Ange den gruppaktivitet som ska tas bort:");
+                int answerInt = int.Parse(Console.ReadLine()) - 1;
+
+                Console.WriteLine($"Gruppaktiviteten {activities[answerInt].activityDetails} är nu borttaget från schemat");
+                activities.RemoveAt(answerInt);
             }
         }
+
+        public void SignUp(ReservingEntity user, DatabaseTemp data1)
+        {
+            int x = 1;
+
+            foreach (Activity activity in activities)
+            {
+                Console.WriteLine($"{x}, {activity.activityDetails}");
+                x++;
+            }
+
+            Console.WriteLine("Which activity do you want to sign up for?");
+            int answer = int.Parse(Console.ReadLine()) -1;
+
+            if (user.status == "Member")
+            {
+                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                {
+                    activities[answer].participants.Add(user);
+                }
+                else
+                {
+                    Console.WriteLine("\nParticipant limit reached for this activity.");
+                }
+            }
+
+            else if (user.status == "Staff")
+            {
+                int y = 1;
+
+                foreach (ReservingEntity staffUser in data1.userObjects)
+                {
+                    Console.WriteLine($"{y}, {staffUser.name}, {staffUser.phone}");
+                    y++;
+                }
+
+                Console.WriteLine("Which activity do you want to sign up the member for?");
+                int staffAnswer = int.Parse(Console.ReadLine()) - 1;
+
+                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                {
+                    activities[answer].participants.Add(data1.userObjects[staffAnswer]);
+                }
+                else
+                {
+                    Console.WriteLine("\nParticipant limit reached for this activity.");
+                }
+            }
+        }
+
         public override string ToString()
         {
             return $"{activities}";
