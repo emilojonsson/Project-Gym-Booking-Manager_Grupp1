@@ -38,7 +38,7 @@ namespace Gym_Booking_Manager
                         ReservingEntity member = data1.userObjects[0];
                         Console.WriteLine("--- Member ---");
                         Console.WriteLine("1. View schedule");       // Samla view schedule, equipment, PT(?) och space här
-                        Console.WriteLine("2. Sign Up to activity");  // Kom vidare till att se vad som går att reservera
+                        Console.WriteLine("2. Sign Up to activity");  // Kom vidare till att se vad som går att boka för aktivitet
                         Console.WriteLine("3. Make a reservation");  // Kom vidare till att se vad som går att reservera
                         Console.WriteLine("4. Edit reservation"); // Cancel resevation or make a new!!!
                         Console.WriteLine("5. Cancel Activity");
@@ -55,7 +55,7 @@ namespace Gym_Booking_Manager
                                 break;
                             case "2":
                                 // Signup to activity
-                                //activity3.SignUp(user5);
+                                data1.schedule.SignUp(member, data1);
                                 break;
                             case "3":
                                 // Implement Method "make reservation" method for space,equimpent and trainer!!
@@ -121,7 +121,7 @@ namespace Gym_Booking_Manager
                                 // Code to view equipment
                                 break;
                             case "3":
-                                // Code to view space
+                                data1.schedule.SignUp(staff, data1);
                                 break;
                             case "4":
                                 data1.schedule.AddActivity(staff, data1);
@@ -159,7 +159,7 @@ namespace Gym_Booking_Manager
                         }
                         break;
                     case "4":
-                        User service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
+                        ReservingEntity service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
                         Console.WriteLine("--- Service ---");
                         Console.WriteLine("1. View Restrictions");
                         Console.WriteLine("2. Drop Restrictions");

@@ -26,10 +26,12 @@ namespace Gym_Booking_Manager
         public Space space;
         [DataMember]
         public Equipment equipment;
+
         public Activity()
         {
 
         }
+
         public Activity(string activityID, string activityDetails, int participantLimit, DateTime startTime, double durationMinutes, ReservingEntity owner, Space space, Trainer trainer, Equipment equipment)
         {
             this.activityID = activityID;
@@ -39,19 +41,6 @@ namespace Gym_Booking_Manager
             this.space = space;
             this.trainer = trainer;
             this.equipment = equipment;
-        }
-
-        public void SignUp(ReservingEntity user)
-        {
-            //Todo
-            if (participants.Count < participantLimit)
-            {
-                participants.Add(user);
-            }
-            else
-            {
-                Console.WriteLine("Participant limit reached for this activity.");
-            }
         }
 
         public void ModifyActivity(DatabaseTemp data, ReservingEntity owner)
@@ -97,6 +86,7 @@ namespace Gym_Booking_Manager
             this.equipment = data.equipmentObjects[updatedEquipment]; ;
             this.space = data.spaceObjects[updatedSpace]; ;
         }
+
         public override string ToString()
         {
             return $"{nameof(activityDetails)}:{activityDetails},{nameof(trainer)}:{trainer},{nameof(participantLimit)}:{participantLimit}, Number of Participants: {participants.Count}"; 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -184,7 +184,37 @@ namespace Gym_Booking_Manager
                 //    Console.WriteLine($"The activity with ID {activityID} was not found in the schedule.");
                 //}
             }
+        }        public void SignUp(ReservingEntity user, DatabaseTemp data1)
+        {
+            int x = 1;
+
+            foreach (Activity activity in activities)            {                Console.WriteLine($"{x}, {activity.activityDetails}");                x++;            }
+
+            Console.WriteLine("Which activity do you want to sign up for?");
+            int answer = int.Parse(Console.ReadLine()) -1;
+
+            if (user.status == "Member")
+            {                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                {
+                    activities[answer].participants.Add(user);
+                }
+                else
+                {                    Console.WriteLine("\nParticipant limit reached for this activity.");                }
+            }
+
+            else if (user.status == "Staff")
+            {
+                int y = 1;
+
+                foreach (ReservingEntity staffUser in data1.userObjects)                {                    Console.WriteLine($"{y}, {staffUser.name}, {staffUser.phone}");                    y++;                }                Console.WriteLine("Which activity do you want to sign up the member for?");                int staffAnswer = int.Parse(Console.ReadLine()) - 1;                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                {
+                    activities[answer].participants.Add(data1.userObjects[staffAnswer]);
+                }
+                else
+                {                    Console.WriteLine("\nParticipant limit reached for this activity.");                }
+            }
         }
+
         public override string ToString()
         {
             return $"{activities}";
