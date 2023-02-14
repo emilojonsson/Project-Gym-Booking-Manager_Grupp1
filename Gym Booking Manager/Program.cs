@@ -18,7 +18,6 @@ namespace Gym_Booking_Manager
             //Menu m1 = new Menu();
             //m1.Run();
 
-
             string userInput = "";
             while (userInput != "q")
             {
@@ -38,7 +37,7 @@ namespace Gym_Booking_Manager
                         ReservingEntity member = data1.userObjects[0];
                         Console.WriteLine("--- Member ---");
                         Console.WriteLine("1. View schedule");       // Samla view schedule, equipment, PT(?) och space här
-                        Console.WriteLine("2. Sign Up to activity");  // Kom vidare till att se vad som går att reservera
+                        Console.WriteLine("2. Sign Up to activity");  // Kom vidare till att se vad som går att boka för aktivitet
                         Console.WriteLine("3. Make a reservation");  // Kom vidare till att se vad som går att reservera
                         Console.WriteLine("4. Edit reservation"); // Cancel resevation or make a new!!!
                         Console.WriteLine("5. Cancel Activity");
@@ -55,7 +54,7 @@ namespace Gym_Booking_Manager
                                 break;
                             case "2":
                                 // Signup to activity
-                                //activity3.SignUp(user5);
+                                data1.schedule.SignUp(member, data1);
                                 break;
                             case "3":
                                 data1.MakeRes(member);
@@ -67,6 +66,8 @@ namespace Gym_Booking_Manager
                                 // Implemetnera metoden 
                             case "5":
                                 //implementera remove activity
+                                data1.schedule.RemoveActivity(member);
+                                break;
                             case "q":
                                 break;
                             default:
@@ -86,7 +87,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to purchase subscription
-                                data1.UserManagement(data1.userObjects[0]);
+                                data1.UserManagement(nonMember);
                                 break;
                             case "q":
                                 break;
@@ -118,13 +119,13 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
+                                data1.schedule.ViewSchedule(staff);
                                 break;
                             case "2":
                                 data1.ViewEquipments();
                                 // Code to view equipment
                                 break;
                             case "3":
-                                data1.ViewSpaces();
                                 // Code to view space
                                 break;
                             case "4":
@@ -134,7 +135,8 @@ namespace Gym_Booking_Manager
                                 // Code to Modify activity
                                 break;
                             case "6":
-                                // Code to Modify activity
+                                // Code to Remove activity
+                                data1.schedule.RemoveActivity(staff);
                                 break;
                             case "7":
                                 // Code to Modify activity
