@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.ExceptionServices;
@@ -243,6 +244,114 @@ namespace Gym_Booking_Manager
             Console.Write(":> ");
             string input = Console.ReadLine();
             return input;
+        }
+        public void ViewEquipments()
+        {
+            Console.WriteLine();
+            foreach (Equipment allEquipments in equipmentObjects)
+            {
+                Console.WriteLine($"-- {allEquipments} --");
+            }
+            Console.WriteLine();
+        }
+
+        public void ViewSpaces()
+        {
+            Console.WriteLine();
+            foreach (Space allSpaces in spaceObjects)
+            {
+                Console.WriteLine($"-- {allSpaces} --");
+            }
+            Console.WriteLine();
+        }
+
+        public void LoadTraining(ReservingEntity user, string choice)
+        {
+            string choicemod = "";
+            if (choice == "1")
+            {
+                choicemod = "Trainer";
+            }
+            if (choice == "2")
+            {
+                choicemod = "Consultation";
+            }
+
+            char sep = Path.DirectorySeparatorChar;
+            string storage = $"GymDB{sep}storage";
+            Directory.CreateDirectory(storage);
+            string file = $"{storage}{sep}trainer.csv";
+            Console.WriteLine();
+            Console.WriteLine("Do choice:");
+            Console.WriteLine();
+            using (StreamReader sr = new StreamReader(file))
+            {
+                List<string> sample = new List<string>();
+                string line;
+                int b = 1;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] field = line.Split(':');
+                    if (field[1] == $"{choicemod},name")
+                    {
+                        Console.WriteLine($"[{b++}] {field[2]}");
+                    }
+                    sample.Add(field[2]);
+
+                }
+                string userInput = Console.ReadLine();
+                Console.WriteLine("Activity start time:");
+                DateTime timeSlot = DateTime.Parse(Console.ReadLine());
+                Console.WriteLine("Activity time in minutes");
+                double durationMinutes = double.Parse(Console.ReadLine());
+                switch (userInput)
+                {
+                    case "1":
+                        trainerObjects[0].MakeReservation(user, timeSlot, durationMinutes);
+                        Console.WriteLine();
+                        Console.WriteLine("--Reservation registred!--");
+                        //Console.WriteLine($"test {sample[0]}");
+                        break;
+                    case "2":
+                        trainerObjects[1].MakeReservation(user, timeSlot, durationMinutes);
+                        Console.WriteLine();
+                        Console.WriteLine("--Reservation registred!--");
+                        break;
+                }
+            }
+            
+        }
+        public void MakeRes(ReservingEntity user)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Make reservation for:");
+            Console.WriteLine("[1] Trainer");
+            Console.WriteLine("[2] Equipment");
+            Console.WriteLine("[3] Space");
+            string userInput;
+            userInput = Console.ReadLine();
+            switch (userInput)
+            {
+                case "1":
+                    int a = 1;
+                    Console.WriteLine("Choose:");
+                    Array trainerEnums = Enum.GetValues(typeof(Trainer.Category));
+                    foreach (Object i in trainerEnums)
+                    {
+                        Console.WriteLine($"[{a++}] {i}");
+                    }
+                    userInput = Console.ReadLine();
+                    switch (userInput)
+                    {
+                        case "1":
+                            LoadTraining(user, userInput);
+                            break;
+                        case "2":
+                            LoadTraining(user, userInput);
+                            break;
+                    }
+                    break;
+            }
         }
     }
 }

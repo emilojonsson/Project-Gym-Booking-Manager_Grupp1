@@ -58,6 +58,8 @@ namespace Gym_Booking_Manager
                                 //activity3.SignUp(user5);
                                 break;
                             case "3":
+                                data1.MakeRes(member);
+                                Console.WriteLine();
                                 // Implement Method "make reservation" method for space,equimpent and trainer!!
                                 //Behöver skriva ut alternativ till användaren
                                 break;
@@ -118,9 +120,11 @@ namespace Gym_Booking_Manager
                                 // Code to view schedule
                                 break;
                             case "2":
+                                data1.ViewEquipments();
                                 // Code to view equipment
                                 break;
                             case "3":
+                                data1.ViewSpaces();
                                 // Code to view space
                                 break;
                             case "4":
@@ -159,7 +163,7 @@ namespace Gym_Booking_Manager
                         }
                         break;
                     case "4":
-                        User service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
+                        ReservingEntity service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
                         Console.WriteLine("--- Service ---");
                         Console.WriteLine("1. View Restrictions");
                         Console.WriteLine("2. Drop Restrictions");

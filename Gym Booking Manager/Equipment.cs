@@ -102,6 +102,7 @@ namespace Gym_Booking_Manager
             del = Int32.Parse(Console.ReadLine());
             calendar.reservations.Remove(calendar.reservations[del]);
         }
+        
 
         // Consider how and when to add a new Space to the database.
         // Maybe define a method to persist it? Any other reasonable schemes?
