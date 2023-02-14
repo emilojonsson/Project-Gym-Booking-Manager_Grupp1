@@ -159,7 +159,7 @@ namespace Gym_Booking_Manager
                         }
                         break;
                     case "4":
-                        User service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
+                        ReservingEntity service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
                         Console.WriteLine("--- Service ---");
                         Console.WriteLine("1. View Restrictions");
                         Console.WriteLine("2. Drop Restrictions");
