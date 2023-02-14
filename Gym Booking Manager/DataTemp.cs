@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.ExceptionServices;
 using System.Runtime.Intrinsics.X86;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -25,7 +27,9 @@ namespace Gym_Booking_Manager
         public List<Activity> activities = new List<Activity>();
 
         public List<ReservingEntity> userObjects = new List<ReservingEntity>();
-        
+
+        public List<RestrictedObjects> restrictedObjects = new List<RestrictedObjects>();
+
         public GroupSchedule schedule = new GroupSchedule();
 
         //Add New list, restricter objects!!
@@ -42,76 +46,17 @@ namespace Gym_Booking_Manager
             {
                 schedule.activities.Add(a);
             }
-       
         }
         //Method to Save current objects to DataBase!
         public void SaveToDataBase()
         {
             SaveViaDataContractSerialization(activities, "activity.xml");
             SaveViaDataContractSerialization(userObjects, "user.xml");
+            SaveViaDataContractSerialization(restrictedObjects, "restrictedObjects.xml");
             gymDatabase.Create(equipmentObjects);
             gymDatabase.Create(spaceObjects);
             gymDatabase.Create(trainerObjects);
-
         }
-        //Not used in current program, after testing these should be removed if they are not needed!
-        public void LoadFile(string entity, string filePath)
-        {
-            char sep = Path.DirectorySeparatorChar;
-            string storage = $"GymDB{sep}storage";
-            Directory.CreateDirectory(storage);
-            string fpathUser = $"{storage}{sep}{filePath}";
-
-            using (StreamReader infile = new StreamReader(fpathUser))
-            {
-                string line;
-                while ((line = infile.ReadLine()) != null)
-                {
-                    //Behövs normaliseras!!!! så man kan styra vilket object och lista som används!!! hmmmmmmm
-                    //If-statment that deteminde witch object and list to use!!
-                    if(entity == "user")
-                    {
-                        string[] attrs = line.Split('|');
-                        ReservingEntity user = new ReservingEntity(attrs[0], attrs[1], attrs[2], attrs[3], attrs[4]);
-                        userObjects.Add(user);
-                    }
-                    else
-                    {
-                        Console.WriteLine($"{entity} dose not exist in database");
-                    }
-                }
-            }
-        }
-        //Not used in current program, after testing these should be removed if they are not needed!
-        public void SaveListToDatabase(string entity, string filePath)
-        {
-            char sep = Path.DirectorySeparatorChar;
-            string storage = $"GymDB{sep}storage";
-            Directory.CreateDirectory(storage);
-            string fpathUser = $"{storage}{sep}{filePath}";
-
-            using (StreamWriter outfile = new StreamWriter(fpathUser))
-            {
-                //If-statment that deteminde witch object and list to use
-                if (entity == "user")
-                {
-                    foreach (ReservingEntity user in userObjects)
-                    {
-                        if (user != null)
-                            outfile.WriteLine($"{user.name}|{user.uniqueID}|{user.phone}|{user.email}|{user.status}"); //Spara dessa i strängar som avgör hur infomraion skrivs ut!!!
-                    }
-                }
-                else
-                {
-                    Console.WriteLine($"{entity} dose not exist in database");
-                }
-            }
-        }
-        // New Methods to create a funktionall Database, use the DataContractSerializer class in .net to create readeble .xml files
-        // All classes we want to save or load to new DataBase must have [DataContract] above class and all its fields a [DataMember]
-        // With this method we do not need the DataBase method we inherited from former Team
-        // The Save method rewrite the entire file, for simplisity we should in the begingen just use this as a method to be called on 
-        // exiting the program and save all current lists!
         static void SaveViaDataContractSerialization<T>(T serializableObject, string filePath)
         {
             //ToDo, make a method of this filepath insted of repeting in both methods!
@@ -145,6 +90,159 @@ namespace Gym_Booking_Manager
             reader.Close();
             fileStream.Close();
             return serializableObject;
+        }
+        public void StatusChangeEmail(string a)
+        {
+            foreach(Activity b in schedule.activities)
+            {
+                if(b.activityID == a)
+                {
+                    using (StreamWriter sw = new StreamWriter("email.txt"))
+                    for (int n = 0; n < b.participants.Count; n++)
+                    {
+                        sw.WriteLine($"{b.participants[n].email} your activity {b.activityID} has been canceled");
+                    }
+                }
+            }
+        }
+        public void LogAlteration(string cause, string refrense)
+        {
+            DateTime time = DateTime.Now;
+            using (StreamWriter sw = File.AppendText("test.txt"))
+            {
+                sw.WriteLine($"{time} : {cause} : {refrense}");
+            }
+        }
+        public void ViewRestrictedObject()
+        {
+            int a = 1;
+            foreach(RestrictedObjects rs in restrictedObjects)
+            {
+                Console.WriteLine($"{a}: {rs}");
+                a++;
+            }
+        }
+        //TODO, add a try/catch to stop method from crashing if worng input is given
+        public void DropRestrictedObjects()
+        {
+            int input;
+            ViewRestrictedObject();
+            Console.WriteLine("Type number corresponding with object to drop restriction:> ");
+            input = Convert.ToInt32(Console.ReadLine());
+            for(int n = 0; n < restrictedObjects.Count; n++)
+            {
+                if (restrictedObjects[input-1] == restrictedObjects[n])
+                {
+                    if (restrictedObjects[input - 1].space == restrictedObjects[n].space)
+                    {
+                        Console.WriteLine(restrictedObjects[input - 1]);
+                        spaceObjects.Add(restrictedObjects[input - 1].space);
+                        restrictedObjects.RemoveAt(input - 1);
+                        foreach (Space a in spaceObjects)
+                        {
+                            Console.WriteLine(a);
+                        }
+                    }
+                    else if (restrictedObjects[input - 1].equipment == restrictedObjects[n].equipment)
+                    {
+                        Console.WriteLine(restrictedObjects[input - 1]);
+                        restrictedObjects.RemoveAt(input - 1);
+                    }
+                }
+            }
+        }
+        //TODO, add a try/catch to stop method from crashing if worng input is given
+        public void SetRestrictedStatus()
+        {
+            Console.WriteLine("Wich object do you want to restrict?");
+            Console.Write("Space or Equipment:> ");
+            string input = Console.ReadLine();
+            if(input.ToLower() == "space")
+            {
+                int n = 1;
+                foreach(Space a in spaceObjects)
+                {
+                    Console.WriteLine($"{n} : {a.name}");
+                    n++;
+                }
+                Console.WriteLine("Type number corresponding with object to set restriction:> ");
+                int number = Convert.ToInt32(Console.ReadLine());
+                RestrictedObjects restricted = new RestrictedObjects(spaceObjects[number-1]);
+                restrictedObjects.Add(restricted);
+                spaceObjects.RemoveAt(number-1);
+            }
+            else if( input.ToLower() == "equipment")
+            {
+                int n = 1;
+                foreach(Equipment a in equipmentObjects)
+                {
+                    Console.WriteLine($"{n} : {a.name}");
+                    n++;
+                }
+                Console.WriteLine("Type number corresponding with object to set restriction:> ");
+                int number = Convert.ToInt32(Console.ReadLine());
+                RestrictedObjects restricted = new RestrictedObjects(equipmentObjects[number-1]);
+                restrictedObjects.Add(restricted);
+                equipmentObjects.RemoveAt(number-1);
+            }
+        }
+        public void UserManagement(ReservingEntity user)
+        {
+            if(user.status == "Non-member")
+            {
+                //A payment method should be implemented here
+                List<ReservingEntity> dayPass = new List<ReservingEntity>();
+                Console.WriteLine("Enter name:> ");
+                string name = ReturnString();
+                ReservingEntity tempMember = new ReservingEntity(name, "333", "", "", "Member");
+                dayPass.Add(tempMember);
+            }
+            else if(user.status == "Staff")
+            {
+                //Do Something
+                Console.WriteLine("[1] Purchase daypass");
+                Console.WriteLine("[2] Add new user");
+                Console.WriteLine("[3] Remove user");
+                string input = Console.ReadLine();
+                if(input == "1")
+                {
+                    userObjects[3].status = "Member";
+                }
+                else if(input == "2")
+                {
+                    Console.WriteLine("Name: ");
+                    string name = ReturnString();
+                    Console.WriteLine("UniqueID: ");
+                    string uniqueID = ReturnString();
+                    Console.WriteLine("Phone: ");
+                    string phone = ReturnString();
+                    Console.WriteLine("Email: ");
+                    string email = ReturnString();
+                    Console.WriteLine("Status: ");
+                    string status = ReturnString();
+                    ReservingEntity newMember = new ReservingEntity(name,uniqueID,phone,email,status);
+                    userObjects.Add(newMember);
+                    
+                }
+                else if (input == "3")
+                {
+                    int n = 1;
+                    foreach (ReservingEntity u in userObjects)
+                    {
+                        Console.WriteLine($"{n} : {u.name}");
+                        n++;
+                    }
+                    Console.WriteLine("Type number corresponding with user to remove:> ");
+                    int number = Convert.ToInt32(Console.ReadLine());
+                    userObjects.RemoveAt(number - 1);
+                }
+            }
+        }
+        public string ReturnString()
+        {
+            Console.Write(":> ");
+            string input = Console.ReadLine();
+            return input;
         }
     }
 }
