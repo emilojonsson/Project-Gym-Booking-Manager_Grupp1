@@ -23,27 +23,34 @@ namespace Gym_Booking_Manager
         [DataMember]
         public List<Reservation> reservations;
         [DataMember]
-        public DateTime dateTime; // Becca skrev in tillfälligt
+        public DateTime dateTime; //this one could be renamed to startTime
 
         public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {
             this.reservations = new List<Reservation>();
         }
 
-        public Calendar(DateTime dateTime)
+        public Calendar(DateTime startTime, double durationMinutes, ReservingEntity Owner) //this is to be used when creating an Activity
         {
-            this.dateTime = dateTime;
+            this.reservations = new List<Reservation> {new Reservation(Owner, startTime, durationMinutes)};
         }
 
-        public Calendar(DateTime timeSlot, ReservingEntity Owner) //this is to be used when creating an Activity
+        public void BookReservation(ReservingEntity owner, DateTime startTime, double durationMinutes)
         {
-            this.reservations = new List<Reservation> {new Reservation(Owner, timeSlot)};
+            bool isAvailableTimeSlot = true;
+            foreach (Reservation reservation in reservations)
+            {
+                if (reservation.startTime < startTime.AddMinutes(durationMinutes) && reservation.startTime.AddMinutes(reservation.durationMinutes) > startTime)
+                {
+                    isAvailableTimeSlot = false;
+                    Console.WriteLine("OBS! Går ej att dubbelboka i kalendern");
+                }
+            }
+            if (isAvailableTimeSlot)
+            {
+                reservations.Add(new Reservation(owner, startTime, durationMinutes));
+            }
         }
-
-
-        // Leaving this method for now. Idea being it may be useful to get entries within a "start" and "end" time/date range.
-        // Need parameters if so.
-        // Or maybe we'll come up with a better solution elsewhere.
         public List<Reservation> GetSlice()
         {
             return this.reservations; // Promise to implement or delete this later, please just compile.
