@@ -8,4 +8,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Interfaces\IReservingEntity.cs" />
+    <Compile Remove="User.cs" />
+  </ItemGroup>
+
 </Project>
