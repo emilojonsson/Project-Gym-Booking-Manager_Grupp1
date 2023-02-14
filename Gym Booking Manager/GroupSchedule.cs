@@ -79,46 +79,7 @@ namespace Gym_Booking_Manager
             data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
             data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
         }
-
-        // TODO - Ska kunna användas av member och staff
-        // - ombokning/avbokning
-        // TODO - Är metoden klar eller ska den utökas med avbokning som RemoveActivity???
-        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID, Activity updateActivity)
-        {
-            for (int i = 0; i < activities.Count; i++)
-            {
-                if(user.status == "Member")
-                {
-                    if (activities[i].activityID == activityID)
-                    {
-                        activities[i] = updateActivity;
-                        Console.WriteLine("The activity has been updated.");
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"The activity was not found in the schedule.");
-                    }
-                }
-
-                else if(user.status == "Staff")
-                {
-                    if (activities[i].activityID == activityID)
-                    {
-                        activities[i] = updateActivity;
-                        Console.WriteLine("The activity has been updated.");
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"The activity was not found in the schedule.");
-                    }
-                }
-            }
-        }
-
-
-        public void RemoveActivity(ReservingEntity user)
+        public void RemoveActivity(ReservingEntity user, DatabaseTemp data1)
         {
             if (user.status == "Member")
             {
@@ -173,8 +134,52 @@ namespace Gym_Booking_Manager
                 int answerInt = int.Parse(Console.ReadLine()) - 1;
 
                 Console.WriteLine($"Gruppaktiviteten {activities[answerInt].activityDetails} är nu borttaget från schemat");
+                data1.StatusChangeEmail(activities[answerInt].activityID);
                 activities.RemoveAt(answerInt);
             }
+        }
+        public void ModifyActivity(DatabaseTemp data, ReservingEntity owner)
+        {
+            Console.WriteLine("Enter the new activity details:");
+            string updatedDetails = Console.ReadLine();
+
+            Console.WriteLine("Enter the new participant limit:");
+            int updatedLimit = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM):");
+            string updatedTime = Console.ReadLine();
+            Console.WriteLine("Ange hur många minuter aktiviteten ska hålla på:");
+            double durationMinutes = double.Parse(Console.ReadLine());
+
+            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime), durationMinutes, owner);
+
+            Console.WriteLine("Enter the new trainer's name: ");
+            foreach (Trainer trainer in data.trainerObjects)
+            {
+                Console.WriteLine(trainer);
+            }
+            int updatedTrainer = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the new space name:");
+            foreach (Space space in data.spaceObjects)
+            {
+                Console.WriteLine(space);
+            }
+            int updatedSpace = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter the new equipment name:");
+            foreach (Equipment equipment in data.equipmentObjects)
+            {
+                Console.WriteLine(equipment);
+            }
+            int updatedEquipment = int.Parse(Console.ReadLine());
+
+            //this.activityDetails = updatedDetails;
+            //this.participantLimit = updatedLimit;
+            //this.timeSlot = updatedCalendar;
+            //this.trainer = data.trainerObjects[updatedTrainer];
+            //this.equipment = data.equipmentObjects[updatedEquipment]; ;
+            //this.space = data.spaceObjects[updatedSpace]; ;
         }
 
         public void SignUp(ReservingEntity user, DatabaseTemp data1)

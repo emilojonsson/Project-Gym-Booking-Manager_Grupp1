@@ -264,6 +264,16 @@ namespace Gym_Booking_Manager
             }
             Console.WriteLine();
         }
+        public void ViewTrainer()
+        {
+            Console.WriteLine();
+            foreach (Trainer allTrainer in trainerObjects)
+            {
+                Console.WriteLine($"-- {allTrainer} --");
+            }
+            Console.WriteLine();
+        }
+
 
         public void LoadTraining(ReservingEntity user, string choice)
         {
