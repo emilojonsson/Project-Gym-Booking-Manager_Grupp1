@@ -84,7 +84,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to purchase subscription
-                                //Make a temorary member 
+                                data1.UserManagement(data1.userObjects[0]);
                                 break;
                             case "q":
                                 break;
@@ -100,7 +100,7 @@ namespace Gym_Booking_Manager
                         Console.WriteLine("2. View equipment");            // Se vilka equipments som går att boka
                         Console.WriteLine("3. View space");                // Se lediga lokaler
                         Console.WriteLine("4. Add activity");              // Reservera PT, gruppass, equipments, lokal
-                        Console.WriteLine("5. Modify activity");
+                        Console.WriteLine("5. Modify activity");            
                         Console.WriteLine("6. Remove acticity");
                         Console.WriteLine("7. make reservation");
                         Console.WriteLine("8. Edit reservation");          // Redigera reservation
@@ -143,13 +143,13 @@ namespace Gym_Booking_Manager
                                 break;
                             case "10":
                                 // Code to restrict equipment
-                                //flytta från space list to restricted list!
+                                //flytta från space list
                                 break;
                             case "11":
-                                // Code to user management
+                                data1.SetRestrictedStatus();
                                 break;
                             case "12":
-                                // Code to user management
+                                data1.UserManagement(data1.userObjects[1]);
                                 break;
                             case "q":
                                 break;
@@ -171,9 +171,11 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // View Restrictions
+                                data1.ViewRestrictedObject();
                                 break;
                             case "2":
                                 // Code to Drop Restrictions
+                                data1.DropRestrictedObjects();
                                 break;
                             case "q":
                                 break;
