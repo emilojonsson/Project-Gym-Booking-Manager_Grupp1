@@ -64,7 +64,7 @@ namespace Gym_Booking_Manager
             }
             int addedTrainer = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Ange siffra för vilken utrustning som ska reserveras för aktiviteten:");
+            Console.WriteLine("Select number for which equipment you want to make a reservation:");
             foreach (Equipment equipment in data.equipmentObjects)
             {
                 Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment)} - {equipment.name}");
@@ -79,30 +79,41 @@ namespace Gym_Booking_Manager
 
         // TODO - Ska kunna användas av member och staff
         // - ombokning/avbokning
-        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID) 
+        // TODO - Är metoden klar eller ska den utökas med avbokning som RemoveActivity???
+        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID, Activity updateActivity)
         {
-            foreach(Activity activity in activities)
+            for (int i = 0; i < activities.Count; i++)
             {
                 if(user.status == "Member")
                 {
-                    if (activity.activityID == activityID)
+                    if (activities[i].activityID == activityID)
                     {
-                        //activity.participants.Update(user);
-                        //Console.WriteLine(" ");
-                        //break;
+                        activities[i] = updateActivity;
+                        Console.WriteLine("The activity has been updated.");
+                        break;
                     }
                     else
                     {
-                        Console.WriteLine($"The Activity was not found in the schedule.");
+                        Console.WriteLine($"The activity was not found in the schedule.");
                     }
                 }
 
                 else if(user.status == "Staff")
                 {
-                    // TODO
+                    if (activities[i].activityID == activityID)
+                    {
+                        activities[i] = updateActivity;
+                        Console.WriteLine("The activity has been updated.");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The activity was not found in the schedule.");
+                    }
                 }
             }
         }
+
 
         public void RemoveActivity(ReservingEntity user, string activityID)
         {
