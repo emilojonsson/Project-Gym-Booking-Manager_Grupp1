@@ -18,7 +18,6 @@ namespace Gym_Booking_Manager
             //Menu m1 = new Menu();
             //m1.Run();
 
-
             string userInput = "";
             while (userInput != "q")
             {
@@ -65,6 +64,8 @@ namespace Gym_Booking_Manager
                                 // Implemetnera metoden 
                             case "5":
                                 //implementera remove activity
+                                data1.schedule.RemoveActivity(member);
+                                break;
                             case "q":
                                 break;
                             default:
@@ -130,7 +131,8 @@ namespace Gym_Booking_Manager
                                 // Code to Modify activity
                                 break;
                             case "6":
-                                // Code to Modify activity
+                                // Code to Remove activity
+                                data1.schedule.RemoveActivity(staff);
                                 break;
                             case "7":
                                 // Code to Modify activity
