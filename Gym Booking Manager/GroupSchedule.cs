@@ -47,8 +47,10 @@ namespace Gym_Booking_Manager
             Console.WriteLine("Ange hur många deltagare det maximalt kan vara på aktiviteten:");
             int participantLimit = int.Parse(Console.ReadLine());
             
-            Console.WriteLine("Ange vilken timme aktiviteten ska starta:");
+            Console.WriteLine("Ange när aktiviteten ska starta:");
             DateTime timeSlot = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Ange hur många minuter aktiviteten ska hålla på:");
+            double durationMinutes = double.Parse(Console.ReadLine());
 
             Console.WriteLine("Ange siffra för vilken yta som ska reserveras för aktiviteten:");
             foreach(Space space in data.spaceObjects)
@@ -64,79 +66,123 @@ namespace Gym_Booking_Manager
             }
             int addedTrainer = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Ange siffra för vilken utrustning som ska reserveras för aktiviteten:");
+            Console.WriteLine("Select number for which equipment you want to make a reservation:");
             foreach (Equipment equipment in data.equipmentObjects)
             {
                 Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment)} - {equipment.name}");
             }
             int addedEquipment = int.Parse(Console.ReadLine());
 
-            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, owner, data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
-            data.spaceObjects[addedSpace].MakeReservation(owner, timeSlot);
-            data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot);
-            data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot);
+            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner, data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+            data.spaceObjects[addedSpace].MakeReservation(owner, timeSlot, durationMinutes);
+            data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
+            data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
         }
 
         // TODO - Ska kunna användas av member och staff
         // - ombokning/avbokning
-        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID) 
+        // TODO - Är metoden klar eller ska den utökas med avbokning som RemoveActivity???
+        public void UpdateActivity(ReservingEntity user, string activityDetails, string activityID, Activity updateActivity)
         {
-            foreach(Activity activity in activities)
+            for (int i = 0; i < activities.Count; i++)
             {
                 if(user.status == "Member")
                 {
-                    if (activity.activityID == activityID)
+                    if (activities[i].activityID == activityID)
                     {
-                        //activity.participants.Update(user);
-                        //Console.WriteLine(" ");
-                        //break;
+                        activities[i] = updateActivity;
+                        Console.WriteLine("The activity has been updated.");
+                        break;
                     }
                     else
                     {
-                        Console.WriteLine($"The Activity was not found in the schedule.");
+                        Console.WriteLine($"The activity was not found in the schedule.");
                     }
                 }
 
                 else if(user.status == "Staff")
                 {
-                    // TODO
+                    if (activities[i].activityID == activityID)
+                    {
+                        activities[i] = updateActivity;
+                        Console.WriteLine("The activity has been updated.");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"The activity was not found in the schedule.");
+                    }
                 }
             }
         }
 
+
         public void RemoveActivity(ReservingEntity user, string activityID)
         {
-            //Todo
-            foreach (Activity activity in activities)
+            if (user.status == "Member")
             {
-                if (user.status == "Member")
+                foreach (Activity activity in activities)
                 {
-                    //Do something
-                    if(activity.activityID == activityID)
+                    Console.WriteLine("Nedan listas de gruppaktiviteter som du är anmäld på:");
+                    foreach (ReservingEntity signUp in activity.participants)
                     {
-                        activity.participants.Remove(user);
-                        Console.WriteLine($"The User {user.name} was removed from activity {activity.activityID}");
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"The User was not found in the schedule.");
+                        int count = 1;
+                        if (user == signUp)
+                        {
+                            Console.WriteLine($"{count}. {activity.activityID},  {activity.timeSlot.reservations[0]}"); //for now an activity can only have one reservation, but beware of future changes...
+                            count++;
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{user} hittas ej som anmäld på någon gruppaktivitet");
+                        }
                     }
                 }
-                else if (user.status == "Staff")
+                Console.WriteLine("Ange den aktivitet du vill avanmäla dig från:");
+                int answerInt = int.Parse(Console.ReadLine());
+
+                foreach (Activity activity in activities)
                 {
-                    if (activity.activityID == activityID)
+                    int count = 0;
+                    foreach (ReservingEntity signUp in activity.participants)
                     {
-                        activities.Remove(activity);
-                        Console.WriteLine($"The activity with ID {activityID} has been removed from the schedule.");
-                        // Here we need a method so that the activity gets removed from the Database!!
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine($"The activity with ID {activityID} was not found in the schedule.");
+                        if (user == signUp)
+                        {
+                            count++;
+                        }
+                        if (count == answerInt)
+                        {
+                            activity.participants.Remove(user);
+                            Console.WriteLine($"Användaren {user.name} was removed from activity {activity.activityID}");
+                            break;
+                        }
                     }
                 }
+
+                //if (activity.activityID == activityID)
+                //{
+                //    activity.participants.Remove(user);
+                //    Console.WriteLine($"The User {user.name} was removed from activity {activity.activityID}");
+                //    break;
+                //}
+                //else
+                //{
+                //    Console.WriteLine($"The User was not found in the schedule.");
+                //}
+            }
+            else if (user.status == "Staff")
+            {
+                //if (activity.activityID == activityID)
+                //{
+                //    activities.Remove(activity);
+                //    Console.WriteLine($"The activity with ID {activityID} has been removed from the schedule.");
+                //    // Here we need a method so that the activity gets removed from the Database!!
+                //    break;
+                //}
+                //else
+                //{
+                //    Console.WriteLine($"The activity with ID {activityID} was not found in the schedule.");
+                //}
             }
         }
         public override string ToString()

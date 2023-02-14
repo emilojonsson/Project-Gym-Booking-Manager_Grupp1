@@ -13,15 +13,18 @@ namespace Gym_Booking_Manager
         [DataMember]
         public ReservingEntity owner;
         [DataMember]
-        public DateTime timeSlot;
-        public Reservation (ReservingEntity owner, DateTime timeSlot)
+        public DateTime startTime;
+        public double durationMinutes;
+
+        public Reservation (ReservingEntity owner, DateTime startTime, double durationMinutes)
         {
             this.owner = owner;
-            this.timeSlot = timeSlot;
+            this.startTime = startTime;
+            this.durationMinutes = durationMinutes;
         }
         public override string ToString()
         {
-            return $"{owner} {timeSlot}";
+            return $"{owner} {startTime.ToString("yyyy/MM/dd")}, mellan: {startTime.ToString("HH:mm")}-{startTime.AddMinutes(durationMinutes).ToString("HH:mm")}";
         }
     }
 }
