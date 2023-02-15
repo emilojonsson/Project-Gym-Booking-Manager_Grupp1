@@ -53,11 +53,18 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("Add start date and time when the first occurens of the activity will take place 'YYYY/MM/DD hh:mm':");
                 DateTime firstDate = DateTime.Parse(Console.ReadLine());
 
+                DateTime uniqueTimeToID = DateTime.Now;
+                string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); //picked this for now. it is at least unique
+
                 Console.WriteLine("Please add for how many weeks this activity will repeat itself:");
                 int repeats = int.Parse(Console.ReadLine());
                 for (int i = 0; i < repeats; i++)
                 {
-                    //data.templateActivityObjects[template] här ska jag adda data vidare (datum) och sedan kopiera över objektet till activitylistan 
+                    //data.schedule.activities.Add(new Activity(activityID, data.templateActivityObjects[template].activityDetails, data.templateActivityObjects[template].participantLimit, 
+                    //    firstDate, data.templateActivityObjects[template].durationMinutes, owner,
+                    //        data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+                    uniqueTimeToID.AddMinutes(1);
+                    activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm");
                 }
             }
             else
@@ -290,6 +297,53 @@ namespace Gym_Booking_Manager
         public override string ToString()
         {
             return $"{activities}";
+        }
+        public void AddTemplateActivity(ReservingEntity owner, Database data)
+        {
+            DateTime timeSlot = new DateTime(1, 1, 1);
+
+            Console.WriteLine("Please add activity details (label of the session):");
+            string? activityDetails = Console.ReadLine();
+
+            DateTime uniqueTimeToID = DateTime.Now;
+            string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); //picked this for now. it is at least unique
+
+            Console.WriteLine("What is the maximum amount of participants:");
+            int participantLimit = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("How many minutes will the activity last:");
+            double durationMinutes = double.Parse(Console.ReadLine());
+
+            Console.WriteLine();
+            Console.WriteLine("Please add which space that will be reserved for the activity:");
+            foreach (Space space in data.spaceObjects)
+            {
+                Console.WriteLine($"{data.spaceObjects.IndexOf(space) + 1} - {space.name}");
+            }
+            int addedSpace = int.Parse(Console.ReadLine()) - 1;
+            bool spaceBookingComplete = data.spaceObjects[addedSpace].MakeReservation(owner, timeSlot, durationMinutes);
+
+            Console.WriteLine();
+            Console.WriteLine("Please add which trainer that will be reserved for the activity:");
+            foreach (Trainer trainer in data.trainerObjects)
+            {
+                Console.WriteLine($"{data.trainerObjects.IndexOf(trainer) + 1} - {trainer.name}");
+            }
+            int addedTrainer = int.Parse(Console.ReadLine()) - 1;
+            bool trainerBookingComplete = data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
+
+            Console.WriteLine();
+            Console.WriteLine("Please add which equipment that will be reserved for the activity:");
+            foreach (Equipment equipment in data.equipmentObjects)
+            {
+                Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment) + 1} - {equipment.name}");
+            }
+            int addedEquipment = int.Parse(Console.ReadLine()) - 1;
+            bool equipmentBookingComplete = data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
+            Console.WriteLine();
+
+            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
+                data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
         }
 
     }

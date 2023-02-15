@@ -77,7 +77,7 @@ namespace Gym_Booking_Manager
             SaveViaDataContractSerialization(spaceObjects, "spaceObjects.xml");
             SaveViaDataContractSerialization(trainerObjects, "trainerObjects.xml");
             SaveViaDataContractSerialization(equipmentObjects, "equipmentObjects.xml");
-           
+            SaveViaDataContractSerialization(templateActivityObjects, "templateActivities.xml");
         }
 
         public static string FilePath(string fileName)
@@ -244,7 +244,8 @@ namespace Gym_Booking_Manager
             if (userInput == "3")
             {
                 spaceObjects[inputChoice - 1].MakeReservation(user, timeSlot, durationMinutes);
-                choosen = $"{equipmentObjects[inputChoice - 1]}";
+                choosen = $"{spaceObjects[inputChoice - 1]}";
+                LogAlteration("space", choosen);
             }
             Console.WriteLine();
             Console.WriteLine("-- Reservation registred! --");
@@ -283,7 +284,6 @@ namespace Gym_Booking_Manager
             string userInput;
             userInput = Console.ReadLine();
             LoadTraining(user, userInput);
-
         }
     }
 }
