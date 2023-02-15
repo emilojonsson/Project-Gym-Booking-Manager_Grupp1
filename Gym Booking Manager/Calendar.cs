@@ -35,21 +35,18 @@ namespace Gym_Booking_Manager
             this.reservations = new List<Reservation> {new Reservation(Owner, startTime, durationMinutes)};
         }
 
-        public void BookReservation(ReservingEntity owner, DateTime startTime, double durationMinutes)
+        public bool BookReservation(ReservingEntity owner, DateTime startTime, double durationMinutes)
         {
-            bool isAvailableTimeSlot = true;
             foreach (Reservation reservation in reservations)
             {
                 if (reservation.startTime < startTime.AddMinutes(durationMinutes) && reservation.startTime.AddMinutes(reservation.durationMinutes) > startTime)
                 {
-                    isAvailableTimeSlot = false;
-                    Console.WriteLine("OBS! Går ej att dubbelboka i kalendern");
+                    Console.WriteLine("The item is not possible to book at this time, it's allready booked.");
+                    return false;
                 }
             }
-            if (isAvailableTimeSlot)
-            {
-                reservations.Add(new Reservation(owner, startTime, durationMinutes));
-            }
+            reservations.Add(new Reservation(owner, startTime, durationMinutes));
+            return true;
         }
         public List<Reservation> GetSlice()
         {
