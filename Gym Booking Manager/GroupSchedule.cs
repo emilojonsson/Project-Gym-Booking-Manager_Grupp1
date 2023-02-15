@@ -53,11 +53,18 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("Add start date and time when the first occurens of the activity will take place 'YYYY/MM/DD hh:mm':");
                 DateTime firstDate = DateTime.Parse(Console.ReadLine());
 
+                DateTime uniqueTimeToID = DateTime.Now;
+                string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); //picked this for now. it is at least unique
+
                 Console.WriteLine("Please add for how many weeks this activity will repeat itself:");
                 int repeats = int.Parse(Console.ReadLine());
                 for (int i = 0; i < repeats; i++)
                 {
-                    //data.templateActivityObjects[template] här ska jag adda data vidare (datum) och sedan kopiera över objektet till activitylistan 
+                    //data.schedule.activities.Add(new Activity(activityID, data.templateActivityObjects[template].activityDetails, data.templateActivityObjects[template].participantLimit, 
+                    //    firstDate, data.templateActivityObjects[template].durationMinutes, owner,
+                    //        data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+                    uniqueTimeToID.AddMinutes(1);
+                    activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm");
                 }
             }
             else

@@ -102,13 +102,13 @@ namespace Gym_Booking_Manager
                     case "3":
                         ReservingEntity staff = data1.userObjects[1];
                         Console.WriteLine("--- Staff ---");
-                        Console.WriteLine("1. View schedule");             // Se alla pass, bokningsbart eller fullbokat
+                        Console.WriteLine("1. View group activities");             // Se alla pass, bokningsbart eller fullbokat
                         Console.WriteLine("2. View equipment");            // Se vilka equipments som går att boka
                         Console.WriteLine("3. View space");                // Se lediga lokaler
                         Console.WriteLine("4. View trainer");
                         Console.WriteLine("5. Add activity");              // Reservera PT, gruppass, equipments, lokal
                         Console.WriteLine("6. Modify activity");            
-                        Console.WriteLine("7. Remove acticity");
+                        Console.WriteLine("7. Remove activity");
                         Console.WriteLine("8. make reservation");
                         Console.WriteLine("9. Edit reservation");          // Redigera reservation
                         Console.WriteLine("10. View log");                  // Se de anställdas loggar
