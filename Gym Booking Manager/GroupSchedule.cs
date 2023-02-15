@@ -37,7 +37,7 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-        public void AddActivity(ReservingEntity owner, DatabaseTemp data)
+        public void AddActivity(ReservingEntity owner, Database data)
         {
             Console.WriteLine("Do you want to add an activity from template (yes/no):");
             if (Console.ReadLine().ToLower() == "yes")
