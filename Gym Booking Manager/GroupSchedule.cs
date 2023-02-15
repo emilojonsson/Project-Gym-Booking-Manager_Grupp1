@@ -37,7 +37,7 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-        public void AddActivity(ReservingEntity owner, DatabaseTemp data)
+        public void AddActivity(ReservingEntity owner, Database data)
         {
             Console.WriteLine("Ange information om aktiviteten:");
             string? activityDetails = Console.ReadLine();
@@ -79,7 +79,7 @@ namespace Gym_Booking_Manager
             data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
             data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
         }
-        public void RemoveActivity(ReservingEntity user, DatabaseTemp data1)
+        public void RemoveActivity(ReservingEntity user, Database data1)
         {
             if (user.status == "Member")
             {
@@ -138,7 +138,7 @@ namespace Gym_Booking_Manager
                 activities.RemoveAt(answerInt);
             }
         }
-        public void ModifyActivity(DatabaseTemp data, ReservingEntity owner)
+        public void ModifyActivity(Database data, ReservingEntity owner)
         {
             Console.WriteLine("Enter the new activity details:");
             string updatedDetails = Console.ReadLine();
@@ -182,7 +182,7 @@ namespace Gym_Booking_Manager
             //this.space = data.spaceObjects[updatedSpace]; ;
         }
 
-        public void SignUp(ReservingEntity user, DatabaseTemp data1)
+        public void SignUp(ReservingEntity user, Database data1)
         {
             int x = 1;
 
@@ -197,7 +197,7 @@ namespace Gym_Booking_Manager
 
             if (user.status == "Member")
             {
-                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
                 {
                     activities[answer].participants.Add(user);
                 }
@@ -220,7 +220,7 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("Which activity do you want to sign up the member for?");
                 int staffAnswer = int.Parse(Console.ReadLine()) - 1;
 
-                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
                 {
                     activities[answer].participants.Add(data1.userObjects[staffAnswer]);
                 }
