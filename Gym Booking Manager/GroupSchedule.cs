@@ -50,7 +50,7 @@ namespace Gym_Booking_Manager
                 }
                 int template = int.Parse(Console.ReadLine()) - 1;
 
-                Console.WriteLine("Add start date and time when the first occurens of the activity will take place 'YYYY/MM/DD hh:mm':");
+                Console.WriteLine("Add start date and time when the first occurrence of the activity will take place 'YYYY/MM/DD hh:mm':");
                 DateTime firstDate = DateTime.Parse(Console.ReadLine());
 
                 DateTime uniqueTimeToID = DateTime.Now;
@@ -60,11 +60,12 @@ namespace Gym_Booking_Manager
                 int repeats = int.Parse(Console.ReadLine());
                 for (int i = 0; i < repeats; i++)
                 {
-                    //data.schedule.activities.Add(new Activity(activityID, data.templateActivityObjects[template].activityDetails, data.templateActivityObjects[template].participantLimit, 
-                    //    firstDate, data.templateActivityObjects[template].durationMinutes, owner,
-                    //        data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+                    data.schedule.activities.Add(new Activity(activityID, data.templateActivityObjects[template].activityDetails, data.templateActivityObjects[template].participantLimit,
+                        firstDate, data.templateActivityObjects[template].participantLimit, owner,
+                            data.templateActivityObjects[template].space, data.templateActivityObjects[template].trainer, data.templateActivityObjects[template].equipment));
                     uniqueTimeToID.AddMinutes(1);
                     activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm");
+                    firstDate = firstDate.AddDays(7);
                 }
             }
             else
@@ -342,8 +343,15 @@ namespace Gym_Booking_Manager
             bool equipmentBookingComplete = data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
             Console.WriteLine();
 
-            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
+            data.templateActivityObjects.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
                 data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+        }
+        public void ViewTemplate(Database data)
+        {
+            foreach (Activity template in data.templateActivityObjects)
+            {
+                Console.WriteLine($"{template.activityDetails}, {template.participantLimit} participants, {template.space}, {template.trainer}, {template.equipment}");
+            }
         }
 
     }
