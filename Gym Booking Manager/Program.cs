@@ -150,6 +150,7 @@ namespace Gym_Booking_Manager
                                 data1.schedule.RemoveActivity(staff, data1);
                                 break;
                             case "8":
+                                data1.MakeResStaff();
                                 // make a reservation for a member by a staff
                                 break;
                             case "9":
