@@ -52,5 +52,6 @@ namespace Gym_Booking_Manager
         {
             return this.reservations; // Promise to implement or delete this later, please just compile.
         }
+        
     }
 }

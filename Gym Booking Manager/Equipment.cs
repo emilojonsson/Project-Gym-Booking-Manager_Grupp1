@@ -87,10 +87,9 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void MakeReservation(ReservingEntity owner, DateTime timeSlot, double durationMinutes)
+        public bool MakeReservation(ReservingEntity owner, DateTime timeSlot, double durationMinutes)
         {
-            //calendar.reservations.Add(new Reservation(owner, timeSlot));
-            calendar.BookReservation(owner, timeSlot, durationMinutes);
+            return calendar.BookReservation(owner, timeSlot, durationMinutes);
 
         }
 

@@ -12,7 +12,7 @@ namespace Gym_Booking_Manager
     {
         static void Main(string[] args)
         {
-            DatabaseTemp data1 = new DatabaseTemp();
+            Database data1 = new Database();
             data1.LoadDataBase();
 
             //Menu m1 = new Menu();
@@ -90,7 +90,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to purchase subscription
-                                data1.UserManagement(nonMember);
+                                data1.user.UserManagement(nonMember, data1);
                                 break;
                             case "e":
                                 break;
@@ -114,6 +114,7 @@ namespace Gym_Booking_Manager
                         Console.WriteLine("10. View log");                  // Se de anställdas loggar
                         Console.WriteLine("11. Restrict equipment");        // Registrera avstängda maskiner/lokaler
                         Console.WriteLine("12. User management");           // Användarhantering, purchase subscription to members
+                        Console.WriteLine("13. Add template");
                         Console.WriteLine("e. Go back");
                         Console.Write("Enter your choice: ");
                         userInput = Console.ReadLine();
@@ -149,6 +150,7 @@ namespace Gym_Booking_Manager
                                 data1.schedule.RemoveActivity(staff, data1);
                                 break;
                             case "8":
+                                data1.MakeResStaff();
                                 // make a reservation for a member by a staff
                                 break;
                             case "9":
@@ -158,10 +160,13 @@ namespace Gym_Booking_Manager
                                 // View logfile
                                 break;
                             case "11":
-                                data1.SetRestrictedStatus();
+                                data1.restricted.SetRestrictedStatus(data1);
                                 break;
                             case "12":
-                                data1.UserManagement(data1.userObjects[1]);
+                                data1.user.UserManagement(data1.userObjects[1],data1);
+                                break;
+                            case "13":
+                                data1.schedule.AddTemplateActivity(staff, data1);
                                 break;
                             case "e":
                                 break;
@@ -188,7 +193,7 @@ namespace Gym_Booking_Manager
                                 break;
                             case "2":
                                 // Code to Drop Restrictions
-                                data1.DropRestrictedObjects();
+                                data1.restricted.DropRestrictedObjects(data1);
                                 break;
                             case "e":
                                 break;
@@ -198,8 +203,7 @@ namespace Gym_Booking_Manager
                         }
                         break;
                 }
-                //data1.SaveToDataBase();
-
+                data1.SaveToDataBase();
             }
         }
         //Add method below if needed!!!

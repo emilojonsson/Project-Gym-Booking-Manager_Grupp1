@@ -37,54 +37,6 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-        public void AddTemplateActivity(ReservingEntity owner, DatabaseTemp data)
-        {
-            DateTime timeSlot = new DateTime(1, 1, 1);
-
-            Console.WriteLine("Please add activity details (label of the session):");
-            string? activityDetails = Console.ReadLine();
-
-            DateTime uniqueTimeToID = DateTime.Now;
-            string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); //picked this for now. it is at least unique
-
-            Console.WriteLine("What is the maximum amount of participants:");
-            int participantLimit = int.Parse(Console.ReadLine());
-
-            Console.WriteLine("How many minutes will the activity last:");
-            double durationMinutes = double.Parse(Console.ReadLine());
-
-            Console.WriteLine();
-            Console.WriteLine("Please add which space that will be reserved for the activity:");
-            foreach (Space space in data.spaceObjects)
-            {
-                Console.WriteLine($"{data.spaceObjects.IndexOf(space) + 1} - {space.name}");
-            }
-            int addedSpace = int.Parse(Console.ReadLine()) - 1;
-            bool spaceBookingComplete = data.spaceObjects[addedSpace].MakeReservation(owner, timeSlot, durationMinutes);
-
-            Console.WriteLine();
-            Console.WriteLine("Please add which trainer that will be reserved for the activity:");
-            foreach (Trainer trainer in data.trainerObjects)
-            {
-                Console.WriteLine($"{data.trainerObjects.IndexOf(trainer) + 1} - {trainer.name}");
-            }
-            int addedTrainer = int.Parse(Console.ReadLine()) - 1;
-            bool trainerBookingComplete = data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
-
-            Console.WriteLine();
-            Console.WriteLine("Please add which equipment that will be reserved for the activity:");
-            foreach (Equipment equipment in data.equipmentObjects)
-            {
-                Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment) + 1} - {equipment.name}");
-            }
-            int addedEquipment = int.Parse(Console.ReadLine()) - 1;
-            bool equipmentBookingComplete = data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
-            Console.WriteLine();
-
-            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
-                data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
-        }
-
         public void AddActivity(ReservingEntity owner, DatabaseTemp data)
         {
             Console.WriteLine("Do you want to add an activity from template (yes/no):");
@@ -179,7 +131,8 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-        public void RemoveActivity(ReservingEntity user, DatabaseTemp data1)
+
+        public void RemoveActivity(ReservingEntity user, Database data1)
         {
             if (user.status == "Member")
             {
@@ -241,9 +194,15 @@ namespace Gym_Booking_Manager
                 activities.RemoveAt(answerInt);
             }
         }
-        public void ModifyActivity(DatabaseTemp data, ReservingEntity owner)
+
+        public void ModifyActivity(Database data, ReservingEntity user)
         {
-            Console.WriteLine("Enter the new activity details:");
+            Console.WriteLine("Here is a list of all activities");            int x = 1;            foreach (Activity activity in activities)            {                Console.WriteLine($"{x}. {activity.activityDetails}, time: {activity.timeSlot.reservations[0].startTime}");                x++;            }
+
+            Console.WriteLine("Choose which one you want to modify: ");
+            int xAnswer = int.Parse(Console.ReadLine()) - 1;           
+
+            if (xAnswer < 0 || xAnswer >= activities.Count)            {                Console.WriteLine("Error");                return;            }            Activity selectedActivity = activities[xAnswer];            Console.WriteLine("Enter the new activity details:");
             string updatedDetails = Console.ReadLine();
 
             Console.WriteLine("Enter the new participant limit:");
@@ -251,41 +210,35 @@ namespace Gym_Booking_Manager
 
             Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM):");
             string updatedTime = Console.ReadLine();
-            Console.WriteLine("Ange hur många minuter aktiviteten ska hålla på:");
-            double durationMinutes = double.Parse(Console.ReadLine());
+            Console.WriteLine("How long will the activity be, write in minutes:");            double durationMinutes = double.Parse(Console.ReadLine());
 
-            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime), durationMinutes, owner);
-
+            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime), durationMinutes, user);
             Console.WriteLine("Enter the new trainer's name: ");
             foreach (Trainer trainer in data.trainerObjects)
             {
-                Console.WriteLine(trainer);
+                Console.WriteLine($"{data.trainerObjects.IndexOf(trainer)} - {trainer.name}");
             }
             int updatedTrainer = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the new space name:");
             foreach (Space space in data.spaceObjects)
             {
-                Console.WriteLine(space);
+                Console.WriteLine($"{data.spaceObjects.IndexOf(space)} - {space.name}");
             }
             int updatedSpace = int.Parse(Console.ReadLine());
 
             Console.WriteLine("Enter the new equipment name:");
             foreach (Equipment equipment in data.equipmentObjects)
             {
-                Console.WriteLine(equipment);
+                Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment)} - {equipment.name}");
             }
             int updatedEquipment = int.Parse(Console.ReadLine());
 
-            //this.activityDetails = updatedDetails;
-            //this.participantLimit = updatedLimit;
-            //this.timeSlot = updatedCalendar;
-            //this.trainer = data.trainerObjects[updatedTrainer];
-            //this.equipment = data.equipmentObjects[updatedEquipment]; ;
-            //this.space = data.spaceObjects[updatedSpace]; ;
+            selectedActivity.activityDetails = updatedDetails;            selectedActivity.participantLimit = updatedLimit;            selectedActivity.timeSlot = updatedCalendar;            selectedActivity.trainer = data.trainerObjects[updatedTrainer];            selectedActivity.space = data.spaceObjects[updatedSpace];            selectedActivity.equipment = data.equipmentObjects[updatedEquipment];            // Prompt the user to confirm that the new data is correct            Console.WriteLine("Here is the updated activity:");            Console.WriteLine($"Activity Details: {selectedActivity.activityDetails}");            Console.WriteLine($"Participant Limit: {selectedActivity.participantLimit}");            Console.WriteLine($"Time Slot: {selectedActivity.timeSlot}");            Console.WriteLine($"Trainer: {selectedActivity.trainer}");            Console.WriteLine($"Space: {selectedActivity.space}");            Console.WriteLine($"Equipment: {selectedActivity.equipment}");            Console.WriteLine("Is this data correct? (Y/N)");            string answer = Console.ReadLine();
+            if (answer.ToLower() != "y")            {                Console.WriteLine("Activity was not updated.");                return;            }
         }
 
-        public void SignUp(ReservingEntity user, DatabaseTemp data1)
+        public void SignUp(ReservingEntity user, Database data1)
         {
             int x = 1;
 
@@ -300,7 +253,7 @@ namespace Gym_Booking_Manager
 
             if (user.status == "Member")
             {
-                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
                 {
                     activities[answer].participants.Add(user);
                 }
@@ -323,7 +276,7 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("Which activity do you want to sign up the member for?");
                 int staffAnswer = int.Parse(Console.ReadLine()) - 1;
 
-                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
                 {
                     activities[answer].participants.Add(data1.userObjects[staffAnswer]);
                 }
