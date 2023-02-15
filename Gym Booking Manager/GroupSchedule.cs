@@ -37,12 +37,8 @@ namespace Gym_Booking_Manager
                 }
             }
         }
-<<<<<<< HEAD
 
-        public void AddActivity(ReservingEntity owner, DatabaseTemp data)
-=======
         public void AddActivity(ReservingEntity owner, Database data)
->>>>>>> ada301baa933117d4cdf11dd2980ea5c066be560
         {
             Console.WriteLine("Ange information om aktiviteten:");
             string? activityDetails = Console.ReadLine();
@@ -84,12 +80,8 @@ namespace Gym_Booking_Manager
             data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
             data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
         }
-<<<<<<< HEAD
 
-        public void RemoveActivity(ReservingEntity user, DatabaseTemp data1)
-=======
         public void RemoveActivity(ReservingEntity user, Database data1)
->>>>>>> ada301baa933117d4cdf11dd2980ea5c066be560
         {
             if (user.status == "Member")
             {
@@ -148,15 +140,8 @@ namespace Gym_Booking_Manager
                 activities.RemoveAt(answerInt);
             }
         }
-<<<<<<< HEAD
-=======
-        public void ModifyActivity(Database data, ReservingEntity owner)
-        {
-            Console.WriteLine("Enter the new activity details:");
-            string updatedDetails = Console.ReadLine();
->>>>>>> ada301baa933117d4cdf11dd2980ea5c066be560
 
-        public void ModifyActivity(DatabaseTemp data, ReservingEntity user)
+        public void ModifyActivity(Database data, ReservingEntity user)
         {            Console.WriteLine("Here is a list of all activities");            int x = 1;            foreach (Activity activity in activities)            {                Console.WriteLine($"{x}. {activity.activityDetails}, time: {activity.timeSlot.reservations[0].startTime}");                x++;            }
 
             Console.WriteLine("Choose which one you want to modify: ");
