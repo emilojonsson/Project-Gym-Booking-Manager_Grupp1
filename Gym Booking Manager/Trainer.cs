@@ -82,31 +82,9 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void MakeReservation(ReservingEntity owner, DateTime timeSlot, double durationMinutes)
+        public bool MakeReservation(ReservingEntity owner, DateTime timeSlot, double durationMinutes)
         {
-            //calendar.reservations.Add(new Reservation(owner, timeSlot));
-            calendar.BookReservation(owner, timeSlot, durationMinutes);
-            //supervised training session and consultation
-            //string input = "";
-            //string passname = "";
-            //Console.WriteLine("[1] Supervised training session");
-            //Console.WriteLine("[2] Consultation");
-            //Console.Write("Enter your choice: ");
-            //input = Console.ReadLine();
-            //switch (input)
-            //{
-            //    case "1":
-            //        Category trainer = Category.Trainer;
-            //        passname = Console.ReadLine();
-
-            //        break;
-            //    case "2":
-            //        Category consultation = Category.Consultation;
-            //        passname = Console.ReadLine();
-
-            //        break;
-            //}
-
+            return calendar.BookReservation(owner, timeSlot, durationMinutes);
         }
 
         public void CancelReservation(ReservingEntity owner)

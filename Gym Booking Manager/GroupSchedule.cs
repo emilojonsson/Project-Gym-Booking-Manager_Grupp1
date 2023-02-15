@@ -37,8 +37,12 @@ namespace Gym_Booking_Manager
                 }
             }
         }
+<<<<<<< HEAD
 
         public void AddActivity(ReservingEntity owner, DatabaseTemp data)
+=======
+        public void AddActivity(ReservingEntity owner, Database data)
+>>>>>>> ada301baa933117d4cdf11dd2980ea5c066be560
         {
             Console.WriteLine("Ange information om aktiviteten:");
             string? activityDetails = Console.ReadLine();
@@ -80,8 +84,12 @@ namespace Gym_Booking_Manager
             data.trainerObjects[addedTrainer].MakeReservation(owner, timeSlot, durationMinutes);
             data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
         }
+<<<<<<< HEAD
 
         public void RemoveActivity(ReservingEntity user, DatabaseTemp data1)
+=======
+        public void RemoveActivity(ReservingEntity user, Database data1)
+>>>>>>> ada301baa933117d4cdf11dd2980ea5c066be560
         {
             if (user.status == "Member")
             {
@@ -140,6 +148,13 @@ namespace Gym_Booking_Manager
                 activities.RemoveAt(answerInt);
             }
         }
+<<<<<<< HEAD
+=======
+        public void ModifyActivity(Database data, ReservingEntity owner)
+        {
+            Console.WriteLine("Enter the new activity details:");
+            string updatedDetails = Console.ReadLine();
+>>>>>>> ada301baa933117d4cdf11dd2980ea5c066be560
 
         public void ModifyActivity(DatabaseTemp data, ReservingEntity user)
         {            Console.WriteLine("Here is a list of all activities");            int x = 1;            foreach (Activity activity in activities)            {                Console.WriteLine($"{x}. {activity.activityDetails}, time: {activity.timeSlot.reservations[0].startTime}");                x++;            }
@@ -160,7 +175,7 @@ namespace Gym_Booking_Manager
             if (answer.ToLower() != "y")            {                Console.WriteLine("Activity was not updated.");                return;            }
         }
 
-        public void SignUp(ReservingEntity user, DatabaseTemp data1)
+        public void SignUp(ReservingEntity user, Database data1)
         {
             int x = 1;
 
@@ -175,7 +190,7 @@ namespace Gym_Booking_Manager
 
             if (user.status == "Member")
             {
-                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
                 {
                     activities[answer].participants.Add(user);
                 }
@@ -198,7 +213,7 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("Which activity do you want to sign up the member for?");
                 int staffAnswer = int.Parse(Console.ReadLine()) - 1;
 
-                if (activities[answer].participants.Count < activities[answer].participantLimit)
+                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
                 {
                     activities[answer].participants.Add(data1.userObjects[staffAnswer]);
                 }
