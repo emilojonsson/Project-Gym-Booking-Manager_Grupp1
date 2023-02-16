@@ -285,5 +285,20 @@ namespace Gym_Booking_Manager
             LoadTraining(user, userInput);
 
         }
+        public void ViewReservations(ReservingEntity user)
+        {
+            foreach (Space space in spaceObjects)
+            {
+                space.ViewReservations(space, user);
+            }
+            foreach (Equipment equipment in equipmentObjects)
+            {
+                equipment.ViewReservations(equipment, user);
+            }
+            foreach (Trainer trainer in trainerObjects)
+            {
+                trainer.ViewReservations(trainer, user);
+            }
+        }
     }
 }

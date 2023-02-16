@@ -106,20 +106,27 @@ namespace Gym_Booking_Manager
             calendar.reservations.Remove(calendar.reservations[del]);
         }
 
-        // Consider how and when to add a new Space to the database.
-        // Maybe define a method to persist it? Any other reasonable schemes?
+        public void ViewReservations(Space space, ReservingEntity user)
+        {
+            if (user.status == "Member")
+            {
+                foreach (Reservation rs in calendar.reservations)
+                {
+                    if (rs.owner.name == user.name)
+                    {
+                        Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
+                    }
 
-        //private static List<Tuple<Category, int>> InitializeHourlyCosts()
-        //{
-        //    // TODO: fetch from "database"
-        //    var hourlyCosts = new List<Tuple<Category, int>>
-        //    {
-        //        Tuple.Create(Category.Hall, 500),
-        //        Tuple.Create(Category.Lane, 100),
-        //        Tuple.Create(Category.Studio, 400)
-        //    };
-        //    return hourlyCosts;
-        //}
+                }
+            }
+            if (user.status == "Staff")
+            {
+                foreach (Reservation rs in calendar.reservations)
+                {
+                    Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
+                }
+            }
+        }
 
     }
 }

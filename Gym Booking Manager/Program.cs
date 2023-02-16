@@ -14,6 +14,7 @@ namespace Gym_Booking_Manager
         {
             Database data1 = new Database();
             data1.LoadDataBase();
+            //data1.ViewReservations();
 
             //Menu m1 = new Menu();
             //m1.Run();
@@ -52,7 +53,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
-                                data1.schedule.ViewSchedule(member);
+                                data1.schedule.ViewSchedule(data1, member);
                                 break;
                             case "2":
                                 // Signup to activity
@@ -115,6 +116,7 @@ namespace Gym_Booking_Manager
                         Console.WriteLine("11. Restrict equipment");        // Registrera avstängda maskiner/lokaler
                         Console.WriteLine("12. User management");           // Användarhantering, purchase subscription to members
                         Console.WriteLine("13. Add template");
+                        Console.WriteLine("14. Show all reservations");
                         Console.WriteLine("e. Go back");
                         Console.Write("Enter your choice: ");
                         userInput = Console.ReadLine();
@@ -124,7 +126,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
-                                data1.schedule.ViewSchedule(staff);
+                                //data1.schedule.ViewSchedule(data1, staff);
                                 break;
                             case "2":
                                 data1.ViewEquipments();
@@ -167,6 +169,9 @@ namespace Gym_Booking_Manager
                                 break;
                             case "13":
                                 data1.schedule.AddTemplateActivity(staff, data1);
+                                break;
+                            case "14":
+                                data1.ViewReservations(staff);
                                 break;
                             case "e":
                                 break;

@@ -16,17 +16,34 @@ namespace Gym_Booking_Manager
     {
         //Do we need thos list? we use this list in DataTemp....? Consult Team!!!
         public List<Activity> activities = new List<Activity>();
-        public void ViewSchedule(ReservingEntity user)
+        public void ViewSchedule(Database data1, ReservingEntity user)
         {
             //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
             if (user.status == "Member")
             {
+                Console.WriteLine($"Activities {user.name} are signed up:");
                 foreach (Activity activity in activities)
                 {
                     if (activity.participants.Contains(user))
                     {
                         Console.WriteLine(activity);
                     }
+                }
+                Console.WriteLine();
+                Console.WriteLine("----------------------");
+                Console.WriteLine($"Registrations {user.name} are signed up:");
+                Console.WriteLine();
+                foreach (Space space in data1.spaceObjects)
+                {
+                    space.ViewReservations(space, user);
+                }
+                foreach (Equipment equipment in data1.equipmentObjects)
+                {
+                    equipment.ViewReservations(equipment, user);
+                }
+                foreach (Trainer trainer in data1.trainerObjects)
+                {
+                    trainer.ViewReservations(trainer, user);
                 }
             }
             if (user.status == "Staff")
