@@ -49,10 +49,11 @@ namespace Gym_Booking_Manager
                 foreach (Activity activity in data.templateActivityObjects)
                 {
                     Console.WriteLine($"{count}. {activity.activityDetails}");
+                    count++;
                 }
                 int template = int.Parse(Console.ReadLine()) - 1;
 
-                Console.WriteLine("Add start date and time when the first occurens of the activity will take place 'YYYY/MM/DD hh:mm':");
+                Console.WriteLine("Add start date & time when the first occurrence of the activity will take place 'YYYY/MM/DD hh:mm':");
                 DateTime firstDate = DateTime.Parse(Console.ReadLine());
 
                 DateTime uniqueTimeToID = DateTime.Now;
@@ -60,13 +61,43 @@ namespace Gym_Booking_Manager
 
                 Console.WriteLine("Please add for how many weeks this activity will repeat itself:");
                 int repeats = int.Parse(Console.ReadLine());
+                int indexSpaceObject = data.spaceObjects.IndexOf(data.templateActivityObjects[template].space);
+                int indexTrainerObject = data.trainerObjects.IndexOf(data.templateActivityObjects[template].trainer);
+                int indexEquipmentObject = data.equipmentObjects.IndexOf(data.templateActivityObjects[template].equipment);
+                bool spaceBookingComplete = false;
+                bool trainerBookingComplete = false;
+                bool equipmentBookingComplete = false;
+
                 for (int i = 0; i < repeats; i++)
                 {
-                    //data.schedule.activities.Add(new Activity(activityID, data.templateActivityObjects[template].activityDetails, data.templateActivityObjects[template].participantLimit, 
-                    //    firstDate, data.templateActivityObjects[template].durationMinutes, owner,
-                    //        data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
+                    spaceBookingComplete = data.spaceObjects[indexSpaceObject].calendar.BookReservation(owner,firstDate, data.templateActivityObjects[template].timeSlot.reservations[0].durationMinutes);
+                    trainerBookingComplete = data.trainerObjects[indexTrainerObject].calendar.BookReservation(owner, firstDate, data.templateActivityObjects[template].timeSlot.reservations[0].durationMinutes);
+                    equipmentBookingComplete = data.equipmentObjects[indexEquipmentObject].calendar.BookReservation(owner, firstDate, data.templateActivityObjects[template].timeSlot.reservations[0].durationMinutes);
+                    if (spaceBookingComplete == true && trainerBookingComplete == true && equipmentBookingComplete == true)
+                    {
+                        data.schedule.activities.Add(new Activity(activityID, data.templateActivityObjects[template].activityDetails, data.templateActivityObjects[template].participantLimit,
+                        firstDate, data.templateActivityObjects[template].participantLimit, owner,
+                            data.templateActivityObjects[template].space, data.templateActivityObjects[template].trainer, data.templateActivityObjects[template].equipment));
+                    }
+                    else
+                    {
+                        if (spaceBookingComplete)
+                        {
+                            data.spaceObjects[indexSpaceObject].calendar.reservations.RemoveAt(data.spaceObjects[indexSpaceObject].calendar.reservations.Count - 1);
+                        }
+                        if (trainerBookingComplete)
+                        {
+                            data.trainerObjects[indexTrainerObject].calendar.reservations.RemoveAt(data.trainerObjects[indexTrainerObject].calendar.reservations.Count - 1);
+                        }
+                        if (equipmentBookingComplete)
+                        {
+                            data.equipmentObjects[indexEquipmentObject].calendar.reservations.RemoveAt(data.equipmentObjects[indexEquipmentObject].calendar.reservations.Count - 1);
+                        }
+                        Console.WriteLine($"This means that no resvervations has been made on the date/time of: {firstDate}");
+                    }
                     uniqueTimeToID.AddMinutes(1);
                     activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm");
+                    firstDate = firstDate.AddDays(7);
                 }
             }
             else
@@ -131,7 +162,7 @@ namespace Gym_Booking_Manager
                     }
                     Console.WriteLine();
 
-                    if (spaceBookingComplete == trainerBookingComplete == equipmentBookingComplete == true)
+                    if (spaceBookingComplete == true && trainerBookingComplete == true && equipmentBookingComplete == true)
                     {
                         activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner, 
                             data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
@@ -340,7 +371,7 @@ namespace Gym_Booking_Manager
             bool equipmentBookingComplete = data.equipmentObjects[addedEquipment].MakeReservation(owner, timeSlot, durationMinutes);
             Console.WriteLine();
 
-            activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
+            data.templateActivityObjects.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
                 data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
         }        /*        public void EditReservation(ReservingEntity user, Database data1)
         {        
@@ -367,7 +398,29 @@ namespace Gym_Booking_Manager
                     Console.WriteLine($"{user.name} is not signed up to any group activities");
                 }            }
 
-        }*/        public override string ToString()
+        }*/
+
+        public void ViewTemplate(Database data)
+        {
+            foreach (Activity template in data.templateActivityObjects)
+            {
+                Console.WriteLine($"{template.activityDetails}, {template.participantLimit} participants, {template.space}, {template.trainer}, {template.equipment}");
+            }
+        }
+        public void DeleteTemplate(Database data)
+        {
+            int count = 1;
+            foreach (Activity template in data.templateActivityObjects)
+            {
+                Console.WriteLine($"{count}.{template.activityDetails}, {template.participantLimit} participants, {template.space}, {template.trainer}, {template.equipment}");
+                count++;
+            }
+            
+            Console.WriteLine("Select the template that you want to remove:");
+            int answerInt = int.Parse(Console.ReadLine()) - 1;
+            data.templateActivityObjects.RemoveAt(answerInt);
+            Console.WriteLine("Template has been removed");
+        }        public override string ToString()
         {
             return $"{activities}";
         }
