@@ -125,6 +125,8 @@ namespace Gym_Booking_Manager
             Console.WriteLine("11. Restrict equipment");
             Console.WriteLine("12. User management");
             Console.WriteLine("13. Add template");
+            Console.WriteLine("14. View template");
+            Console.WriteLine("15. Delete template");
             Console.WriteLine("e. Go back");
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
@@ -157,7 +159,7 @@ namespace Gym_Booking_Manager
                     data1.MakeResStaff();
                     break;
                 case "9":
-                    // edit a reservation for a member by a staff
+                    //data1.schedule.EditReservation(staff, data1);
                     break;
                 case "10":
                     // View logfile
@@ -170,6 +172,11 @@ namespace Gym_Booking_Manager
                     break;
                 case "13":
                     data1.schedule.AddTemplateActivity(staff, data1);
+                    break;                case "14":
+                    data1.schedule.ViewTemplate(data1);
+                    break;
+                case "15":
+                    data1.schedule.DeleteTemplate(data1);
                     break;
                 case "e":
                     RunMenu();
@@ -208,7 +215,7 @@ namespace Gym_Booking_Manager
                     data1.MakeRes(member);
                     Console.WriteLine();
                     break;
-                case "4":                // Implementera metoden                 case "5":
+                case "4":                    data1.schedule.EditReservation(member, data1);                    break;                case "5":
                     data1.schedule.RemoveActivity(member, data1);
                     break;
                 case "e":

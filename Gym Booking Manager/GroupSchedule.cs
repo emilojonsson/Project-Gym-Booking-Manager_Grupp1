@@ -16,6 +16,7 @@ namespace Gym_Booking_Manager
     {
         //Do we need thos list? we use this list in DataTemp....? Consult Team!!!
         public List<Activity> activities = new List<Activity>();
+
         public void ViewSchedule(ReservingEntity user)
         {
             //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
@@ -37,6 +38,7 @@ namespace Gym_Booking_Manager
                 }
             }
         }
+
         public void AddActivity(ReservingEntity owner, Database data)
         {
             Console.WriteLine("Do you want to add an activity from template (yes/no):");
@@ -221,27 +223,31 @@ namespace Gym_Booking_Manager
 
             Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime), durationMinutes, user);
             Console.WriteLine("Enter the new trainer's name: ");
+            int optionNumber = 1;
             foreach (Trainer trainer in data.trainerObjects)
-            {
-                Console.WriteLine($"{data.trainerObjects.IndexOf(trainer)} - {trainer.name}");
+            {                Console.WriteLine($"{optionNumber}. {trainer}");
+                optionNumber++;
             }
             int updatedTrainer = int.Parse(Console.ReadLine());
+            updatedTrainer -= 1;
 
             Console.WriteLine("Enter the new space name:");
+            optionNumber = 1;
             foreach (Space space in data.spaceObjects)
-            {
-                Console.WriteLine($"{data.spaceObjects.IndexOf(space)} - {space.name}");
+            {                Console.WriteLine($"{optionNumber}. {space}");                optionNumber++;
             }
             int updatedSpace = int.Parse(Console.ReadLine());
+            updatedSpace -= 1;
 
             Console.WriteLine("Enter the new equipment name:");
+            optionNumber = 1;
             foreach (Equipment equipment in data.equipmentObjects)
-            {
-                Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment)} - {equipment.name}");
+            {                Console.WriteLine($"{optionNumber}. {equipment}");                optionNumber++;
             }
             int updatedEquipment = int.Parse(Console.ReadLine());
+            updatedEquipment -= 1;
 
-            selectedActivity.activityDetails = updatedDetails;            selectedActivity.participantLimit = updatedLimit;            selectedActivity.timeSlot = updatedCalendar;            selectedActivity.trainer = data.trainerObjects[updatedTrainer];            selectedActivity.space = data.spaceObjects[updatedSpace];            selectedActivity.equipment = data.equipmentObjects[updatedEquipment];            // Prompt the user to confirm that the new data is correct            Console.WriteLine("Here is the updated activity:");            Console.WriteLine($"Activity Details: {selectedActivity.activityDetails}");            Console.WriteLine($"Participant Limit: {selectedActivity.participantLimit}");            Console.WriteLine($"Time Slot: {selectedActivity.timeSlot.reservations[0].startTime}");            Console.WriteLine($"Trainer: {selectedActivity.trainer}");            Console.WriteLine($"Space: {selectedActivity.space}");            Console.WriteLine($"Equipment: {selectedActivity.equipment}");            Console.WriteLine("Is this data correct? (Y/N)");            string answer = Console.ReadLine();
+            selectedActivity.activityDetails = updatedDetails;            selectedActivity.participantLimit = updatedLimit;            selectedActivity.timeSlot = updatedCalendar;            selectedActivity.trainer = data.trainerObjects[updatedTrainer];            selectedActivity.space = data.spaceObjects[updatedSpace];            selectedActivity.equipment = data.equipmentObjects[updatedEquipment];            Console.WriteLine("Here is the updated activity:");            Console.WriteLine($"Activity Details: {selectedActivity.activityDetails}");            Console.WriteLine($"Participant Limit: {selectedActivity.participantLimit}");            Console.WriteLine($"Time Slot: {selectedActivity.timeSlot.reservations[0].startTime}");            Console.WriteLine($"Trainer: {selectedActivity.trainer}");            Console.WriteLine($"Space: {selectedActivity.space}");            Console.WriteLine($"Equipment: {selectedActivity.equipment}");            Console.WriteLine("Is this data correct? (Y/N)");            string answer = Console.ReadLine();
             if (answer.ToLower() != "y")            {                Console.WriteLine("Activity was not updated.");                return;            }
         }
 
@@ -264,10 +270,11 @@ namespace Gym_Booking_Manager
                 {
                     activities[answer].participants.Add(user);
                 }
-                else
+                else if (activities[answer].participants.Contains(user))
                 {
-                    Console.WriteLine("\nParticipant limit reached for this activity.");
+                    Console.WriteLine("You have already signed up for this activity.");
                 }
+                else if (activities[answer].participants.Count >= activities[answer].participantLimit)                {                    Console.WriteLine("Participant limit reached for this activity.");                }
             }
 
             else if (user.status == "Staff")
@@ -280,24 +287,15 @@ namespace Gym_Booking_Manager
                     y++;
                 }
 
-                Console.WriteLine("Which activity do you want to sign up the member for?");
-                int staffAnswer = int.Parse(Console.ReadLine()) - 1;
-
-                if (activities[answer].participants.Count < activities[answer].participantLimit && !activities[answer].participants.Contains(user))
-                {
-                    activities[answer].participants.Add(data1.userObjects[staffAnswer]);
-                }
+                Console.WriteLine("Which activity do you want to sign up for the member?");
+                int staffAnswer = int.Parse(Console.ReadLine()) - 1;                if (activities[answer].participants.Contains(data1.userObjects[staffAnswer]))                {                    Console.WriteLine("\nThe member is already signed up for this activity.");                }                else if (activities[answer].participants.Count >= activities[answer].participantLimit)                {                    Console.WriteLine("\nParticipant limit reached for this activity.");                }
                 else
                 {
-                    Console.WriteLine("\nParticipant limit reached for this activity.");
+                    activities[answer].participants.Add(data1.userObjects[staffAnswer]);
                 }
             }
         }
 
-        public override string ToString()
-        {
-            return $"{activities}";
-        }
         public void AddTemplateActivity(ReservingEntity owner, Database data)
         {
             DateTime timeSlot = new DateTime(1, 1, 1);
@@ -344,8 +342,35 @@ namespace Gym_Booking_Manager
 
             activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
                 data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
-        }
+        }        /*        public void EditReservation(ReservingEntity user, Database data1)
+        {        
+            if ( user.status == "Member")            {                bool isUserBooked = false;                foreach (Activity activity in activities)                {                    if (activity.participants.Contains(user))                    {                        isUserBooked = true;                        break;                    }                }                if (isUserBooked)                {                    RemoveActivity(user, data1);                    SignUp(user, data1);                }                else                {                    Console.WriteLine($"{user.name}: You are not signed up to any group activities");                }            }
 
+            else if (user.status == "Staff")            {                int i = 1;                foreach (ReservingEntity staffUser in data1.userObjects)                {                    Console.WriteLine($"{i}, {staffUser.name}, {staffUser.phone}");                    i++;                }                Console.WriteLine("Which member do you want to check?");
+                int staffAnswer = int.Parse(Console.ReadLine()) - 1;                bool isUserBooked = false;
+                foreach (Activity activity in activities)
+                {
+                    if (activity.participants.Contains(user))
+                    {
+                        isUserBooked = true;
+                        break;
+                    }
+                }
+
+                if (isUserBooked)
+                {
+                    RemoveActivity(user, data1);
+                    SignUp(user, data1);
+                }
+                else
+                {
+                    Console.WriteLine($"{user.name} is not signed up to any group activities");
+                }            }
+
+        }*/        public override string ToString()
+        {
+            return $"{activities}";
+        }
     }
 }
 

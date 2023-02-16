@@ -54,14 +54,15 @@ namespace Gym_Booking_Manager
                 }
             }
             else
-                Console.WriteLine("No activitis were loaded!");
+                Console.WriteLine("No activities were loaded!");
         }
+
         //Save current objectsLists to DataBase!
         public void SaveToDataBase()
         {
             if(activities == null)
             {
-                Console.WriteLine("No activitys were saved to Database");
+                Console.WriteLine("No activities were saved to Database");
             }
             else
             {
@@ -197,7 +198,6 @@ namespace Gym_Booking_Manager
             Console.WriteLine();
         }
 
-
         public void LoadTraining(ReservingEntity user, string userInput)
         {
             int a = 1;
@@ -255,6 +255,7 @@ namespace Gym_Booking_Manager
             Console.WriteLine($"Start time: {timeSlot}");
             Console.WriteLine($"Activity length: {durationMinutes} minutes");
         }
+
         public void MakeRes(ReservingEntity user)
         {
             Console.WriteLine();
@@ -266,6 +267,7 @@ namespace Gym_Booking_Manager
             userInput = Console.ReadLine();
             LoadTraining(user, userInput);
         }
+
         public void MakeResStaff()
         {
             int a = 1;
@@ -285,5 +287,9 @@ namespace Gym_Booking_Manager
             userInput = Console.ReadLine();
             LoadTraining(user, userInput);
         }
+
+        public void EditReservation(ReservingEntity user)        {        }
+
+        public void EditReservationStaff()        {        }
     }
 }
