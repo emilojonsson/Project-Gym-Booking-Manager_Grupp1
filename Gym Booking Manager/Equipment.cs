@@ -93,14 +93,25 @@ namespace Gym_Booking_Manager
 
         }
 
-        public void CancelReservation(ReservingEntity owner)
+        public void CancelReservation(ReservingEntity owner, Equipment equipment)
         {
-            ViewTimeTable(owner);
-            int del;
-            Console.Write("\nCansel reservation (number): ");
-            del = Int32.Parse(Console.ReadLine());
-            calendar.reservations.Remove(calendar.reservations[del]);
+            //ViewTimeTable(owner);
+            //int del;
+            //Console.Write("\nCansel reservation (number): ");
+            //del = Int32.Parse(Console.ReadLine());
+            if (owner.status == "Member")
+            {
+                foreach (Reservation rs in calendar.reservations.ToList())
+                {
+                    if (rs.owner.name == owner.name)
+                    {
+                        Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
+                        equipment.calendar.reservations.Remove(rs);
+                    }
+                }
+            }
         }
+     
 
         public void ViewReservations(Equipment equipment, ReservingEntity user)
         {
@@ -112,7 +123,6 @@ namespace Gym_Booking_Manager
                     {
                         Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
                     }
-
                 }
             }
             if (user.status == "Staff")
