@@ -97,7 +97,7 @@ namespace Gym_Booking_Manager
         {
             ViewTimeTable(owner);
             int del;
-            Console.Write("\nCansel reservation (number): ");
+            Console.Write("\nCancel reservation (number): ");
             del = Int32.Parse(Console.ReadLine());
             calendar.reservations.Remove(calendar.reservations[del]);
         }

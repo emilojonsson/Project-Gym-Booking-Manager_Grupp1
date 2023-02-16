@@ -19,8 +19,8 @@ namespace Gym_Booking_Manager
         {
             Database data1 = new Database();
             data1.LoadDataBase();
+            
             string userInput = "";
-
             bool quit = false;
 
             while (!quit)
@@ -33,8 +33,7 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("q. Quit program");
                 Console.Write("Enter your choice: ");
                 userInput = Console.ReadLine();
-                
-                switch (userInput)
+                Console.Clear();                switch (userInput)
                 {
                     case "1":
                         choiceMember(data1);
@@ -74,6 +73,7 @@ namespace Gym_Booking_Manager
             Console.Write("Enter your choice: ");
             userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
             switch (userInput)
             {
@@ -102,6 +102,7 @@ namespace Gym_Booking_Manager
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
             switch (userInput)
             {
@@ -142,6 +143,7 @@ namespace Gym_Booking_Manager
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
             switch (userInput)
             {
@@ -216,6 +218,7 @@ namespace Gym_Booking_Manager
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
 
             switch (userInput)
