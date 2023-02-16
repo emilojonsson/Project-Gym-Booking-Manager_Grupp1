@@ -215,12 +215,26 @@ namespace Gym_Booking_Manager
 
         public void ModifyActivity(Database data, ReservingEntity user)
         {
-            Console.WriteLine("Here is a list of all activities");            int x = 1;            foreach (Activity activity in activities)            {                Console.WriteLine($"{x}. {activity.activityDetails}, time: {activity.timeSlot.reservations[0].startTime}");                x++;            }
+            Console.WriteLine("Here is a list of all activities");
+            int x = 1;
+            foreach (Activity activity in activities)
+            {
+                Console.WriteLine($"{x}. {activity.activityDetails}, time: {activity.timeSlot.reservations[0].startTime}");
+                x++;
+            }
 
             Console.WriteLine("Choose which one you want to modify: ");
             int xAnswer = int.Parse(Console.ReadLine()) - 1;           
 
-            if (xAnswer < 0 || xAnswer >= activities.Count)            {                Console.WriteLine("Error");                return;            }            Activity selectedActivity = activities[xAnswer];            Console.WriteLine("Enter the new activity details:");
+            if (xAnswer < 0 || xAnswer >= activities.Count)
+            {
+                Console.WriteLine("Error");
+                return;
+            }
+
+            Activity selectedActivity = activities[xAnswer];
+
+            Console.WriteLine("Enter the new activity details:");
             string updatedDetails = Console.ReadLine();
 
             Console.WriteLine("Enter the new participant limit:");
@@ -228,9 +242,12 @@ namespace Gym_Booking_Manager
 
             Console.WriteLine("Enter the new time slot (YYYY-MM-DD HH:MM):");
             string updatedTime = Console.ReadLine();
-            Console.WriteLine("How long will the activity be, write in minutes:");            double durationMinutes = double.Parse(Console.ReadLine());
 
-            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime), durationMinutes, user);
+            Console.WriteLine("How long will the activity be, write in minutes:");
+            double durationMinutes = double.Parse(Console.ReadLine());
+
+            Calendar updatedCalendar = new Calendar(DateTime.Parse(updatedTime), durationMinutes, user);
+
             Console.WriteLine("Enter the new trainer's name: ");
             foreach (Trainer trainer in data.trainerObjects)
             {
@@ -252,8 +269,30 @@ namespace Gym_Booking_Manager
             }
             int updatedEquipment = int.Parse(Console.ReadLine());
 
-            selectedActivity.activityDetails = updatedDetails;            selectedActivity.participantLimit = updatedLimit;            selectedActivity.timeSlot = updatedCalendar;            selectedActivity.trainer = data.trainerObjects[updatedTrainer];            selectedActivity.space = data.spaceObjects[updatedSpace];            selectedActivity.equipment = data.equipmentObjects[updatedEquipment];            // Prompt the user to confirm that the new data is correct            Console.WriteLine("Here is the updated activity:");            Console.WriteLine($"Activity Details: {selectedActivity.activityDetails}");            Console.WriteLine($"Participant Limit: {selectedActivity.participantLimit}");            Console.WriteLine($"Time Slot: {selectedActivity.timeSlot}");            Console.WriteLine($"Trainer: {selectedActivity.trainer}");            Console.WriteLine($"Space: {selectedActivity.space}");            Console.WriteLine($"Equipment: {selectedActivity.equipment}");            Console.WriteLine("Is this data correct? (Y/N)");            string answer = Console.ReadLine();
-            if (answer.ToLower() != "y")            {                Console.WriteLine("Activity was not updated.");                return;            }
+            selectedActivity.activityDetails = updatedDetails;
+            selectedActivity.participantLimit = updatedLimit;
+            selectedActivity.timeSlot = updatedCalendar;
+            selectedActivity.trainer = data.trainerObjects[updatedTrainer];
+            selectedActivity.space = data.spaceObjects[updatedSpace];
+            selectedActivity.equipment = data.equipmentObjects[updatedEquipment];
+
+            // Prompt the user to confirm that the new data is correct
+            Console.WriteLine("Here is the updated activity:");
+            Console.WriteLine($"Activity Details: {selectedActivity.activityDetails}");
+            Console.WriteLine($"Participant Limit: {selectedActivity.participantLimit}");
+            Console.WriteLine($"Time Slot: {selectedActivity.timeSlot}");
+            Console.WriteLine($"Trainer: {selectedActivity.trainer}");
+            Console.WriteLine($"Space: {selectedActivity.space}");
+            Console.WriteLine($"Equipment: {selectedActivity.equipment}");
+
+            Console.WriteLine("Is this data correct? (Y/N)");
+            string answer = Console.ReadLine();
+
+            if (answer.ToLower() != "y")
+            {
+                Console.WriteLine("Activity was not updated.");
+                return;
+            }
         }
 
         public void SignUp(ReservingEntity user, Database data1)
