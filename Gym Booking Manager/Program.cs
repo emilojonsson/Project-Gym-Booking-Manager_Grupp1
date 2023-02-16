@@ -19,38 +19,38 @@ namespace Gym_Booking_Manager
         {
             Database data1 = new Database();
             data1.LoadDataBase();
-
             string userInput = "";
-            while (userInput != "q")
-            {
-                // TODO - skapa en säkerhetsåtgärd för inloggning på Customer och Staff
-                Console.WriteLine("Welcome to the menu:");
-                Console.WriteLine("1. Member");
-                Console.WriteLine("2. Non-member");
-                Console.WriteLine("3. Staff");
-                Console.WriteLine("4. Service");
-                Console.WriteLine("q. Quit program");
-                Console.Write("Enter your choice: ");
-                userInput = Console.ReadLine();
-                Console.WriteLine("----------------------------");
 
-                switch (userInput)
-                {
-                    case "1":
-                        choiceMember(data1);
-                        break;
-                    case "2":
-                        choiceNonMember(data1);
-                        break;
-                    case "3":
-                        choiceStaff(data1);
-                        break;
-                    case "4":
-                        choiceService(data1);
-                        break;
-                }
-                data1.SaveToDataBase();
+            // TODO - skapa en säkerhetsåtgärd för inloggning på Customer och Staff
+            Console.WriteLine("Welcome to the menu:");
+            Console.WriteLine("1. Member");
+            Console.WriteLine("2. Non-member");
+            Console.WriteLine("3. Staff");
+            Console.WriteLine("4. Service");
+            Console.WriteLine("q. Quit program");
+            Console.Write("Enter your choice: ");
+            userInput = Console.ReadLine();
+            Console.WriteLine("----------------------------");
+
+            switch (userInput)
+            {
+                case "1":
+                    choiceMember(data1);
+                    break;
+                case "2":
+                    choiceNonMember(data1);
+                    break;
+                case "3":
+                    choiceStaff(data1);
+                    break;
+                case "4":
+                    choiceService(data1);
+                    break;
+                case "q":
+                    break;
             }
+            data1.SaveToDataBase();
+            
         }
 
         private static string choiceService(Database data1)
@@ -160,7 +160,7 @@ namespace Gym_Booking_Manager
                     data1.MakeResStaff();
                     break;
                 case "9":
-                    //data1.schedule.EditReservation(staff, data1);
+                    // Insert method here
                     break;
                 case "10":
                     // View logfile
@@ -220,9 +220,7 @@ namespace Gym_Booking_Manager
                     data1.MakeRes(member);
                     Console.WriteLine();
                     break;
-                case "4": 
-                    //data1.schedule.EditReservation(member, data1);
-                    break;
+                case "4":                    // Insert method here                    break;
                 case "5":
                     data1.schedule.RemoveActivity(member, data1);
                     break;
