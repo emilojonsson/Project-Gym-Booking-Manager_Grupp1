@@ -5,7 +5,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
+      <x>534</x>
       <y>192</y>
       <w>132</w>
       <h>48</h>
@@ -33,19 +33,16 @@ IServicable
 -status : String
 
 --
-AbleToMakeReservation() : Bool
-
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1038</x>
-      <y>780</y>
+      <y>744</y>
       <w>300</w>
-      <h>120</h>
+      <h>156</h>
     </coordinates>
     <panel_attributes>GroupSchedule
 --
@@ -54,26 +51,29 @@ AbleToMakeReservation() : Bool
 --
 +ViewSchedule(user ReservingEntity)
 +AddActivity(owner ReservingEntity, data DataTemp)
-+UpdateActivity(user ReservingEntity, data DataTemp)
 +RemoveActivity(user ReservingEntity, data DataTemp)
++ModifyActivity(user ReservingEntity, data DataTemp)
++SignUp(user ReservingEntity, data DataTemp)
++AddTemplateActivity(owner ReservingEntitiy, data DataTemp)
++ViewTemplate(data DataTemp)
++DeleteTemplate(data DataTemp)
 
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
+      <x>534</x>
       <y>84</y>
-      <w>264</w>
+      <w>342</w>
       <h>84</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 IReservable
 --
-+MakeReservation(owner ReservingEntity, timeSlot DateTime)
-+CancelReservation(owner ReservingEntity, posInList Int)
++MakeReservation(owner ReservingEntity, timeSlot DateTime, durationMinutes Double)
++CancelReservation(owner ReservingEntity)
 +ViewTimeTable(owner ReservingEntity)
 </panel_attributes>
     <additional_attributes/>
@@ -93,37 +93,35 @@ IReservable
 -calendar : Calendar
 
 --
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>1182</x>
-      <y>708</y>
+      <y>690</y>
       <w>18</w>
-      <h>84</h>
+      <h>66</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1098</x>
       <y>198</y>
-      <w>192</w>
+      <w>372</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>Calendar
 --
 -reservations : List&lt;Reservation&gt;
 --
-+GetSlice() :  List&lt;Reservation&gt;
++BookReservation(owner ReservingEntity, startTime DateTime, durationMinutes Double) : Bool
 
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -147,11 +145,11 @@ IReservable
     </coordinates>
     <panel_attributes>Reservation
 --
--owner : readonly ReservingEntity
--timeSlot : readonly DateTime
+-owner :  ReservingEntity
+-startTime : DateTime
+-durationMinutes : Double
 --
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -321,38 +319,37 @@ m2=*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
+      <x>534</x>
       <y>12</y>
-      <w>72</w>
+      <w>78</w>
       <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 ICSVable
---
-+CSVify()</panel_attributes>
+--</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>666</x>
+      <x>606</x>
       <y>30</y>
-      <w>288</w>
+      <w>348</w>
       <h>336</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>460.0;540.0;460.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>560.0;540.0;560.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
       <x>378</x>
       <y>24</y>
-      <w>228</w>
+      <w>174</w>
       <h>330</h>
     </coordinates>
     <panel_attributes>lt=)-</panel_attributes>
-    <additional_attributes>350.0;20.0;190.0;20.0;190.0;530.0;10.0;530.0</additional_attributes>
+    <additional_attributes>260.0;20.0;190.0;20.0;190.0;530.0;10.0;530.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -424,8 +421,7 @@ ICSVable
 -calendar : Calendar
 
 --
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -469,8 +465,7 @@ Large Equipment</panel_attributes>
 -calendar : Calendar
 
 --
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -535,24 +530,24 @@ Consultation</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>858</x>
+      <x>870</x>
       <y>120</y>
-      <w>420</w>
+      <w>408</w>
       <h>246</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>680.0;390.0;680.0;280.0;140.0;280.0;140.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>660.0;390.0;660.0;280.0;120.0;280.0;120.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>726</x>
+      <x>660</x>
       <y>210</y>
-      <w>864</w>
+      <w>930</w>
       <h>156</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>1420.0;240.0;1420.0;130.0;360.0;130.0;360.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>1530.0;240.0;1530.0;130.0;470.0;130.0;470.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -572,6 +567,7 @@ Consultation</panel_attributes>
 -activityObjects : List&lt;Activity&gt;
 -calendarObjects : List&lt;Calendar&gt;
 -reservationObjects : List&lt;Reservation&gt;
+-templateActivityObjects : List&lt;Activity&gt;
 
 --
 </panel_attributes>
@@ -583,7 +579,7 @@ Consultation</panel_attributes>
       <x>1038</x>
       <y>546</y>
       <w>300</w>
-      <h>168</h>
+      <h>150</h>
     </coordinates>
     <panel_attributes>Activity
 --
@@ -597,11 +593,8 @@ Consultation</panel_attributes>
 -equipment : Equipment
 
 --
-+SignUp(user ReservingEntity) 
-+ModifyActivity()
 
-+ToString() : String
-+CSVify() : String</panel_attributes>
++ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
