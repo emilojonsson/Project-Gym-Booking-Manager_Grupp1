@@ -287,6 +287,8 @@ namespace Gym_Booking_Manager
         }
         public void ViewReservations(ReservingEntity user)
         {
+            Console.WriteLine("All member reservations:");
+            Console.WriteLine();
             foreach (Space space in spaceObjects)
             {
                 space.ViewReservations(space, user);

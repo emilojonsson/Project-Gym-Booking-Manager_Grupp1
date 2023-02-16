@@ -45,6 +45,7 @@ namespace Gym_Booking_Manager
                 {
                     trainer.ViewReservations(trainer, user);
                 }
+                Console.WriteLine();
             }
             if (user.status == "Staff")
             {
