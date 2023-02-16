@@ -30,9 +30,9 @@ namespace Tests
             // Persistance of the activity in the database should happen at some point as part class methods,
             // and not as a db call in this scope. We call db.Read() as part of the test.
 
-            List<Gym_Booking_Manager.Activity> persistedActivities = db.activities.Read<Gym_Booking_Manager.Activity>(); // Make changes if necessary
+            //List<Gym_Booking_Manager.Activity> persistedActivities = db.activities.Read<Gym_Booking_Manager.Activity>(); // Make changes if necessary
 
-            Assert.IsTrue(persistedActivities.Exists(x => ??));
+            //Assert.IsTrue(persistedActivities.Exists(x => ??));
             // Replace ?? with a reasonable comparison.
             // Example: if ?? is replaced with 'x == activity':
             //     Assert.IsTrue(persistedActivities.Exists(x => x == activity));
