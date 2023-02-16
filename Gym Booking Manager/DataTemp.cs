@@ -305,5 +305,14 @@ namespace Gym_Booking_Manager
                 trainer.ViewReservations(trainer, user);
             }
         }
+        public void CancelReservation(ReservingEntity user)
+        {
+            ViewReservations(user);
+            foreach(Equipment equipment in equipmentObjects)
+            {
+                equipment.CancelReservation(user,equipment);
+            }
+
+        }
     }
 }

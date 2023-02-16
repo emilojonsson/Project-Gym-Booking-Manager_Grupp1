@@ -25,10 +25,6 @@ namespace Gym_Booking_Manager
     [DataContract]
     internal class Space : IReservable, ICSVable, IComparable<Space> 
     {
-        void IReservable.CancelReservation(ReservingEntity owner)
-        {
-            throw new NotImplementedException();
-        }
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
         public Category category;
