@@ -164,7 +164,7 @@ namespace Gym_Booking_Manager
                     data1.schedule.ModifyActivity(data1, staff);
                     break;
                 case "7":
-                    data1.schedule.RemoveActivity(staff, data1);
+                    data1.schedule.RemoveActivity(staff, data1, editInsted: false);
                     break;
                 case "8":
                     data1.MakeResStaff();
@@ -232,7 +232,7 @@ namespace Gym_Booking_Manager
                     break;
                 case "4":                    // Insert method here                    break;
                 case "5":
-                    data1.schedule.RemoveActivity(member, data1);
+                    data1.schedule.RemoveActivity(member, data1, editInsted: false);
                     break;
                 case "e":
                     RunMenu();
