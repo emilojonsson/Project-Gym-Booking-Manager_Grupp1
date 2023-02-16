@@ -454,6 +454,7 @@ namespace Gym_Booking_Manager
                 Console.WriteLine($"{template.activityDetails}, {template.participantLimit} participants, {template.space}, {template.trainer}, {template.equipment}");
             }
         }
+
         public void DeleteTemplate(Database data)
         {
             int count = 1;

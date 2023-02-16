@@ -21,37 +21,47 @@ namespace Gym_Booking_Manager
             data1.LoadDataBase();
             string userInput = "";
 
-            // TODO - skapa en säkerhetsåtgärd för inloggning på Customer och Staff
-            Console.WriteLine("Welcome to the menu:");
-            Console.WriteLine("1. Member");
-            Console.WriteLine("2. Non-member");
-            Console.WriteLine("3. Staff");
-            Console.WriteLine("4. Service");
-            Console.WriteLine("q. Quit program");
-            Console.Write("Enter your choice: ");
-            userInput = Console.ReadLine();
-            Console.WriteLine("----------------------------");
+            bool quit = false;
 
-            switch (userInput)
+            while (!quit)
             {
-                case "1":
-                    choiceMember(data1);
-                    break;
-                case "2":
-                    choiceNonMember(data1);
-                    break;
-                case "3":
-                    choiceStaff(data1);
-                    break;
-                case "4":
-                    choiceService(data1);
-                    break;
-                case "q":
-                    break;
+                Console.WriteLine("\nWelcome to the menu:");
+                Console.WriteLine("1. Member");
+                Console.WriteLine("2. Non-member");
+                Console.WriteLine("3. Staff");
+                Console.WriteLine("4. Service");
+                Console.WriteLine("q. Quit program");
+                Console.Write("Enter your choice: ");
+                userInput = Console.ReadLine();
+                
+                switch (userInput)
+                {
+                    case "1":
+                        choiceMember(data1);
+                        break;
+                    case "2":
+                        choiceNonMember(data1);
+                        break;
+                    case "3":
+                        choiceStaff(data1);
+                        break;
+                    case "4":
+                        choiceService(data1);
+                        break;
+                    case "q":
+                        quitMessage();
+                        quit = true;
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid option");
+                        RunMenu();
+                        break;
+                }
             }
-            data1.SaveToDataBase();
-            
+            data1.SaveToDataBase();            
         }
+
+        private static void quitMessage()        {            Console.WriteLine("Press 'q' again to confirm");        }
 
         private static string choiceService(Database data1)
         {
