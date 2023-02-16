@@ -1,6 +1,7 @@
 using Gym_Booking_Manager;
 using static Gym_Booking_Manager.Space;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 // There are many tools for improving how you write your tests,
 // but it's good enough to keep things simple to get things started.
@@ -47,7 +48,8 @@ namespace Tests
         public void SpaceToString()
         {
             Space testSpace = new Space(Space.Category.Studio, "Test Studio");
-            Assert.AreEqual(testSpace.ToString(), "Some nice string representation"); // Fix this
+            
+            Assert.AreEqual(testSpace.ToString(), "Test Studio");
         }
 
         [TestMethod]
@@ -64,11 +66,12 @@ namespace Tests
             Space testStudio = new Space(Space.Category.Studio, "Test Studio");
             Space testHall = new Space(Space.Category.Hall, "Test Hall");
 
-            sortedSpaces.Add(testStudio);
             sortedSpaces.Add(testHall);
+            sortedSpaces.Add(testStudio);
 
             var spaceEnumerator = sortedSpaces.GetEnumerator();
 
+            spaceEnumerator.MoveNext();
             Assert.AreSame(testHall, spaceEnumerator.Current);
             spaceEnumerator.MoveNext();
             Assert.AreSame(testStudio, spaceEnumerator.Current);

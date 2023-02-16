@@ -54,14 +54,15 @@ namespace Gym_Booking_Manager
                 }
             }
             else
-                Console.WriteLine("No activitis were loaded!");
+                Console.WriteLine("No activities were loaded!");
         }
+
         //Save current objectsLists to DataBase!
         public void SaveToDataBase()
         {
             if(activities == null)
             {
-                Console.WriteLine("No activitys were saved to Database");
+                Console.WriteLine("No activities were saved to Database");
             }
             else
             {
@@ -77,7 +78,7 @@ namespace Gym_Booking_Manager
             SaveViaDataContractSerialization(spaceObjects, "spaceObjects.xml");
             SaveViaDataContractSerialization(trainerObjects, "trainerObjects.xml");
             SaveViaDataContractSerialization(equipmentObjects, "equipmentObjects.xml");
-           
+            SaveViaDataContractSerialization(templateActivityObjects, "templateActivities.xml");
         }
 
         public static string FilePath(string fileName)
@@ -197,7 +198,6 @@ namespace Gym_Booking_Manager
             Console.WriteLine();
         }
 
-
         public void LoadTraining(ReservingEntity user, string userInput)
         {
             int a = 1;
@@ -244,7 +244,8 @@ namespace Gym_Booking_Manager
             if (userInput == "3")
             {
                 spaceObjects[inputChoice - 1].MakeReservation(user, timeSlot, durationMinutes);
-                choosen = $"{equipmentObjects[inputChoice - 1]}";
+                choosen = $"{spaceObjects[inputChoice - 1]}";
+                LogAlteration("space", choosen);
             }
             Console.WriteLine();
             Console.WriteLine("-- Reservation registred! --");
@@ -254,6 +255,7 @@ namespace Gym_Booking_Manager
             Console.WriteLine($"Start time: {timeSlot}");
             Console.WriteLine($"Activity length: {durationMinutes} minutes");
         }
+
         public void MakeRes(ReservingEntity user)
         {
             Console.WriteLine();
@@ -265,6 +267,7 @@ namespace Gym_Booking_Manager
             userInput = Console.ReadLine();
             LoadTraining(user, userInput);
         }
+
         public void MakeResStaff()
         {
             int a = 1;
@@ -283,7 +286,11 @@ namespace Gym_Booking_Manager
             string userInput;
             userInput = Console.ReadLine();
             LoadTraining(user, userInput);
+        }
 
+        public void EditReservation(ReservingEntity user)        {        }
+
+        public void EditReservationStaff()        {
         }
         public void ViewReservations(ReservingEntity user)
         {

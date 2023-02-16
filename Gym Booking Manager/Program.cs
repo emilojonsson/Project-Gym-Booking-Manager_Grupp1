@@ -12,12 +12,13 @@ namespace Gym_Booking_Manager
     {
         static void Main(string[] args)
         {
+            RunMenu();
+        }
+
+        private static void RunMenu()
+        {
             Database data1 = new Database();
             data1.LoadDataBase();
-            //data1.ViewReservations();
-
-            //Menu m1 = new Menu();
-            //m1.Run();
 
             string userInput = "";
             while (userInput != "q")
@@ -36,24 +37,40 @@ namespace Gym_Booking_Manager
                 switch (userInput)
                 {
                     case "1":
-                        ReservingEntity member = data1.userObjects[0];
-                        Console.WriteLine("--- Member ---");
-                        Console.WriteLine("1. View schedules that you are signed up to");       // Samla view schedule, equipment, PT(?) och space här
-                        Console.WriteLine("2. View and sign Up to activity");  // Kom vidare till att se vad som går att boka för aktivitet
-                        Console.WriteLine("3. Make an individual reservation");  // Kom vidare till att se vad som går att reservera
-                        Console.WriteLine("4. Edit individual reservation"); // Cancel resevation or make a new!!!
-                        Console.WriteLine("5. Cancel Activity");
-                        Console.WriteLine("e. Go back");
-                        Console.Write("Enter your choice: ");
-                        userInput = Console.ReadLine();
-                        Console.WriteLine("----------------------------");
+                        choiceMember(data1);
+                        break;
+                    case "2":
+                        choiceNonMember(data1);
+                        break;
+                    case "3":
+                        choiceStaff(data1);
+                        break;
+                    case "4":
+                        choiceService(data1);
+                        break;
+                }
+                data1.SaveToDataBase();
+            }
+        }
+
+        private static string choiceService(Database data1)
+        {
+            string userInput;
+            ReservingEntity service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
+            Console.WriteLine("--- Service ---");
+            Console.WriteLine("1. View Restrictions");
+            Console.WriteLine("2. Drop Restrictions");
+            Console.WriteLine("e. Go back");
+            Console.Write("Enter your choice: ");
+            userInput = Console.ReadLine();
+            Console.WriteLine("----------------------------");
 
 
                         switch (userInput)
                         {
                             case "1":
                                 // Code to view schedule
-                                data1.schedule.ViewSchedule(data1, member);
+                                data1.schedule.ViewSchedule(member);
                                 break;
                             case "2":
                                 // Signup to activity
@@ -116,7 +133,6 @@ namespace Gym_Booking_Manager
                         Console.WriteLine("11. Restrict equipment");        // Registrera avstängda maskiner/lokaler
                         Console.WriteLine("12. User management");           // Användarhantering, purchase subscription to members
                         Console.WriteLine("13. Add template");
-                        Console.WriteLine("14. Show all reservations");
                         Console.WriteLine("e. Go back");
                         Console.Write("Enter your choice: ");
                         userInput = Console.ReadLine();
@@ -126,7 +142,7 @@ namespace Gym_Booking_Manager
                         {
                             case "1":
                                 // Code to view schedule
-                                //data1.schedule.ViewSchedule(data1, staff);
+                                data1.schedule.ViewSchedule(staff);
                                 break;
                             case "2":
                                 data1.ViewEquipments();
@@ -170,9 +186,6 @@ namespace Gym_Booking_Manager
                             case "13":
                                 data1.schedule.AddTemplateActivity(staff, data1);
                                 break;
-                            case "14":
-                                data1.ViewReservations(staff);
-                                break;
                             case "e":
                                 break;
                             default:
@@ -190,27 +203,30 @@ namespace Gym_Booking_Manager
                         userInput = Console.ReadLine();
                         Console.WriteLine("----------------------------");
 
-                        switch (userInput)
-                        {
-                            case "1":
-                                // View Restrictions
-                                data1.ViewRestrictedObject();
-                                break;
-                            case "2":
-                                // Code to Drop Restrictions
-                                data1.restricted.DropRestrictedObjects(data1);
-                                break;
-                            case "e":
-                                break;
-                            default:
-                                Console.WriteLine("Invalid option");
-                                break;
-                        }
-                        break;
-                }
-                data1.SaveToDataBase();
+
+            switch (userInput)
+            {
+                case "1":
+                    data1.schedule.ViewSchedule(member);
+                    break;
+                case "2":
+                    data1.schedule.SignUp(member, data1);
+                    break;
+                case "3":
+                    data1.MakeRes(member);
+                    Console.WriteLine();
+                    break;
+                case "4":                    data1.schedule.EditReservation(member, data1);                    break;                case "5":
+                    data1.schedule.RemoveActivity(member, data1);
+                    break;
+                case "e":
+                    RunMenu();
+                    break;
+                default:
+                    Console.WriteLine("Invalid option");
+                    break;
             }
+            return userInput;
         }
-        //Add method below if needed!!!
     }
 }

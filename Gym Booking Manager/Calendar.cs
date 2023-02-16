@@ -41,7 +41,7 @@ namespace Gym_Booking_Manager
             {
                 if (reservation.startTime < startTime.AddMinutes(durationMinutes) && reservation.startTime.AddMinutes(reservation.durationMinutes) > startTime)
                 {
-                    Console.WriteLine("The item is not possible to book at this time, it's allready booked.");
+                    Console.WriteLine($"The item is not possible to book at this time ({startTime}), it's allready booked.");
                     return false;
                 }
             }
