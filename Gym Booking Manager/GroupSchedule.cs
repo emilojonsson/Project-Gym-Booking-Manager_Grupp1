@@ -15,8 +15,8 @@ namespace Gym_Booking_Manager
 {
     internal class GroupSchedule
     {
-        //Do we need thos list? we use this list in DataTemp....? Consult Team!!!
         public List<Activity> activities = new List<Activity>();
+
         public void ViewSchedule(Database data1, ReservingEntity user)
         {
             //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
@@ -54,11 +54,11 @@ namespace Gym_Booking_Manager
                 //for (DateTime i = test; i < data1.; i = i.AddDays(1))
                 
                 foreach (Activity activity in activities)
-                    {
+                {
                         
-                        Console.WriteLine(activity);
+                    Console.WriteLine(activity);
                             
-                    }
+                }
                 
             }
         }
@@ -75,15 +75,16 @@ namespace Gym_Booking_Manager
                 AddActivityManually(owner, data);
             }
         }
+
         public void AddActivityManually(ReservingEntity owner, Database data)
         {
-            Console.WriteLine("Please add activity details (label of the session):");
+            Console.WriteLine("Please enter the training session name: ");
             string? activityDetails = Console.ReadLine();
 
             DateTime uniqueTimeToID = DateTime.Now;
             string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); 
 
-            Console.WriteLine("What is the maximum amount of participants:");
+            Console.WriteLine("What is the maximum amount of participants: ");
             int participantLimit = int.Parse(Console.ReadLine());
 
             bool bookingNotComplete = true;
@@ -92,16 +93,16 @@ namespace Gym_Booking_Manager
             int addedEquipment = 0;
             while (bookingNotComplete)
             {
-                Console.WriteLine("At what date and time will the activity start 'YYYY/MM/DD hh:mm':");
+                Console.WriteLine("What date and time will the activity start 'YYYY-MM-DD hh:mm': ");
                 DateTime timeSlot = DateTime.Parse(Console.ReadLine());
-                Console.WriteLine("How many minutes will the activity last:");
+                Console.WriteLine("How many minutes will the activity last: ");
                 double durationMinutes = double.Parse(Console.ReadLine());
 
                 Console.WriteLine();
                 bool spaceBookingComplete = false;
                 while (!spaceBookingComplete)
                 {
-                    Console.WriteLine("Please add which space that will be reserved for the activity:");
+                    Console.WriteLine("Please select which space to reserve for the activity: ");
                     foreach (Space space in data.spaceObjects)
                     {
                         Console.WriteLine($"{data.spaceObjects.IndexOf(space) + 1} - {space.name}");
@@ -114,7 +115,7 @@ namespace Gym_Booking_Manager
                 bool trainerBookingComplete = false;
                 while (!trainerBookingComplete)
                 {
-                    Console.WriteLine("Please add which trainer that will be reserved for the activity:");
+                    Console.WriteLine("Please select which trainer to reserve for the activity: ");
                     foreach (Trainer trainer in data.trainerObjects)
                     {
                         Console.WriteLine($"{data.trainerObjects.IndexOf(trainer) + 1} - {trainer.name}");
@@ -127,7 +128,7 @@ namespace Gym_Booking_Manager
                 bool equipmentBookingComplete = false;
                 while (!equipmentBookingComplete)
                 {
-                    Console.WriteLine("Please add which equipment that will be reserved for the activity:");
+                    Console.WriteLine("Please select which equipment to reserve for the activity:");
                     foreach (Equipment equipment in data.equipmentObjects)
                     {
                         Console.WriteLine($"{data.equipmentObjects.IndexOf(equipment) + 1} - {equipment.name}");
@@ -161,11 +162,11 @@ namespace Gym_Booking_Manager
             }
             int template = int.Parse(Console.ReadLine()) - 1;
 
-            Console.WriteLine("Add start date & time when the first occurrence of the activity will take place 'YYYY/MM/DD hh:mm':");
+            Console.WriteLine("Add start date & time when the first occurrence of the activity will take place 'YYYY-MM-DD hh:mm':");
             DateTime firstDate = DateTime.Parse(Console.ReadLine());
 
             DateTime uniqueTimeToID = DateTime.Now;
-            string activityID = uniqueTimeToID.ToString("yyyy/MM/dd HH:mm"); 
+            string activityID = uniqueTimeToID.ToString("yyyy-MM-dd HH:mm"); 
 
             Console.WriteLine("Please add for how many weeks this activity will repeat itself:");
             int repeats = int.Parse(Console.ReadLine());
@@ -221,7 +222,7 @@ namespace Gym_Booking_Manager
                     {
                         if (user == signUp)
                         {
-                            Console.WriteLine($"{count}. {activity.activityDetails},  {activity.timeSlot.reservations[0].startTime}"); //for now an activity can only have one reservation, but beware of future changes...
+                            Console.WriteLine($"{count}. {activity.activityDetails},  {activity.timeSlot.reservations[0].startTime}");
                             count++;
                         }
                     }

@@ -95,6 +95,13 @@ namespace Gym_Booking_Manager
 
         public void CancelReservation(ReservingEntity owner, Equipment equipment)
         {
+<<<<<<< HEAD
+            ViewTimeTable(owner);
+            int del;
+            Console.Write("\nCancel reservation (number): ");
+            del = Int32.Parse(Console.ReadLine());
+            calendar.reservations.Remove(calendar.reservations[del]);
+=======
             //ViewTimeTable(owner);
             //int del;
             //Console.Write("\nCansel reservation (number): ");
@@ -110,6 +117,7 @@ namespace Gym_Booking_Manager
                     }
                 }
             }
+>>>>>>> 096a836ee6637e341cee225e3c53047de5524db8
         }
      
 
