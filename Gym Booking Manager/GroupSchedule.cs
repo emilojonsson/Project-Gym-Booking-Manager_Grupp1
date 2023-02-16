@@ -49,10 +49,16 @@ namespace Gym_Booking_Manager
             }
             if (user.status == "Staff")
             {
+                //DateTime test = new DateTime();
+                //for (DateTime i = test; i < data1.; i = i.AddDays(1))
+                
                 foreach (Activity activity in activities)
-                {
-                    Console.WriteLine(activity);
-                }
+                    {
+                        
+                        Console.WriteLine(activity);
+                            
+                    }
+                
             }
         }
 

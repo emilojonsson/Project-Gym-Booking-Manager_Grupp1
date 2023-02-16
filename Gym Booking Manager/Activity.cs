@@ -46,7 +46,7 @@ namespace Gym_Booking_Manager
 
         public override string ToString()
         {
-            return $"Activity: {activityDetails}\nTrainer: {trainer}\nParticipantLimit: {participantLimit}\nStart time: {timeSlot.reservations[0].startTime}\nDurration minutes: {timeSlot.reservations[0].durationMinutes}\nNumber of Participants: {participants.Count}\n"; 
+            return $"Activity: {activityDetails}\nTrainer: {trainer}\nSpace: {space}\nEqupment: {equipment}\nParticipantLimit: {participantLimit}\nStart time: {timeSlot.reservations[0].startTime}\nDurration minutes: {timeSlot.reservations[0].durationMinutes}\nNumber of Participants: {participants.Count}\n"; 
         }
     }
 }
