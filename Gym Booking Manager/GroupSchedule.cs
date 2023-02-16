@@ -446,67 +446,6 @@ namespace Gym_Booking_Manager
             data.templateActivityObjects.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
                 data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
         }
-        /*
-        public void EditReservation(ReservingEntity user, Database data1)
-        {        
-            if ( user.status == "Member")
-            {
-                bool isUserBooked = false;
-                foreach (Activity activity in activities)
-                {
-                    if (activity.participants.Contains(user))
-                    {
-                        isUserBooked = true;
-                        break;
-                    }
-                }
-
-                if (isUserBooked)
-                {
-                    RemoveActivity(user, data1);
-                    SignUp(user, data1);
-                }
-                else
-                {
-                    Console.WriteLine($"{user.name}: You are not signed up to any group activities");
-                }
-            }
-
-            else if (user.status == "Staff")
-            {
-                int i = 1;
-
-                foreach (ReservingEntity staffUser in data1.userObjects)
-                {
-                    Console.WriteLine($"{i}, {staffUser.name}, {staffUser.phone}");
-                    i++;
-                }
-
-                Console.WriteLine("Which member do you want to check?");
-                int staffAnswer = int.Parse(Console.ReadLine()) - 1;
-
-                bool isUserBooked = false;
-                foreach (Activity activity in activities)
-                {
-                    if (activity.participants.Contains(user))
-                    {
-                        isUserBooked = true;
-                        break;
-                    }
-                }
-
-                if (isUserBooked)
-                {
-                    RemoveActivity(user, data1);
-                    SignUp(user, data1);
-                }
-                else
-                {
-                    Console.WriteLine($"{user.name} is not signed up to any group activities");
-                }
-            }
-
-        }*/
 
         public void ViewTemplate(Database data)
         {
