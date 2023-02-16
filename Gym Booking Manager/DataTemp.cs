@@ -288,15 +288,6 @@ namespace Gym_Booking_Manager
             LoadTraining(user, userInput);
         }
 
-        public void EditReservation(ReservingEntity user)
-        {
-
-        }
-
-        public void EditReservationStaff()
-        {
-
-        }
         public void ViewReservations(ReservingEntity user)
         {
             Console.WriteLine("All member reservations:");
