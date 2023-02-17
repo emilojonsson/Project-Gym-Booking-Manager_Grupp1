@@ -76,7 +76,6 @@ namespace Gym_Booking_Manager
                 }
                 Console.ReadKey();
             }
->>>>>>> 096a836ee6637e341cee225e3c53047de5524db8
         }
         public void CancelReservation(ReservingEntity owner, Equipment equipment)
         {
