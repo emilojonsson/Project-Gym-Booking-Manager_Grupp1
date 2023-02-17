@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRestrictedObjects xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Gym_Booking_Manager">
+	<RestrictedObjects>
+		<equipment i:nil="true" />
+		<space>
+			<calendar>
+				<dateTime>0001-01-01T00:00:00</dateTime>
+				<reservations />
+			</calendar>
+			<category>Lane</category>
+			<name>DummyObject,Do not Remove!</name>
+		</space>
+	</RestrictedObjects>
+</ArrayOfRestrictedObjects>

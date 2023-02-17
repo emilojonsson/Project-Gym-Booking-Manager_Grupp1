@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTrainer xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Gym_Booking_Manager">
+	<Trainer>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Trainer</category>
+		<name>Dansledare</name>
+	</Trainer>
+	<Trainer>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Trainer</category>
+		<name>Passledare</name>
+	</Trainer>
+	<Trainer>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations>
+				<Reservation>
+					<owner>
+						<email>b.b@gmail.com</email>
+						<name>Berit Birgersson</name>
+						<phone>101</phone>
+						<status>Staff</status>
+						<uniqueID>1001</uniqueID>
+					</owner>
+					<startTime>2002-03-06T21:30:00</startTime>
+				</Reservation>
+			</reservations>
+		</calendar>
+		<category>Consultation</category>
+		<name>PT</name>
+	</Trainer>
+	<Trainer>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Consultation</category>
+		<name>Racketcoach</name>
+	</Trainer>
+</ArrayOfTrainer>

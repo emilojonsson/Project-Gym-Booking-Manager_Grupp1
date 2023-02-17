@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEquipment xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Gym_Booking_Manager">
+	<Equipment>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Small</category>
+		<name>Hopprep</name>
+	</Equipment>
+	<Equipment>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Small</category>
+		<name>Musikanläggning</name>
+	</Equipment>
+	<Equipment>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Small</category>
+		<name>Tennisracket</name>
+	</Equipment>
+	<Equipment>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Small</category>
+		<name>Hantlar 55kg</name>
+	</Equipment>
+</ArrayOfEquipment>

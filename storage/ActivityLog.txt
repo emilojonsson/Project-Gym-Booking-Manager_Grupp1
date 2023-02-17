@@ -1,0 +1,13 @@
+2023-02-16 14:27:02 : space : Jympaområdet
+2023-02-16 15:48:37 : space : category:Studio,name:Gymmet
+2023-02-16 17:43:48 : CancelReservation : Anders Andersson
+
+2023-02-17 11:10:20 : New User : FlåsDoris
+2023-02-17 11:11:11 : new Object : Hantlar 55kg
+2023-02-17 11:11:41 : Remove User : Fredrik Fransson
+2023-02-17 11:24:49 : DropRestriction : Hantlar 55kg
+2023-02-17 11:31:28 : DropRestriction : Jympaområdet
+2023-02-17 11:34:38 : DropRestriction : Hantlar 55kg
+2023-02-17 11:35:08 : DropRestriction : Dansscenen
+2023-02-17 12:03:21 : Reservations : category:Studio,name:Dansscenen2020-03-06 23:00:0060
+2023-02-17 12:06:11 : Reservations : Uppvärmingsdelen2023-06-02 20:00:0060

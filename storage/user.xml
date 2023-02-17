@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfReservingEntity xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Gym_Booking_Manager">
+	<ReservingEntity>
+		<email>a.a@gmail.com</email>
+		<name>Anders Andersson</name>
+		<phone>100</phone>
+		<status>Member</status>
+		<uniqueID>1000</uniqueID>
+	</ReservingEntity>
+	<ReservingEntity>
+		<email>b.b@gmail.com</email>
+		<name>Berit Birgersson</name>
+		<phone>101</phone>
+		<status>Staff</status>
+		<uniqueID>1001</uniqueID>
+	</ReservingEntity>
+	<ReservingEntity>
+		<email>c.c@gmail.com</email>
+		<name>Cedric Cederkvist</name>
+		<phone>102</phone>
+		<status>Service</status>
+		<uniqueID>1002</uniqueID>
+	</ReservingEntity>
+	<ReservingEntity>
+		<email>d.d@gmail.com</email>
+		<name>Daniel Damp</name>
+		<phone>103</phone>
+		<status>Non-member</status>
+		<uniqueID>1003</uniqueID>
+	</ReservingEntity>
+	<ReservingEntity>
+		<email>e.e@gmail.com</email>
+		<name>Erik Erdogan</name>
+		<phone>104</phone>
+		<status>Member</status>
+		<uniqueID>1004</uniqueID>
+	</ReservingEntity>
+	<ReservingEntity>
+		<email>MyBikeMyLife@mail.com</email>
+		<name>FlåsDoris</name>
+		<phone>073568745</phone>
+		<status>Member</status>
+		<uniqueID>1010</uniqueID>
+	</ReservingEntity>
+</ArrayOfReservingEntity>

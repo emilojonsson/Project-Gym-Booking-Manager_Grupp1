@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSpace xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Gym_Booking_Manager">
+	<Space>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations>
+				<Reservation>
+					<owner>
+						<email>a.a@gmail.com</email>
+						<name>Anders Andersson</name>
+						<phone>100</phone>
+						<status>Member</status>
+						<uniqueID>1000</uniqueID>
+					</owner>
+					<startTime>2023-06-02T20:00:00</startTime>
+				</Reservation>
+			</reservations>
+		</calendar>
+		<category>Hall</category>
+		<name>Uppvärmingsdelen</name>
+	</Space>
+	<Space>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Lane</category>
+		<name>Paddelytan</name>
+	</Space>
+	<Space>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations />
+		</calendar>
+		<category>Hall</category>
+		<name>Jympaområdet</name>
+	</Space>
+	<Space>
+		<calendar>
+			<dateTime>0001-01-01T00:00:00</dateTime>
+			<reservations>
+				<Reservation>
+					<owner>
+						<email>a.a@gmail.com</email>
+						<name>Anders Andersson</name>
+						<phone>100</phone>
+						<status>Member</status>
+						<uniqueID>1000</uniqueID>
+					</owner>
+					<startTime>2020-03-06T23:00:00</startTime>
+				</Reservation>
+			</reservations>
+		</calendar>
+		<category>Studio</category>
+		<name>Dansscenen</name>
+	</Space>
+</ArrayOfSpace>
