@@ -1,3 +1,13 @@
+Storage filen behöver läggas på rätt sökväg, Project-Gym-Booking-Manager_Grupp1\Gym Booking Manager\bin\Debug\net6.0\GymDB
+
+Known buggs:
+- Ingen full felhantering i programet, anges fel eller icke existerande värden i vissa metoder så krashar programmet
+- Finns inte Databasfilerna så kan programmet krasha, se till att dem existerar på rätt sökväg
+- Gör man en reservation men stänger av programmet så kan man göra en reservation på samma slot igen, reservationen läggs i databasen men något blir fel vid nu inläsning!
+- LogAlteration metoden som loggar händelser är inte fullt implementerad på alla akriviteter i programmet, Add aktivity har inte den fullt ut samt MakeReservation då den är så inästlad och tiden finns inte för att urnästla så man kan få in loggen där just nu
+- Fortfarande okonsist med Svenska och engelska i Outputen
+- Man kan inte ta bort Object Space,Equipement eller Trainer utan man får tillsivare lägga dem som restricted objects!
+
 # Projektuppgift - Gym Booking Manager
 
 Ett gym vill ha hjälp med ett nytt bokningssystem kring deras träningsverksamhet. Systemet ska kunna hantera registrering och bokning av aktiviteter, samt datalagring av information om nödvändiga entiteter mellan skilda programkörningar. Några exempel på aktiviteter i dagsläget:
