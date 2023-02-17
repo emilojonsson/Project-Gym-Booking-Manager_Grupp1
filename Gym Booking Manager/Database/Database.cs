@@ -18,15 +18,10 @@ namespace Gym_Booking_Manager
     internal class Database
     {
         public List<Equipment> equipmentObjects = new List<Equipment>();
-
         public List<Space> spaceObjects = new List<Space>();
-
         public List<Trainer> trainerObjects = new List<Trainer>();
-
         public List<Activity> activities = new List<Activity>();
-
         public List<ReservingEntity> userObjects = new List<ReservingEntity>();
-
         public List<RestrictedObjects> restrictedObjects = new List<RestrictedObjects>();
 
         //public List<ReservingEntity> dayPass = new List<ReservingEntity>();
@@ -137,10 +132,10 @@ namespace Gym_Booking_Manager
                 if (b.activityID == a)
                 {
                     using (StreamWriter sw = new StreamWriter(filePath))
-                        for (int n = 0; n < b.participants.Count; n++)
-                        {
-                            sw.WriteLine($"{b.participants[n].email} your activity {b.activityDetails} has been canceled");
-                        }
+                    for (int n = 0; n < b.participants.Count; n++)
+                    {
+                        sw.WriteLine($"{b.participants[n].email} your activity {b.activityDetails} has been cancelled");
+                    }
                 }
             }
         }
@@ -220,7 +215,7 @@ namespace Gym_Booking_Manager
         {
             int a = 1;
             Console.WriteLine();
-            Console.WriteLine("Do choice:");
+            Console.WriteLine("Please select:");
             Console.WriteLine();
             if (userInput == "1")
             {
@@ -266,7 +261,7 @@ namespace Gym_Booking_Manager
                 LogAlteration("space", choosen);
             }
             Console.WriteLine();
-            Console.WriteLine("-- Reservation registred! --");
+            Console.WriteLine("-- Reservation registered! --");
             Console.WriteLine();
             Console.WriteLine($"User: {user.name}");
             Console.WriteLine($"Activity: {choosen}");
@@ -308,7 +303,7 @@ namespace Gym_Booking_Manager
 
         public void ViewReservations(ReservingEntity user)
         {
-            Console.WriteLine("All member reservations:");
+            Console.WriteLine("All members' reservations:");
             Console.WriteLine();
             foreach (Space space in spaceObjects)
             {
