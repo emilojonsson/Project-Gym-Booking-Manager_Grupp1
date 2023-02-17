@@ -15,7 +15,6 @@ namespace Gym_Booking_Manager
 {
     internal class GroupSchedule
     {
-        //Do we need thos list? we use this list in DataTemp....? Consult Team!!!
         public List<Activity> activities = new List<Activity>();
         public void ViewSchedule(Database data1, ReservingEntity user)
         {
@@ -55,6 +54,7 @@ namespace Gym_Booking_Manager
                     Console.WriteLine(activity);
                 }
             }
+            Console.ReadKey();
         }
 
         public void AddActivity(ReservingEntity owner, Database data)

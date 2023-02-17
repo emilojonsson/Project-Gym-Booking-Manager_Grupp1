@@ -17,10 +17,6 @@ namespace Gym_Booking_Manager
 {
     internal class Database
     {
-        //Create an instance of the DataBase, use for save/load space,equipment,trainer objects
-        GymDatabaseContext gymDatabase = new GymDatabaseContext();
-
-        //Static lists that we will use to load data from DataBase
         public List<Equipment> equipmentObjects = new List<Equipment>();
 
         public List<Space> spaceObjects = new List<Space>();
@@ -33,19 +29,22 @@ namespace Gym_Booking_Manager
 
         public List<RestrictedObjects> restrictedObjects = new List<RestrictedObjects>();
 
+        //public List<ReservingEntity> dayPass = new List<ReservingEntity>();
+
         public GroupSchedule schedule = new GroupSchedule();
         public RestrictedObjects restricted = new RestrictedObjects();
         public ReservingEntity user = new ReservingEntity();
         public List<Activity> templateActivityObjects = new List<Activity>();
 
-        //Load current DataBase to program!
+
         public void LoadDataBase()
         {
             equipmentObjects = LoadViaDataContractSerialization<List<Equipment>>("equipmentObjects.xml");
             spaceObjects = LoadViaDataContractSerialization<List<Space>>("spaceObjects.xml");
-            trainerObjects = gymDatabase.Read<Trainer>(); //Load DataBase to list trainerObjects
+            trainerObjects = LoadViaDataContractSerialization<List<Trainer>>("trainerObjects.xml");
             userObjects = LoadViaDataContractSerialization<List<ReservingEntity>>("user.xml");
             activities = LoadViaDataContractSerialization<List<Activity>>("activity.xml");
+            restrictedObjects = LoadViaDataContractSerialization<List<RestrictedObjects>>("restrictedObjects.xml");
             if (activities != null)
             {
                 foreach (Activity activity in activities)
@@ -57,10 +56,9 @@ namespace Gym_Booking_Manager
                 Console.WriteLine("No activities were loaded!");
         }
 
-        //Save current objectsLists to DataBase!
         public void SaveToDataBase()
         {
-            if(activities == null)
+            if (activities == null)
             {
                 Console.WriteLine("No activities were saved to Database");
             }
@@ -105,7 +103,7 @@ namespace Gym_Booking_Manager
                 serializer.WriteObject(writer, serializableObject);
                 writer.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"No data was saved to {fileName} {ex.Message}");
             }
@@ -124,25 +122,25 @@ namespace Gym_Booking_Manager
                 fileStream.Close();
                 return serializableObject;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"{fpathFile} {ex.Message}");
-                return default(T);
+                return default;
             }
         }
 
         public void StatusChangeEmail(string a)
         {
             string filePath = FilePath("email.txt");
-            foreach(Activity b in schedule.activities)
+            foreach (Activity b in schedule.activities)
             {
-                if(b.activityID == a)
+                if (b.activityID == a)
                 {
                     using (StreamWriter sw = new StreamWriter(filePath))
-                    for (int n = 0; n < b.participants.Count; n++)
-                    {
-                        sw.WriteLine($"{b.participants[n].email} your activity {b.activityDetails} has been canceled");
-                    }
+                        for (int n = 0; n < b.participants.Count; n++)
+                        {
+                            sw.WriteLine($"{b.participants[n].email} your activity {b.activityDetails} has been canceled");
+                        }
                 }
             }
         }
@@ -156,7 +154,21 @@ namespace Gym_Booking_Manager
                 sw.WriteLine($"{time} : {cause} : {refrense}");
             }
         }
-
+        public void ViewLogfile()
+        {
+            string filePath = FilePath("ActivityLog.txt");
+            using(StreamReader sr = new StreamReader(filePath))
+            {
+                string line;
+                while((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+                Console.ReadKey();
+                sr.Close();
+            }
+            
+        }
         public void ViewRestrictedObject()
         {
             int a = 1;
@@ -165,6 +177,7 @@ namespace Gym_Booking_Manager
                 Console.WriteLine($"{a}: {rs}");
                 a++;
             }
+            Console.ReadKey();
         }
 
         public void ViewEquipments()
@@ -175,6 +188,8 @@ namespace Gym_Booking_Manager
                 Console.WriteLine($"-- {allEquipments} --");
             }
             Console.WriteLine();
+            Console.ReadKey();
+
         }
 
         public void ViewSpaces()
@@ -185,6 +200,8 @@ namespace Gym_Booking_Manager
                 Console.WriteLine($"-- {allSpaces} --");
             }
             Console.WriteLine();
+            Console.ReadKey();
+
         }
 
         public void ViewTrainer()
@@ -196,6 +213,7 @@ namespace Gym_Booking_Manager
 
             }
             Console.WriteLine();
+            Console.ReadKey();
         }
 
         public void LoadTraining(ReservingEntity user, string userInput)
@@ -225,7 +243,7 @@ namespace Gym_Booking_Manager
                     Console.WriteLine($"[{a++}] {allSpaces}");
                 }
             }
-            int inputChoice = Int32.Parse(Console.ReadLine());
+            int inputChoice = int.Parse(Console.ReadLine());
             Console.Write("Start time (YYYY-MM-DD HH:MM): ");
             DateTime timeSlot = DateTime.Parse(Console.ReadLine());
             Console.Write("Activity length in minutes: ");
@@ -277,7 +295,7 @@ namespace Gym_Booking_Manager
             }
             Console.WriteLine();
             Console.WriteLine("Select user");
-            int userselect = Int32.Parse(Console.ReadLine());
+            int userselect = int.Parse(Console.ReadLine());
             ReservingEntity user = userObjects[userselect - 1];
             Console.WriteLine("Make reservation for:");
             Console.WriteLine("[1] Trainer");
@@ -304,15 +322,78 @@ namespace Gym_Booking_Manager
             {
                 trainer.ViewReservations(trainer, user);
             }
+            Console.ReadKey();
         }
         public void CancelReservation(ReservingEntity user)
         {
-            ViewReservations(user);
-            foreach(Equipment equipment in equipmentObjects)
+            if (user.status == "Member")
             {
-                equipment.CancelReservation(user,equipment);
+                Console.WriteLine("Type object you would like to cancel");
+                string input = Console.ReadLine();
+                if (input.ToLower() == "equipment")
+                {
+                    foreach (Equipment equipment in equipmentObjects)
+                    {
+                        equipment.CancelReservation(user, equipment);
+                    }
+                }
+                else if (input.ToLower() == "space")
+                {
+                    foreach (Space space in spaceObjects)
+                    {
+                        space.CancelReservation(user, space);
+                    }
+                }
+                else if (input.ToLower() == "trainer")
+                {
+                    foreach (Trainer trainer in trainerObjects)
+                    {
+                        trainer.CancelReservation(user, trainer);
+                    }
+                }
+                else
+                    Console.WriteLine("Invalid Input");
             }
-
+            if (user.status == "Staff")
+            {
+                foreach (ReservingEntity u in userObjects)
+                {
+                    Console.WriteLine($"{u.uniqueID} : {u.name}");
+                }
+                Console.WriteLine("Enter userID");
+                string input = Console.ReadLine();
+                foreach (ReservingEntity choosenUser in userObjects)
+                {
+                    if (input == choosenUser.uniqueID)
+                    {
+                        Console.WriteLine("Type object you would like to cancel");
+                        string secondInput = Console.ReadLine();
+                        if (secondInput.ToLower() == "equipment")
+                        {
+                            foreach (Equipment equipment in equipmentObjects)
+                            {
+                                equipment.CancelReservation(user, equipment);
+                            }
+                        }
+                        else if (secondInput.ToLower() == "space")
+                        {
+                            foreach (Space space in spaceObjects)
+                            {
+                                space.CancelReservation(user, space);
+                            }
+                        }
+                        else if (secondInput.ToLower() == "trainer")
+                        {
+                            foreach (Trainer trainer in trainerObjects)
+                            {
+                                trainer.CancelReservation(user, trainer);
+                            }
+                        }
+                        else
+                            Console.WriteLine("Invalid Input");
+                    }
+                }
+            }
         }
     }
 }

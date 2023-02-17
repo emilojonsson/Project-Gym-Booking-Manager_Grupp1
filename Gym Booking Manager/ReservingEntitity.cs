@@ -4,11 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Gym_Booking_Manager
 {
     [DataContract]
-    internal class ReservingEntity : ICSVable
+    internal class ReservingEntity 
     {
         [DataMember]
         public string uniqueID { get; set; }
@@ -30,16 +31,28 @@ namespace Gym_Booking_Manager
             this.uniqueID = uniqueID;
             this.status = status;
         }
+        public object NonMemberRegistration(Database data, ReservingEntity user)
+        {
+            //A payment method should be implemented here
+            Random rand = new Random();
+            string random = Convert.ToString(rand.Next(100, 500));
+            Console.WriteLine("Enter name");
+            string name = ReturnString();
+            Console.WriteLine($"Enter Email");
+            string email = ReturnString();
+            user.name = name;
+            user.email = email;
+            user.status = "Member";
+            user.uniqueID = random;
+            Console.WriteLine($"You UniqeID is {user.uniqueID}");
+            Console.ReadKey();
+            return user;
+        }
         public void UserManagement(ReservingEntity user, Database data)
         {
             if (user.status == "Non-member")
             {
-                //A payment method should be implemented here
-                List<ReservingEntity> dayPass = new List<ReservingEntity>();
-                Console.WriteLine("Enter name:> ");
-                string name = ReturnString();
-                ReservingEntity tempMember = new ReservingEntity(name, "333", "", "", "Member");
-                dayPass.Add(tempMember);
+                NonMemberRegistration(data, user);
             }
             else if (user.status == "Staff")
             {
@@ -51,7 +64,7 @@ namespace Gym_Booking_Manager
                 string input = Console.ReadLine();
                 if (input == "1")
                 {
-                    data.userObjects[3].status = "Member";
+                    NonMemberRegistration(data, user);
                 }
                 else if (input == "2")
                 {
@@ -81,6 +94,78 @@ namespace Gym_Booking_Manager
                     int number = Convert.ToInt32(Console.ReadLine());
                     data.userObjects.RemoveAt(number - 1);
                 }
+                else if(input == "4")
+                {
+                    Console.Write("Type space,equipment or trainer to add:> ");
+                    string choose = Console.ReadLine();
+                    if(choose.ToLower() == "space")
+                    {
+                        Console.WriteLine("[1] Hall [2] Lane [3] Studio");
+                        Console.WriteLine("Enter number:> ");
+                        int Catagory = Convert.ToInt32(Console.ReadLine());
+                        if(Catagory == 1)
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Space space = new Space(category:Space.Category.Hall, name); 
+                            data.spaceObjects.Add(space);
+                        }
+                        else if(Catagory == 2)
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Space space = new Space(category: Space.Category.Lane, name);
+                            data.spaceObjects.Add(space);
+                        }
+                        else if(Catagory == 3 )
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Space space = new Space(category: Space.Category.Studio, name);
+                            data.spaceObjects.Add(space);
+                        }
+                    }
+                    else if(choose.ToLower() == "equipment") 
+                    {
+                        Console.WriteLine("[1] Small [2] Large");
+                        Console.WriteLine("Enter number:> ");
+                        int Catagory = Convert.ToInt32(Console.ReadLine());
+                        if (Catagory == 1)
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Equipment equipment = new Equipment(category: Equipment.Category.Small, name);
+                            data.equipmentObjects.Add(equipment);
+                        }
+                        else if(Catagory == 2)
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Equipment equipment = new Equipment(category: Equipment.Category.Large, name);
+                            data.equipmentObjects.Add(equipment);
+                        }
+                    }
+                    else if (choose.ToLower() == "trainer")
+                    {
+                        Console.WriteLine("[1] PT [2] Consultation");
+                        Console.WriteLine("Enter number:> ");
+                        int Catagory = Convert.ToInt32(Console.ReadLine());
+                        if(Catagory == 1)
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Trainer trainer = new Trainer(Trainer.Category.Trainer, name);
+                            data.trainerObjects.Add(trainer);
+                        }
+                        else if(Catagory==2)
+                        {
+                            Console.WriteLine("Enter a name:> ");
+                            string name = Console.ReadLine();
+                            Trainer trainer = new Trainer(Trainer.Category.Consultation, name);
+                            data.trainerObjects.Add(trainer);
+                        }
+                    }
+                }
                 else
                     Console.WriteLine("Input Error");
             }
@@ -93,14 +178,7 @@ namespace Gym_Booking_Manager
         }
         public override string ToString()
         {
-            return this.CSVify(); // TODO: Don't use CSVify. Make it more readable.
-        }
-
-        // Every class C to be used for DbSet<C> should have the ICSVable interface and the following implementation.
-        public string CSVify()
-        {
             return $"Status : {status}\nID : {uniqueID}\nName : {name}\nPhone : {phone}\nEmail : {email}";
         }
-
     }
 }

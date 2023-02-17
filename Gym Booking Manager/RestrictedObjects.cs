@@ -34,10 +34,6 @@ namespace Gym_Booking_Manager
                         Console.WriteLine(data.restrictedObjects[input - 1]);
                         data.spaceObjects.Add(data.restrictedObjects[input - 1].space);
                         data.restrictedObjects.RemoveAt(input - 1);
-                        foreach (Space a in data.spaceObjects)
-                        {
-                            Console.WriteLine(a);
-                        }
                     }
                     else if (data.restrictedObjects[input - 1].equipment == data.restrictedObjects[n].equipment)
                     {

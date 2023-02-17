@@ -23,14 +23,14 @@ namespace Gym_Booking_Manager
         [DataMember]
         public List<Reservation> reservations;
         [DataMember]
-        public DateTime dateTime; //this one could be renamed to startTime
+        public DateTime dateTime; 
 
         public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {
             this.reservations = new List<Reservation>();
         }
 
-        public Calendar(DateTime startTime, double durationMinutes, ReservingEntity Owner) //this is to be used when creating an Activity
+        public Calendar(DateTime startTime, double durationMinutes, ReservingEntity Owner)
         {
             this.reservations = new List<Reservation> {new Reservation(Owner, startTime, durationMinutes)};
         }
@@ -48,10 +48,5 @@ namespace Gym_Booking_Manager
             reservations.Add(new Reservation(owner, startTime, durationMinutes));
             return true;
         }
-        public List<Reservation> GetSlice()
-        {
-            return this.reservations; // Promise to implement or delete this later, please just compile.
-        }
-        
     }
 }
