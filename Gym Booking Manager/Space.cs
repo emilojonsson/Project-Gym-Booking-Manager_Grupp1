@@ -22,7 +22,9 @@ namespace Gym_Booking_Manager
         [DataMember]
         public String name;
         [DataMember]
-        public Calendar calendar;        public Space(Category category, string name)
+        public Calendar calendar;
+
+        public Space(Category category, string name)
         {
             this.category = category;
             this.name = name;

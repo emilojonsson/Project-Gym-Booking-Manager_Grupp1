@@ -10,14 +10,14 @@
 |                     | Customer | access the schedule, but certain fields may be              |
 |                     |          | anonymous to low access level-users.                        |
 |                     |          |                                                             |
-| Update Group Schdl  | Staff    | Add/change/remove activities from the open group schedule.  |
+| Modify Group Schdl  | Staff    | Add/modify/remove activities from the open group schedule.  |
 |                     |          | This may impact signups, and should then push               |
 |                     |          | a notification to all affected users (customers and         |
 |                     |          | trainers). Some reservable resources can also be impacted.  |
 |                     |          |                                                             |
 | View Equipment/Space| Staff    | Display reservation data regarding a particular item.       |
-|      		      | Customer | Items include space (halls/lanes/rooms), equipment,         |
-|                     | Service  | staff (coach, PT). Although customers should not have       |
+|      		          | Customer | Items include space (halls/lanes/rooms), equipment,         |
+|                     |          | staff (coach, PT). Although customers should not have       |
 |                     |          | full access to item time table, they may need               |
 |                     |          | availability information indirectly.                        |
 |                     |          |                                                             |
@@ -38,20 +38,20 @@
 |                     |          | should be pushed.                                           |
 |                     |          |                                                             |
 |                     |          | (Optional) A user may want to be able to change their own   |
-|                     |          | user details.					       |
-|		      |          |							       |
+|                     |          | user details.		                    			       |
+|		              |          |							                                   |
 | Purchase Subcription| Non-Membr| Purchase Subcription will (TODO: temporaril                 |
-| 		      | 	 | elevate a non-paying customer's status to paying.           |
+| 		              | 	     | elevate a non-paying customer's status to paying.           |
 |                     |          | It may be prudent to consider this status as distinct       |
 |                     |          | from "member", although functionally they will enjoy        |
 |                     |          | the same privileges, albeit under time restriction.         |
 |                     |          | For simplicity's sake, day pass can currently only be       |
 |                     |          | purchased for the current day or make membership.           |
 |                     |          |                                                             |
-|                     |          | 							       |
-|                     |          | 		                                               |
+|                     |          | 							                                   |
+|                     |          | 		                                                       |
 |                     |          |                                                             |
-| Restrict 	      | Staff    | Some items can be marked as restricted. This disables all   |
+| Restrict 	          | Staff    | Some items can be marked as restricted. This disables all   |
 | Equipment/Space     |          | reservation for the item in question until resolved.        |
 |                     |          | Some examples: A hall can be made "unavailable" due to      |
 |                     |          | renovations; a gym machine can be marked for "repair"       |
@@ -62,9 +62,9 @@
 |                     |          |                                                             |
 | User Management     | Staff    | Staff can add new users to the system. Perhaps with options |
 |                     |          | for specifying customer or type of non-customer             |
-|                     |          | (other staff, service workers, etc.)                        |
+|                     |          | (other staff, service workers, etc.) Change a members info. |
 |                     |          |                                                             |
-| 	              |          | Self-explanatory complement to above.                       |
+| 	                  |          | Self-explanatory complement to above.                       |
 |                     |          | user details.                                               |
 |                     |          |                                                             |
 |                     |          |                                                             |

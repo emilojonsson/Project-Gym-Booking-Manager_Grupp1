@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.0.0">
   <help_text>Reservation</help_text>
-  <zoom_level>8</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1112</x>
-      <y>792</y>
-      <w>200</w>
-      <h>168</h>
+      <x>485</x>
+      <y>395</y>
+      <w>210</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>ReservingEntity
 --
@@ -19,27 +19,32 @@
 -status : String
 
 --
++NonMemberRegistration(data Database, user ReservingEntity)
++UserManagement(user ReservingEntity, data Database)
++ReturnString()
 +ToString() : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1440</x>
-      <y>984</y>
-      <w>400</w>
-      <h>208</h>
+      <x>920</x>
+      <y>560</y>
+      <w>250</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>GroupSchedule
 --
 -activities : List&lt;Activity&gt;
 
 --
-+ViewSchedule(user ReservingEntity)
++ViewSchedule(data1 Database, user ReservingEntity)
 +AddActivity(owner ReservingEntity, data DataTemp)
-+RemoveActivity(user ReservingEntity, data DataTemp)
-+ModifyActivity(user ReservingEntity, data DataTemp)
-+SignUp(user ReservingEntity, data DataTemp)
++AddActivityManually(owner ReservingEntity, data DataTemp)
++AddActivityFromTemplate(owner ReservingEntity, data DataTemp)
++RemoveActivity(user ReservingEntity, data DataTemp, editInsted Bool)
++ModifyActivity(data DataTemp, user ReservingEntity)
++SignUp(user ReservingEntity, data1 DataTemp)
 +AddTemplateActivity(owner ReservingEntitiy, data DataTemp)
 +ViewTemplate(data DataTemp)
 +DeleteTemplate(data DataTemp)
@@ -50,10 +55,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>824</x>
-      <y>104</y>
-      <w>456</w>
-      <h>112</h>
+      <x>330</x>
+      <y>0</y>
+      <w>285</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 IReservable
@@ -66,10 +71,10 @@ IReservable
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1952</x>
-      <y>464</y>
-      <w>208</w>
-      <h>120</h>
+      <x>1300</x>
+      <y>220</y>
+      <w>280</w>
+      <h>105</h>
     </coordinates>
     <panel_attributes>Space
 --
@@ -78,57 +83,58 @@ IReservable
 -calendar : Calendar
 
 --
-+ViewReservation()
-+CancelReservation()
-+ToString() : String</panel_attributes>
++ViewReservation(space Space, user ReservingEntity)
++CancelReservation(owner ReservingEntity, space Space)
++ToString() : String
++MakeReservation(owner ReservingEntity, timeSlot DateTime, durationMinutes double )
++CompareTo(other Space?)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1632</x>
-      <y>912</y>
-      <w>24</w>
-      <h>88</h>
+      <x>1040</x>
+      <y>505</y>
+      <w>15</w>
+      <h>65</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1520</x>
-      <y>256</y>
-      <w>496</w>
-      <h>96</h>
+      <x>900</x>
+      <y>100</y>
+      <w>310</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Calendar
 --
 -reservations : List&lt;Reservation&gt;
+-dateTime: DateTime
 --
-+BookReservation(owner ReservingEntity, startTime DateTime, durationMinutes Double) : Bool
-
-+ToString() : String</panel_attributes>
++BookReservation(owner ReservingEntity, startTime DateTime, durationMinutes Double) : Bool</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1632</x>
-      <y>344</y>
-      <w>24</w>
-      <h>136</h>
+      <x>1045</x>
+      <y>155</y>
+      <w>15</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1520</x>
-      <y>104</y>
-      <w>256</w>
-      <h>88</h>
+      <x>970</x>
+      <y>5</y>
+      <w>160</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>Reservation
 --
@@ -142,10 +148,10 @@ IReservable
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1632</x>
-      <y>184</y>
-      <w>32</w>
-      <h>88</h>
+      <x>1040</x>
+      <y>55</y>
+      <w>20</w>
+      <h>55</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
@@ -155,10 +161,10 @@ m2=*</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1840</x>
-      <y>464</y>
-      <w>80</w>
-      <h>80</h>
+      <x>1220</x>
+      <y>220</y>
+      <w>50</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Category
@@ -171,21 +177,21 @@ Studio</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1912</x>
-      <y>504</y>
-      <w>56</w>
-      <h>24</h>
+      <x>1265</x>
+      <y>245</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>328</x>
-      <y>440</y>
-      <w>168</w>
-      <h>152</h>
+      <x>0</x>
+      <y>225</y>
+      <w>105</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>Program</panel_attributes>
     <additional_attributes/>
@@ -193,43 +199,32 @@ Studio</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1632</x>
-      <y>576</y>
-      <w>440</w>
-      <h>160</h>
+      <x>565</x>
+      <y>155</y>
+      <w>485</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;180.0;10.0;100.0;530.0;100.0;530.0;10.0</additional_attributes>
+    <additional_attributes>10.0;140.0;10.0;80.0;950.0;80.0;950.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1200</x>
-      <y>344</y>
-      <w>456</w>
-      <h>136</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;150.0;10.0;90.0;550.0;90.0;550.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1504</x>
-      <y>504</y>
-      <w>56</w>
-      <h>24</h>
+      <x>875</x>
+      <y>250</y>
+      <w>45</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1544</x>
-      <y>464</y>
-      <w>200</w>
-      <h>120</h>
+      <x>910</x>
+      <y>225</y>
+      <w>280</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Equipment
 --
@@ -238,44 +233,46 @@ Studio</panel_attributes>
 -calendar : Calendar
 
 --
-+ViewReservation()
-+CancelReservation()
-+ToString() : String</panel_attributes>
++ViewReservation(equipment Equipment, user ReservingEntity)
++CancelReservation(owner ReservingEntity, equipment Equipment)
++ToString() : String
++MakeReservation(owner ReservingEntity, timeSlot DateTime, durationMinutes double )
++CompareTo(other Equipment?)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1408</x>
-      <y>464</y>
-      <w>104</w>
-      <h>80</h>
+      <x>815</x>
+      <y>225</y>
+      <w>65</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Category
 --
-Small Equipment
-Large Equipment</panel_attributes>
+Small
+Large</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1632</x>
-      <y>576</y>
-      <w>24</w>
-      <h>160</h>
+      <x>1040</x>
+      <y>320</y>
+      <w>15</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;180.0;10.0;10.0</additional_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1104</x>
-      <y>464</y>
-      <w>208</w>
-      <h>120</h>
+      <x>505</x>
+      <y>225</y>
+      <w>280</w>
+      <h>95</h>
     </coordinates>
     <panel_attributes>Trainer
 --
@@ -284,29 +281,31 @@ Large Equipment</panel_attributes>
 -calendar : Calendar
 
 --
-+ViewReservation()
-+CancelReservation()
-+ToString() : String</panel_attributes>
++ViewReservation(trainer Trainer, user ReservingEntity)
++CancelReservation(owner ReservingEntity, trainer Trainer)
++ToString() : String
++MakeReservation(owner ReservingEntity, timeSlot DateTime, durationMinutes double )
++CompareTo(other Trainer?)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1632</x>
-      <y>344</y>
-      <w>440</w>
-      <h>136</h>
+      <x>1035</x>
+      <y>155</y>
+      <w>340</w>
+      <h>75</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>530.0;150.0;530.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
+    <additional_attributes>660.0;130.0;660.0;80.0;10.0;80.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>976</x>
-      <y>464</y>
-      <w>96</w>
-      <h>80</h>
+      <x>425</x>
+      <y>225</y>
+      <w>60</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Category
@@ -318,10 +317,10 @@ Consultation</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1064</x>
-      <y>504</y>
-      <w>56</w>
-      <h>24</h>
+      <x>480</x>
+      <y>250</y>
+      <w>35</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
@@ -329,57 +328,74 @@ Consultation</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1304</x>
-      <y>856</y>
-      <w>152</w>
-      <h>24</h>
+      <x>690</x>
+      <y>435</y>
+      <w>240</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>170.0;10.0;10.0;10.0</additional_attributes>
+    <additional_attributes>460.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1200</x>
-      <y>576</y>
-      <w>456</w>
-      <h>160</h>
+      <x>565</x>
+      <y>315</y>
+      <w>490</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>550.0;180.0;550.0;100.0;10.0;100.0;10.0;10.0</additional_attributes>
+    <additional_attributes>960.0;140.0;860.0;60.0;10.0;60.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>616</x>
-      <y>440</y>
-      <w>240</w>
-      <h>176</h>
+      <x>150</x>
+      <y>155</y>
+      <w>245</w>
+      <h>240</h>
     </coordinates>
-    <panel_attributes>DatabaseTemp
+    <panel_attributes>Database
 --
 -equipmentObjects : List&lt;Equipment&gt;
 -spaceObjects : List&lt;Space&gt;
 -trainerObjects : List&lt;Trainer&gt;
--scheduleObjects : List&lt;GroupSchedule&gt;
+-activities : List&lt;Activity&gt;
 -userObjects : List&lt;ReservingEntity&gt;
--activityObjects : List&lt;Activity&gt;
--calendarObjects : List&lt;Calendar&gt;
--reservationObjects : List&lt;Reservation&gt;
+-restrictedObjects : List&lt;RestrictedObjects&gt;
 -templateActivityObjects : List&lt;Activity&gt;
-
+-schedule : GroupSchedule()
+-restricted : RestrictedObjects()
+-user : ReservingEntity()
 --
 +LoadToDataBase()
++SaveToDataBase()
++FilePath(fileName String) : String
++SaveViaDataContractSerialization&lt;T&gt;(serializableObject T, fileName String)
++LoadViaDataContractSerialization&lt;T&gt;(fileName String)
++StatusChangeEmail(a String)
++LogAlteration(cause String, refrense String)
++ViewLogfile()
++ViewRestrictedObject()
++ViewEquipments()
++ViewSpaces()
++ViewTrainer()
++LoadTraining(user ReservingEntity, userInput String)
++MakeRes(user ReservingEntity)
++MakeResStaff()
++ViewReservations(user ReservingEntity)
++CancelReservation(user ReservingEntity)
+
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1440</x>
-      <y>720</y>
-      <w>400</w>
-      <h>200</h>
+      <x>920</x>
+      <y>385</y>
+      <w>250</w>
+      <h>125</h>
     </coordinates>
     <panel_attributes>Activity
 --
@@ -400,21 +416,21 @@ Consultation</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>488</x>
-      <y>512</y>
-      <w>144</w>
-      <h>24</h>
+      <x>100</x>
+      <y>270</y>
+      <w>60</w>
+      <h>15</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;160.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;100.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>736</x>
-      <y>784</y>
-      <w>232</w>
-      <h>160</h>
+      <x>175</x>
+      <y>455</y>
+      <w>145</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>RestrictedObjects
 --
@@ -424,18 +440,33 @@ Consultation</panel_attributes>
 RestrictedObject()
 RestrictedObject(Space space)
 RestrictedObject(Equipment equipment)
+
++DropRestrictedObjects(data Database)
++SetRestrictedStatus(data Database)
++ToString(): String
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1208</x>
-      <y>208</y>
-      <w>400</w>
-      <h>272</h>
+      <x>570</x>
+      <y>65</y>
+      <w>250</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;240.0;480.0;240.0;480.0;320.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0;480.0;240.0;480.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>320</y>
+      <w>385</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;130.0;10.0;50.0;750.0;50.0;750.0;10.0</additional_attributes>
   </element>
 </diagram>
