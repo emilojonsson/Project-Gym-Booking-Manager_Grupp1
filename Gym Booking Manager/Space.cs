@@ -72,7 +72,6 @@ namespace Gym_Booking_Manager
                     {
                         Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
                     }
-                    Console.ReadKey();
 
                 }
             }
@@ -82,7 +81,6 @@ namespace Gym_Booking_Manager
                 {
                     Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
                 }
-                Console.ReadKey();
             }
         }
         public void CancelReservation(ReservingEntity owner, Space space)
