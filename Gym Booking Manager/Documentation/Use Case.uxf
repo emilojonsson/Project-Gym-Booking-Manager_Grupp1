@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.0.0">
-  <zoom_level>6</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLActor</id>
     <coordinates>
+
       <x>210</x>
       <y>444</y>
       <w>36</w>
       <h>72</h>
+
+      <x>369</x>
+      <y>477</y>
+      <w>54</w>
+      <h>108</h>
+
     </coordinates>
     <panel_attributes>Staff
 </panel_attributes>
@@ -16,10 +23,17 @@
   <element>
     <id>UMLActor</id>
     <coordinates>
+
       <x>582</x>
       <y>336</y>
       <w>48</w>
       <h>66</h>
+
+      <x>846</x>
+      <y>297</y>
+      <w>72</w>
+      <h>99</h>
+
     </coordinates>
     <panel_attributes>Member</panel_attributes>
     <additional_attributes/>
@@ -82,10 +96,17 @@
   <element>
     <id>UMLUseCase</id>
     <coordinates>
+
       <x>1056</x>
       <y>276</y>
       <w>108</w>
       <h>30</h>
+
+      <x>585</x>
+      <y>234</y>
+      <w>162</w>
+      <h>36</h>
+
     </coordinates>
     <panel_attributes>View Group Schedule</panel_attributes>
     <additional_attributes/>
@@ -97,6 +118,10 @@
       <y>396</y>
       <w>108</w>
       <h>30</h>
+      <x>612</x>
+      <y>396</y>
+      <w>108</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>Make Reservation</panel_attributes>
     <additional_attributes/>
@@ -108,6 +133,10 @@
       <y>336</y>
       <w>108</w>
       <h>30</h>
+      <x>585</x>
+      <y>315</y>
+      <w>162</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>Update Group Schedule</panel_attributes>
     <additional_attributes/>
@@ -119,6 +148,22 @@
       <y>300</y>
       <w>54</w>
       <h>48</h>
+      <x>414</x>
+      <y>324</y>
+      <w>189</w>
+      <h>198</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;200.0;190.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>657</x>
+      <y>261</y>
+      <w>81</w>
+      <h>72</h>
+
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -135,6 +180,25 @@
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;40.0;10.0;40.0;210.0;10.0;210.0</additional_attributes>
+      <x>684</x>
+      <y>261</y>
+      <w>144</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;80.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>243</y>
+      <w>189</w>
+      <h>261</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;270.0;190.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLUseCase</id>
@@ -143,6 +207,10 @@
       <y>522</y>
       <w>108</w>
       <h>36</h>
+      <x>612</x>
+      <y>585</y>
+      <w>108</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>Restrict Equipment/
 Space</panel_attributes>
@@ -155,6 +223,10 @@ Space</panel_attributes>
       <y>456</y>
       <w>108</w>
       <h>36</h>
+      <x>612</x>
+      <y>477</y>
+      <w>108</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>View Equipment/
 Space</panel_attributes>
@@ -167,6 +239,10 @@ Space</panel_attributes>
       <y>420</y>
       <w>54</w>
       <h>48</h>
+      <x>657</x>
+      <y>423</y>
+      <w>81</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -179,6 +255,10 @@ Space</panel_attributes>
       <y>486</y>
       <w>54</w>
       <h>48</h>
+      <x>657</x>
+      <y>522</y>
+      <w>81</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -191,6 +271,10 @@ Space</panel_attributes>
       <y>360</y>
       <w>54</w>
       <h>48</h>
+      <x>657</x>
+      <y>342</y>
+      <w>81</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -214,6 +298,10 @@ Space</panel_attributes>
       <y>222</y>
       <w>108</w>
       <h>36</h>
+      <x>603</x>
+      <y>162</y>
+      <w>126</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Cancel/Change
 Reservation</panel_attributes>
@@ -354,6 +442,13 @@ Subscription</panel_attributes>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+      <x>414</x>
+      <y>171</y>
+      <w>207</w>
+      <h>324</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;340.0;210.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -362,6 +457,10 @@ Subscription</panel_attributes>
       <y>198</y>
       <w>240</w>
       <h>642</h>
+      <x>513</x>
+      <y>108</y>
+      <w>306</w>
+      <h>963</h>
     </coordinates>
     <panel_attributes>Manager
 --
@@ -377,6 +476,220 @@ layer=-1</panel_attributes>
       <w>108</w>
       <h>30</h>
     </coordinates>
+      <x>1053</x>
+      <y>243</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>View Group Schedule</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>405</y>
+      <w>108</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Make Reservation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1053</x>
+      <y>324</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>Update Group Schedule</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>270</y>
+      <w>81</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1152</x>
+      <y>270</y>
+      <w>144</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;80.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>252</y>
+      <w>162</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;70.0;160.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>594</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Restrict Equipment/
+Space</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>342</y>
+      <w>189</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;190.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>486</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>View Equipment/
+Space</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>432</y>
+      <w>81</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>531</y>
+      <w>81</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>351</y>
+      <w>81</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>360</y>
+      <w>189</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>190.0;160.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1071</x>
+      <y>171</y>
+      <w>126</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>Cancel/Change
+Reservation</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>180</y>
+      <w>180</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;130.0;180.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>981</x>
+      <y>117</y>
+      <w>306</w>
+      <h>954</h>
+    </coordinates>
+    <panel_attributes>Manager
+--
+bg=orange
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>495</y>
+      <w>216</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;50.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>1341</x>
+      <y>513</y>
+      <w>54</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Service</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1521</x>
+      <y>252</y>
+      <w>162</w>
+      <h>36</h>
+    </coordinates>
     <panel_attributes>View Group Schedule</panel_attributes>
     <additional_attributes/>
   </element>
@@ -387,6 +700,10 @@ layer=-1</panel_attributes>
       <y>396</y>
       <w>108</w>
       <h>30</h>
+      <x>1548</x>
+      <y>414</y>
+      <w>108</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>Make Reservation</panel_attributes>
     <additional_attributes/>
@@ -394,10 +711,15 @@ layer=-1</panel_attributes>
   <element>
     <id>UMLUseCase</id>
     <coordinates>
+<<<<<<< HEAD
       <x>384</x>
       <y>336</y>
       <w>108</w>
       <h>30</h>
+      <x>1521</x>
+      <y>333</y>
+      <w>162</w>
+      <h>36</h>
     </coordinates>
     <panel_attributes>Update Group Schedule</panel_attributes>
     <additional_attributes/>
@@ -409,6 +731,70 @@ layer=-1</panel_attributes>
       <y>300</y>
       <w>54</w>
       <h>48</h>
+      <x>1593</x>
+      <y>279</y>
+      <w>81</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1620</x>
+      <y>279</y>
+      <w>144</w>
+      <h>153</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;80.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1548</x>
+      <y>603</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Restrict Equipment/
+Space</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1548</x>
+      <y>495</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>View Equipment/
+Space</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1593</x>
+      <y>441</y>
+      <w>81</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1593</x>
+      <y>540</y>
+      <w>81</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -457,6 +843,10 @@ Space</panel_attributes>
       <y>420</y>
       <w>54</w>
       <h>48</h>
+      <x>1593</x>
+      <y>360</y>
+      <w>81</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -469,6 +859,10 @@ Space</panel_attributes>
       <y>486</y>
       <w>54</w>
       <h>48</h>
+      <x>1386</x>
+      <y>504</y>
+      <w>180</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 &lt;&lt;include&gt;&gt;</panel_attributes>
@@ -493,6 +887,10 @@ Space</panel_attributes>
       <y>222</y>
       <w>108</w>
       <h>36</h>
+      <x>1539</x>
+      <y>180</y>
+      <w>126</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>Cancel/Change
 Reservation</panel_attributes>
@@ -788,6 +1186,10 @@ Subscription</panel_attributes>
       <y>198</y>
       <w>240</w>
       <h>642</h>
+      <x>1449</x>
+      <y>126</y>
+      <w>306</w>
+      <h>945</h>
     </coordinates>
     <panel_attributes>Manager
 --
@@ -805,6 +1207,92 @@ layer=-1</panel_attributes>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;170.0;170.0</additional_attributes>
+      <x>414</x>
+      <y>405</y>
+      <w>216</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;130.0;220.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>531</y>
+      <w>216</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;220.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1386</x>
+      <y>549</y>
+      <w>180</w>
+      <h>207</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>180.0;210.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates>
+      <x>846</x>
+      <y>648</y>
+      <w>90</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>Non-Member</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>909</x>
+      <y>675</y>
+      <w>189</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>190.0;180.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>612</x>
+      <y>810</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Purchase
+Subscription</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>612</x>
+      <y>1008</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>View Log</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>612</x>
+      <y>702</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Repair Equipment
+/Spaces</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
@@ -816,6 +1304,163 @@ layer=-1</panel_attributes>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;10.0;170.0;70.0</additional_attributes>
+      <x>657</x>
+      <y>630</y>
+      <w>81</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>414</x>
+      <y>531</y>
+      <w>216</w>
+      <h>423</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;220.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>612</x>
+      <y>909</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>User Management</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>405</x>
+      <y>549</y>
+      <w>225</w>
+      <h>504</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>10.0;10.0;230.0;540.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>810</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Purchase
+Subscription</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>711</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Repair Equipment
+/Spaces</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>639</y>
+      <w>81</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1539</x>
+      <y>810</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Purchase
+Subscription</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1548</x>
+      <y>711</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>Repair Equipment
+/Spaces</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1584</x>
+      <y>648</y>
+      <w>81</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;include&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>918</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>User Management</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1539</x>
+      <y>909</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>User Management</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1080</x>
+      <y>1017</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>View Log</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates>
+      <x>1548</x>
+      <y>1008</y>
+      <w>108</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>View Log</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
@@ -824,6 +1469,10 @@ layer=-1</panel_attributes>
       <y>234</y>
       <w>114</w>
       <h>114</h>
+      <x>1125</x>
+      <y>855</y>
+      <w>81</w>
+      <h>81</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;170.0;170.0;10.0</additional_attributes>
@@ -835,6 +1484,10 @@ layer=-1</panel_attributes>
       <y>282</y>
       <w>114</w>
       <h>78</h>
+      <x>1584</x>
+      <y>855</y>
+      <w>81</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;110.0;170.0;10.0</additional_attributes>
@@ -846,6 +1499,10 @@ layer=-1</panel_attributes>
       <y>660</y>
       <w>114</w>
       <h>24</h>
+      <x>657</x>
+      <y>855</y>
+      <w>81</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>

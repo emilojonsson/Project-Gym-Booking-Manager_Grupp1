@@ -31,7 +31,9 @@ namespace Gym_Booking_Manager
         [DataMember]
         public String name;
         [DataMember]
-        public Calendar calendar;        public Space(Category category, string name)
+        public Calendar calendar;
+
+        public Space(Category category, string name)
         {
             this.category = category;
             this.name = name;
@@ -72,7 +74,6 @@ namespace Gym_Booking_Manager
                     {
                         Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
                     }
-                    Console.ReadKey();
 
                 }
             }
@@ -82,7 +83,6 @@ namespace Gym_Booking_Manager
                 {
                     Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
                 }
-                Console.ReadKey();
             }
         }
         public void CancelReservation(ReservingEntity owner, Space space)

@@ -65,7 +65,6 @@ namespace Gym_Booking_Manager
                     {
                         Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
                     }
-                    Console.ReadKey();
                 }
             }
             if (user.status == "Staff")
@@ -74,7 +73,6 @@ namespace Gym_Booking_Manager
                 {
                     Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
                 }
-                Console.ReadKey();
             }
         }
         public void CancelReservation(ReservingEntity owner, Equipment equipment)
