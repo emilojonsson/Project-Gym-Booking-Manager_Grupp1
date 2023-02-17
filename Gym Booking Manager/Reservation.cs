@@ -11,10 +11,10 @@ namespace Gym_Booking_Manager
     internal class Reservation
     {
         [DataMember]
-        public ReservingEntity owner;
+        public ReservingEntity owner { get; set; }
         [DataMember]
-        public DateTime startTime;
-        public double durationMinutes;
+        public DateTime startTime { get; set; }
+        public double durationMinutes { get; set; }
 
         public Reservation (ReservingEntity owner, DateTime startTime, double durationMinutes)
         {

@@ -11,21 +11,21 @@ namespace Gym_Booking_Manager
     internal class Activity
     {
         [DataMember]
-        public string activityID;
+        public string activityID { get; set; }
         [DataMember]
-        public string activityDetails;
+        public string activityDetails { get; set; }
         [DataMember]
-        public int participantLimit;
+        public int participantLimit { get; set; }
         [DataMember]
-        public List<ReservingEntity> participants = new List<ReservingEntity>();
+        public List<ReservingEntity> participants { get; set; } = new List<ReservingEntity>();
         [DataMember]
-        public Calendar timeSlot; //this one could be renamed to startTime
+        public Calendar timeSlot { get; set; } //this one could be renamed to startTime
         [DataMember]
-        public Trainer trainer;
+        public Trainer trainer { get; set; }
         [DataMember]
-        public Space space;
+        public Space space { get; set; }
         [DataMember]
-        public Equipment equipment;
+        public Equipment equipment { get; set; }
 
         public Activity()
         {

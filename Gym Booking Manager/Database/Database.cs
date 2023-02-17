@@ -17,18 +17,18 @@ namespace Gym_Booking_Manager
 {
     internal class Database
     {
-        public List<Equipment> equipmentObjects = new List<Equipment>();
-        public List<Space> spaceObjects = new List<Space>();
-        public List<Trainer> trainerObjects = new List<Trainer>();
-        public List<Activity> activities = new List<Activity>();
-        public List<ReservingEntity> userObjects = new List<ReservingEntity>();
-        public List<RestrictedObjects> restrictedObjects = new List<RestrictedObjects>();
-        public List<RestrictedObjects> restrictedList = new List<RestrictedObjects>();
+        public List<Equipment> equipmentObjects { get; set; } = new List<Equipment>();
+        public List<Space> spaceObjects { get; set; } = new List<Space>();
+        public List<Trainer> trainerObjects { get; set; } = new List<Trainer>();
+        public List<Activity> activities { get; set; } = new List<Activity>();
+        public List<ReservingEntity> userObjects { get; set; } = new List<ReservingEntity>();
+        public List<RestrictedObjects> restrictedObjects { get; set; } = new List<RestrictedObjects>();
+        public List<RestrictedObjects> restrictedList { get; set; } = new List<RestrictedObjects>();
 
-        public GroupSchedule schedule = new GroupSchedule();
-        public RestrictedObjects restricted = new RestrictedObjects();
-        public ReservingEntity user = new ReservingEntity();
-        public List<Activity> templateActivityObjects = new List<Activity>();
+        public GroupSchedule schedule { get; set; } = new GroupSchedule();
+        public RestrictedObjects restricted { get; set; } = new RestrictedObjects();
+        public ReservingEntity user { get; set; } = new ReservingEntity();
+        public List<Activity> templateActivityObjects { get; set; } = new List<Activity>();
         //public void Test()
         //{
         //    SaveViaDataContractSerialization(restrictedList, "restrictedList.xml");
@@ -42,6 +42,7 @@ namespace Gym_Booking_Manager
             userObjects = LoadViaDataContractSerialization<List<ReservingEntity>>("user.xml");
             activities = LoadViaDataContractSerialization<List<Activity>>("activity.xml");
             restrictedList = LoadViaDataContractSerialization<List<RestrictedObjects>>("restrictedList.xml");
+            templateActivityObjects = LoadViaDataContractSerialization<List<Activity>>("templateActivities.xml");
             if (activities != null)
             {
                 foreach (Activity activity in activities)

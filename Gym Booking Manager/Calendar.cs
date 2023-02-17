@@ -21,9 +21,9 @@ namespace Gym_Booking_Manager
     internal class Calendar
     {
         [DataMember]
-        public List<Reservation> reservations;
+        public List<Reservation> reservations { get; set; }
         [DataMember]
-        public DateTime dateTime; 
+        public DateTime dateTime { get; set; }
 
         public Calendar() //this is to be used when creating an item for the first time (space, trainer, equipment)
         {

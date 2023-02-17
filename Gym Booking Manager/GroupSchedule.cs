@@ -15,7 +15,7 @@ namespace Gym_Booking_Manager
 {
     internal class GroupSchedule
     {
-        public List<Activity> activities = new List<Activity>();
+        public List<Activity> activities { get; set; } = new List<Activity>();
 
         public void ViewSchedule(Database data1, ReservingEntity user)
         {
@@ -400,8 +400,9 @@ namespace Gym_Booking_Manager
         {
             foreach (Activity template in data.templateActivityObjects)
             {
-                Console.WriteLine($"{template.activityDetails}, {template.participantLimit} participants, {template.space}, {template.trainer}, {template.equipment}");
+                Console.WriteLine($"{template.activityDetails}, {template.participantLimit} participants, {template.space.name}, {template.trainer.name}, {template.equipment.name}");
             }
+            Console.ReadKey();
         }
 
         public void DeleteTemplate(Database data)

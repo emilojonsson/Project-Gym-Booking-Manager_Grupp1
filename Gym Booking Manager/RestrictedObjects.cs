@@ -11,9 +11,9 @@ namespace Gym_Booking_Manager
     internal class RestrictedObjects
     {
         [DataMember]
-        public Space space;
+        public Space space { get; set; }
         [DataMember]
-        public Equipment equipment;
+        public Equipment equipment { get; set; }
         public RestrictedObjects() { }
         public RestrictedObjects(Space space)
         {
