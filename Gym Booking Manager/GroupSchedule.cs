@@ -22,6 +22,8 @@ namespace Gym_Booking_Manager
             //Todo Here we need to think about a way for the owner (staff) to also be able to view his schedule. Right now we visualize the participants
             if (user.status == "Member")
             {
+                Console.WriteLine();
+                activities = activities.OrderByDescending(d => d.timeSlot.reservations[0].startTime).ToList();
                 Console.WriteLine($"Activities {user.name} are signed up:");
                 foreach (Activity activity in activities)
                 {
@@ -50,13 +52,13 @@ namespace Gym_Booking_Manager
             }
             if (user.status == "Staff")
             {
-                //DateTime test = new DateTime();
-                //for (DateTime i = test; i < data1.; i = i.AddDays(1))
-                
+                Console.WriteLine();
+                Console.WriteLine(" - Activities sorted by date -");
+                Console.WriteLine();
+                activities = activities.OrderByDescending(d => d.timeSlot.reservations[0].startTime).ToList();
                 foreach (Activity activity in activities)
                     {
-                        
-                        Console.WriteLine(activity);
+                    Console.WriteLine(activity);
                             
                     }
                 
