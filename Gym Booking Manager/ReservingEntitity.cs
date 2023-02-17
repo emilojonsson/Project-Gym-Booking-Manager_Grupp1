@@ -31,42 +31,17 @@ namespace Gym_Booking_Manager
             this.uniqueID = uniqueID;
             this.status = status;
         }
-        public object NonMemberRegistration(Database data, ReservingEntity user)
-        {
-            //A payment method should be implemented here
-            Random rand = new Random();
-            string random = Convert.ToString(rand.Next(100, 500));
-            Console.WriteLine("Enter name");
-            string name = ReturnString();
-            Console.WriteLine($"Enter Email");
-            string email = ReturnString();
-            user.name = name;
-            user.email = email;
-            user.status = "Member";
-            user.uniqueID = random;
-            Console.WriteLine($"You UniqeID is {user.uniqueID}");
-            Console.ReadKey();
-            return user;
-        }
         public void UserManagement(ReservingEntity user, Database data)
         {
-            if (user.status == "Non-member")
-            {
-                NonMemberRegistration(data, user);
-            }
-            else if (user.status == "Staff")
+            if (user.status == "Staff")
             {
                 //Do Something
-                Console.WriteLine("[1] Purchase daypass");
-                Console.WriteLine("[2] Add new user");
-                Console.WriteLine("[3] Remove user");
+                Console.WriteLine("[1] Add new user");
+                Console.WriteLine("[2] Remove user");
+                Console.WriteLine("[3] Add new objects");
                 Console.WriteLine("[Press any other key] Go back");
                 string input = Console.ReadLine();
                 if (input == "1")
-                {
-                    NonMemberRegistration(data, user);
-                }
-                else if (input == "2")
                 {
                     Console.WriteLine("Name: ");
                     string name = ReturnString();
@@ -79,10 +54,11 @@ namespace Gym_Booking_Manager
                     Console.WriteLine("Status: ");
                     string status = ReturnString();
                     ReservingEntity newMember = new ReservingEntity(name, uniqueID, phone, email, status);
+                    data.LogAlteration("New User", newMember.name);
                     data.userObjects.Add(newMember);
 
                 }
-                else if (input == "3")
+                else if (input == "2")
                 {
                     int n = 1;
                     foreach (ReservingEntity u in data.userObjects)
@@ -92,9 +68,10 @@ namespace Gym_Booking_Manager
                     }
                     Console.WriteLine("Type number corresponding with user to remove:> ");
                     int number = Convert.ToInt32(Console.ReadLine());
+                    data.LogAlteration("Remove User", data.userObjects[number - 1].name);
                     data.userObjects.RemoveAt(number - 1);
                 }
-                else if(input == "4")
+                else if(input == "3")
                 {
                     Console.Write("Type space,equipment or trainer to add:> ");
                     string choose = Console.ReadLine();
@@ -107,7 +84,8 @@ namespace Gym_Booking_Manager
                         {
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
-                            Space space = new Space(category:Space.Category.Hall, name); 
+                            Space space = new Space(category:Space.Category.Hall, name);
+                            data.LogAlteration("new Object", space.name);
                             data.spaceObjects.Add(space);
                         }
                         else if(Catagory == 2)
@@ -115,6 +93,7 @@ namespace Gym_Booking_Manager
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
                             Space space = new Space(category: Space.Category.Lane, name);
+                            data.LogAlteration("new Object", space.name);
                             data.spaceObjects.Add(space);
                         }
                         else if(Catagory == 3 )
@@ -122,6 +101,7 @@ namespace Gym_Booking_Manager
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
                             Space space = new Space(category: Space.Category.Studio, name);
+                            data.LogAlteration("new Object", space.name);
                             data.spaceObjects.Add(space);
                         }
                     }
@@ -135,6 +115,7 @@ namespace Gym_Booking_Manager
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
                             Equipment equipment = new Equipment(category: Equipment.Category.Small, name);
+                            data.LogAlteration("new Object", equipment.name);
                             data.equipmentObjects.Add(equipment);
                         }
                         else if(Catagory == 2)
@@ -142,6 +123,7 @@ namespace Gym_Booking_Manager
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
                             Equipment equipment = new Equipment(category: Equipment.Category.Large, name);
+                            data.LogAlteration("new Object", equipment.name);
                             data.equipmentObjects.Add(equipment);
                         }
                     }
@@ -155,6 +137,7 @@ namespace Gym_Booking_Manager
                             Console.WriteLine("Enter a name:> ");
                             string name = Console.ReadLine();
                             Trainer trainer = new Trainer(Trainer.Category.Trainer, name);
+                            data.LogAlteration("new Object", trainer.name);
                             data.trainerObjects.Add(trainer);
                         }
                         else if(Catagory==2)
@@ -163,6 +146,7 @@ namespace Gym_Booking_Manager
                             string name = Console.ReadLine();
                             Trainer trainer = new Trainer(Trainer.Category.Consultation, name);
                             data.trainerObjects.Add(trainer);
+                            data.LogAlteration("new Object", trainer.name);
                         }
                     }
                 }

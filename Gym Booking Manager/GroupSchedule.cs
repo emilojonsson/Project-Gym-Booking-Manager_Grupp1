@@ -144,7 +144,6 @@ namespace Gym_Booking_Manager
 
                 if (spaceBookingComplete == true && trainerBookingComplete == true && equipmentBookingComplete == true)
                 {
-                    
                     {
                         Console.WriteLine();
                         Console.WriteLine(" - Activity added! - ");
@@ -416,6 +415,7 @@ namespace Gym_Booking_Manager
             
             Console.WriteLine("Select the template that you want to remove:");
             int answerInt = int.Parse(Console.ReadLine()) - 1;
+            data.LogAlteration("Remove Templet", data.templateActivityObjects[answerInt].activityDetails);
             data.templateActivityObjects.RemoveAt(answerInt);
             Console.WriteLine("Template has been removed");
         }

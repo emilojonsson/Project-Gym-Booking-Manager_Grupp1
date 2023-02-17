@@ -41,6 +41,7 @@ namespace Gym_Booking_Manager
             }
             else if(input == "s")
             {
+                // Really Ugly to have this code here, but TIME.....thats life!
                 Random rand = new Random();
                 string random = Convert.ToString(rand.Next(100, 500));
                 Console.WriteLine("Enter name");
@@ -98,7 +99,7 @@ namespace Gym_Booking_Manager
             {
                 case "1":
                     data1.ViewRestrictedObject();
-                    Console.ReadLine();
+                    Console.ReadKey();
                     break;
                 case "2":
                     data1.restricted.DropRestrictedObjects(data1);

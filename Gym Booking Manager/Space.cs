@@ -12,16 +12,7 @@ using System.Threading.Tasks;
 #endif
 namespace Gym_Booking_Manager
 {
-    // IComparable<T> interface requires implementing the CompareTo(T other) method.
-    // This interface/method is used by for instance SortedSet<T>.Add(T) (and other sorted collections).
-    // There is also the non-generic IComparable interface for a CompareTo(Object obj) implementation.
-    //
-    // The current database class implementation uses SortedSet, and thus classes and objects that we want to store
-    // in it should inherit the IComparable<T> interface.
-    //
-    // As alluded to from previous paragraphs, implementing IComparable<T> is not exhaustive to cover all "comparisons".
-    // Refer to official C# documentation to determine what interface to implement to allow use with
-    // the class/method/operator that you want.
+
     [DataContract]
     internal class Space : IReservable,IComparable<Space> 
     {

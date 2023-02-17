@@ -23,14 +23,16 @@ namespace Gym_Booking_Manager
         public List<Activity> activities = new List<Activity>();
         public List<ReservingEntity> userObjects = new List<ReservingEntity>();
         public List<RestrictedObjects> restrictedObjects = new List<RestrictedObjects>();
-
-        //public List<ReservingEntity> dayPass = new List<ReservingEntity>();
+        public List<RestrictedObjects> restrictedList = new List<RestrictedObjects>();
 
         public GroupSchedule schedule = new GroupSchedule();
         public RestrictedObjects restricted = new RestrictedObjects();
         public ReservingEntity user = new ReservingEntity();
         public List<Activity> templateActivityObjects = new List<Activity>();
-
+        //public void Test()
+        //{
+        //    SaveViaDataContractSerialization(restrictedList, "restrictedList.xml");
+        //}
 
         public void LoadDataBase()
         {
@@ -39,7 +41,7 @@ namespace Gym_Booking_Manager
             trainerObjects = LoadViaDataContractSerialization<List<Trainer>>("trainerObjects.xml");
             userObjects = LoadViaDataContractSerialization<List<ReservingEntity>>("user.xml");
             activities = LoadViaDataContractSerialization<List<Activity>>("activity.xml");
-            restrictedObjects = LoadViaDataContractSerialization<List<RestrictedObjects>>("restrictedObjects.xml");
+            restrictedList = LoadViaDataContractSerialization<List<RestrictedObjects>>("restrictedList.xml");
             if (activities != null)
             {
                 foreach (Activity activity in activities)
@@ -67,7 +69,7 @@ namespace Gym_Booking_Manager
                 SaveViaDataContractSerialization(activities, "activity.xml");
             }
             SaveViaDataContractSerialization(userObjects, "user.xml");
-            SaveViaDataContractSerialization(restrictedObjects, "restrictedObjects.xml");
+            SaveViaDataContractSerialization(restrictedList, "restrictedList.xml");
             SaveViaDataContractSerialization(spaceObjects, "spaceObjects.xml");
             SaveViaDataContractSerialization(trainerObjects, "trainerObjects.xml");
             SaveViaDataContractSerialization(equipmentObjects, "equipmentObjects.xml");
@@ -83,7 +85,7 @@ namespace Gym_Booking_Manager
             return fpathUser;
         }
 
-        static void SaveViaDataContractSerialization<T>(T serializableObject, string fileName)
+        public static void SaveViaDataContractSerialization<T>(T serializableObject, string fileName)
         {
             string fpathUser = FilePath(fileName);
             try
@@ -146,7 +148,7 @@ namespace Gym_Booking_Manager
             DateTime time = DateTime.Now;
             using (StreamWriter sw = File.AppendText(filePath))
             {
-                sw.WriteLine($"{time} : {cause} : {refrense}");
+                sw.WriteLine($"{time} : {cause} : {refrense }");
             }
         }
         public void ViewLogfile()
@@ -167,12 +169,11 @@ namespace Gym_Booking_Manager
         public void ViewRestrictedObject()
         {
             int a = 1;
-            foreach (RestrictedObjects rs in restrictedObjects)
+            foreach (RestrictedObjects rs in restrictedList)
             {
                 Console.WriteLine($"{a}: {rs}");
                 a++;
             }
-            Console.ReadKey();
         }
 
         public void ViewEquipments()
@@ -248,19 +249,22 @@ namespace Gym_Booking_Manager
             {
                 trainerObjects[inputChoice - 1].MakeReservation(user, timeSlot, durationMinutes);
                 choosen = $"{trainerObjects[inputChoice - 1]}";
+                LogAlteration("Reservations", trainerObjects[inputChoice - 1].name + timeSlot + durationMinutes);
             }
             if (userInput == "2")
             {
                 equipmentObjects[inputChoice - 1].MakeReservation(user, timeSlot, durationMinutes);
                 choosen = $"{equipmentObjects[inputChoice - 1]}";
+                LogAlteration("Reservations", equipmentObjects[inputChoice - 1].name + timeSlot + durationMinutes);
             }
             if (userInput == "3")
             {
                 spaceObjects[inputChoice - 1].MakeReservation(user, timeSlot, durationMinutes);
                 choosen = $"{spaceObjects[inputChoice - 1]}";
-                LogAlteration("space", choosen);
+                LogAlteration("Reservations", spaceObjects[inputChoice -1].name + timeSlot + durationMinutes);
             }
             Console.WriteLine();
+
             Console.WriteLine("-- Reservation registered! --");
             Console.WriteLine();
             Console.WriteLine($"User: {user.name}");
