@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Gym_Booking_Manager
 {
     [DataContract]
-    internal class Equipment : IReservable, ICSVable, IComparable<Equipment>
+    internal class Equipment : IReservable, IComparable<Equipment>
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
@@ -31,24 +31,6 @@ namespace Gym_Booking_Manager
             this.name = name;
             this.calendar = new Calendar();
         }
-
-        // Every class T to be used for DbSet<T> needs a constructor with this parameter signature. Make sure the object is properly initialized.
-        public Equipment(Dictionary<String, String> constructionArgs)
-        {
-            this.name = constructionArgs[nameof(name)];
-            if (!Category.TryParse(constructionArgs[nameof(category)], out this.category))
-            {
-                throw new ArgumentException("Couldn't parse a valid Equipment.Category value.", nameof(category));
-            }
-
-            this.calendar = new Calendar();
-        }
-
-        public Equipment(string? newEquipment)
-        {
-            NewEquipment = newEquipment;
-        }
-
         public int CompareTo(Equipment? other)
         {
             // If other is not a valid object reference, this instance is greater.
@@ -61,12 +43,6 @@ namespace Gym_Booking_Manager
 
         public override string ToString()
         {
-            return $"{name}"; // TODO: Don't use CSVify. Make it more readable.
-        }
-
-        // Every class C to be used for DbSet<C> should have the ICSVable interface and the following implementation.
-        public string CSVify()
-        {
             return $"{nameof(category)}:{category.ToString()},{nameof(name)}:{name}";
         }
         public enum Category
@@ -74,45 +50,11 @@ namespace Gym_Booking_Manager
             Small,
             Large
         }
-
-        public void ViewTimeTable(ReservingEntity owner)
-        {
-            // Fetch
-            List<Reservation> tableSlice = this.calendar.GetSlice();
-            // Show?
-            foreach (Reservation reservation in tableSlice)
-            {
-                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
-            }
-
-        }
-
         public bool MakeReservation(ReservingEntity owner, DateTime timeSlot, double durationMinutes)
         {
             return calendar.BookReservation(owner, timeSlot, durationMinutes);
 
         }
-
-        public void CancelReservation(ReservingEntity owner, Equipment equipment)
-        {
-            //ViewTimeTable(owner);
-            //int del;
-            //Console.Write("\nCansel reservation (number): ");
-            //del = Int32.Parse(Console.ReadLine());
-            if (owner.status == "Member")
-            {
-                foreach (Reservation rs in calendar.reservations.ToList())
-                {
-                    if (rs.owner.name == owner.name)
-                    {
-                        Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
-                        equipment.calendar.reservations.Remove(rs);
-                    }
-                }
-            }
-        }
-     
-
         public void ViewReservations(Equipment equipment, ReservingEntity user)
         {
             if (user.status == "Member")
@@ -123,6 +65,7 @@ namespace Gym_Booking_Manager
                     {
                         Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
                     }
+                    Console.ReadKey();
                 }
             }
             if (user.status == "Staff")
@@ -130,6 +73,28 @@ namespace Gym_Booking_Manager
                 foreach (Reservation rs in calendar.reservations)
                 {
                     Console.WriteLine($"{rs.owner.name} {equipment} {rs.startTime}");
+                }
+                Console.ReadKey();
+            }
+>>>>>>> 096a836ee6637e341cee225e3c53047de5524db8
+        }
+        public void CancelReservation(ReservingEntity owner, Equipment equipment)
+        {
+            if (owner.status == "Member")
+            {
+                foreach (Reservation rs in calendar.reservations.ToList())
+                {
+                    if (rs.owner.name == owner.name)
+                    {
+                        equipment.calendar.reservations.Remove(rs);
+                    }
+                }
+            }
+            if (owner.status == "Staff")
+            {
+                foreach (Reservation rs in calendar.reservations.ToList())
+                {
+                    equipment.calendar.reservations.Remove(rs);
                 }
             }
         }

@@ -23,7 +23,7 @@ namespace Gym_Booking_Manager
     // Refer to official C# documentation to determine what interface to implement to allow use with
     // the class/method/operator that you want.
     [DataContract]
-    internal class Space : IReservable, ICSVable, IComparable<Space> 
+    internal class Space : IReservable,IComparable<Space> 
     {
         //private static readonly List<Tuple<Category, int>> hourlyCosts = InitializeHourlyCosts(); // Costs may not be relevant for the prototype. Let's see what the time allows.
         [DataMember]
@@ -31,27 +31,12 @@ namespace Gym_Booking_Manager
         [DataMember]
         public String name;
         [DataMember]
-        public Calendar calendar;
-
-        public Space(Category category, string name)
+        public Calendar calendar;        public Space(Category category, string name)
         {
             this.category = category;
             this.name = name;
             this.calendar = new Calendar();
         }
-
-        // Every class T to be used for DbSet<T> needs a constructor with this parameter signature. Make sure the object is properly initialized.
-        public Space(Dictionary<String, String> constructionArgs)
-        {
-            this.name = constructionArgs[nameof(name)];
-            if (!Category.TryParse(constructionArgs[nameof(category)], out this.category))
-            {
-                throw new ArgumentException("Couldn't parse a valid Space.Category value.", nameof(category));
-            }
-
-            this.calendar = new Calendar();
-        }
-
         public int CompareTo(Space? other)
         {
             // If other is not a valid object reference, this instance is greater.
@@ -64,12 +49,6 @@ namespace Gym_Booking_Manager
 
         public override string ToString()
         {
-            return $"{name}"; // TODO: Don't use CSVify. Make it more readable.
-        }
-
-        // Every class C to be used for DbSet<C> should have the ICSVable interface and the following implementation.
-        public string CSVify()
-        {
             return $"{nameof(category)}:{category.ToString()},{nameof(name)}:{name}";
         }
         public enum Category
@@ -78,34 +57,11 @@ namespace Gym_Booking_Manager
             Lane,
             Studio
         }
-
-        public void ViewTimeTable(ReservingEntity owner)
-        {
-            // Fetch
-            List<Reservation> tableSlice = this.calendar.GetSlice();
-            // Show?
-            foreach (Reservation reservation in tableSlice)
-            {
-                Console.WriteLine($"----[{calendar.reservations.IndexOf(reservation)}]----\n{reservation}");
-            }
-
-        }
-
         public bool MakeReservation(ReservingEntity owner, DateTime timeSlot, double durationMinutes)
         {
             //calendar.reservations.Add(new Reservation(owner, timeSlot));
             return calendar.BookReservation(owner, timeSlot, durationMinutes);
         }
-
-        public void CancelReservation(ReservingEntity owner)
-        {
-            ViewTimeTable(owner);
-            int del;
-            Console.Write("\nCansel reservation (number): ");
-            del = Int32.Parse(Console.ReadLine());
-            calendar.reservations.Remove(calendar.reservations[del]);
-        }
-
         public void ViewReservations(Space space, ReservingEntity user)
         {
             if (user.status == "Member")
@@ -116,6 +72,7 @@ namespace Gym_Booking_Manager
                     {
                         Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
                     }
+                    Console.ReadKey();
 
                 }
             }
@@ -124,6 +81,28 @@ namespace Gym_Booking_Manager
                 foreach (Reservation rs in calendar.reservations)
                 {
                     Console.WriteLine($"{rs.owner.name} {space} {rs.startTime}");
+                }
+                Console.ReadKey();
+            }
+        }
+        public void CancelReservation(ReservingEntity owner, Space space)
+        {
+            if (owner.status == "Member")
+            {
+                foreach (Reservation rs in calendar.reservations.ToList())
+                {
+                    if (rs.owner.name == owner.name)
+                    {
+                        space.calendar.reservations.Remove(rs);
+                    }
+                }
+            }
+            if (owner.status == "Staff")
+            {
+                foreach (Reservation rs in calendar.reservations.ToList())
+                {
+                    space.calendar.reservations.Remove(rs);
+
                 }
             }
         }

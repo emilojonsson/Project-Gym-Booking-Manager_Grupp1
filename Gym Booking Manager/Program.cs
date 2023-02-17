@@ -1,5 +1,4 @@
-﻿using Gym_Booking_Manager;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using System.Runtime.CompilerServices;
 
@@ -17,56 +16,75 @@ namespace Gym_Booking_Manager
 
         private static void RunMenu()
         {
+            Console.Clear();
             Database data1 = new Database();
             data1.LoadDataBase();
-            string userInput = "";
+            Console.WriteLine("\r\n   ___              ___           _   _             __  __                             \r\n  / __|_  _ _ __   | _ ) ___  ___| |_(_)_ _  __ _  |  \\/  |__ _ _ _  __ _ __ _ ___ _ _ \r\n | (_ | || | '  \\  | _ \\/ _ \\/ _ \\ / / | ' \\/ _` | | |\\/| / _` | ' \\/ _` / _` / -_) '_|\r\n  \\___|\\_, |_|_|_| |___/\\___/\\___/_\\_\\_|_||_\\__, | |_|  |_\\__,_|_||_\\__,_\\__, \\___|_|  \r\n       |__/                                 |___/                        |___/         \r\n");
+            ReservingEntity user = new ReservingEntity();
+            Console.WriteLine("Enter s for SIGNUP");
+            Console.WriteLine("Enter q to EXIT");
+            Console.WriteLine("");
+            Console.Write("Enter UniqeID:> ");
+            string input = Console.ReadLine();
+            Console.WriteLine("");
+            foreach (ReservingEntity rs in data1.userObjects)
+            {
+                if (rs.uniqueID == input)
+                {
+                    user = rs;
+                }
+            }
+            if(input == "q")
+            {
+                data1.SaveToDataBase();
+                Environment.Exit(0);
+            }
+            else if(input == "s")
+            {
+                Random rand = new Random();
+                string random = Convert.ToString(rand.Next(100, 500));
+                Console.WriteLine("Enter name");
+                string name = Console.ReadLine();
+                Console.WriteLine($"Enter Email");
+                string email = Console.ReadLine();
+                user.name = name;
+                user.email = email;
+                user.status = "Member";
+                user.uniqueID = random;
+                Console.WriteLine($"You UniqeID is {user.uniqueID}");
+                Console.ReadKey();
 
+            }
             bool quit = false;
 
             while (!quit)
             {
-                Console.WriteLine("\nWelcome to the menu:");
-                Console.WriteLine("1. Member");
-                Console.WriteLine("2. Non-member");
-                Console.WriteLine("3. Staff");
-                Console.WriteLine("4. Service");
-                Console.WriteLine("q. Quit program");
-                Console.Write("Enter your choice: ");
-                userInput = Console.ReadLine();
-                
-                switch (userInput)
+                switch (user.status)
                 {
-                    case "1":
-                        choiceMember(data1);
+                    case "Member":
+                        choiceMember(data1, user);
                         break;
-                    case "2":
-                        choiceNonMember(data1);
+                    case "Staff":
+                        choiceStaff(data1,user);
                         break;
-                    case "3":
-                        choiceStaff(data1);
-                        break;
-                    case "4":
-                        choiceService(data1);
-                        break;
-                    case "q":
-                        quitMessage();
-                        quit = true;
+                    case "Service":
+                        choiceService(data1,user);
                         break;
                     default:
                         Console.WriteLine("\nInvalid option");
                         RunMenu();
                         break;
                 }
+                data1.SaveToDataBase();            
             }
-            data1.SaveToDataBase();            
         }
 
-        private static void quitMessage()        {            Console.WriteLine("Press 'q' again to confirm");        }
-
-        private static string choiceService(Database data1)
+        private static string choiceService(Database data1, ReservingEntity user)
         {
+            Console.Clear();
+            Console.WriteLine("\r\n  _              _        ___              _        \r\n | |   ___  __ _(_)_ _   / __| ___ _ ___ _(_)__ ___ \r\n | |__/ _ \\/ _` | | ' \\  \\__ \\/ -_) '_\\ V / / _/ -_)\r\n |____\\___/\\__, |_|_||_| |___/\\___|_|  \\_/|_\\__\\___|\r\n           |___/                                    \r\n");
             string userInput;
-            ReservingEntity service = data1.userObjects[2]; //denna meny ska fixas till enligt Usercase
+            ReservingEntity service = user;
             Console.WriteLine("--- Service ---");
             Console.WriteLine("1. View Restrictions");
             Console.WriteLine("2. Drop Restrictions");
@@ -74,16 +92,19 @@ namespace Gym_Booking_Manager
             Console.Write("Enter your choice: ");
             userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
             switch (userInput)
             {
                 case "1":
                     data1.ViewRestrictedObject();
+                    Console.ReadLine();
                     break;
                 case "2":
                     data1.restricted.DropRestrictedObjects(data1);
                     break;
                 case "e":
+                    data1.SaveToDataBase();
                     RunMenu();
                     break;
                 default:
@@ -93,15 +114,18 @@ namespace Gym_Booking_Manager
             return userInput;
         }
 
-        private static string choiceNonMember(Database data1)
+        private static string choiceNonMember(Database data1, ReservingEntity user)
         {
-            ReservingEntity nonMember = data1.userObjects[3];
+            Console.Clear();
+            Console.WriteLine("\r\n  _  _            __  __           _              \r\n | \\| |___ _ _   |  \\/  |___ _ __ | |__  ___ _ _  \r\n | .` / _ \\ ' \\  | |\\/| / -_) '  \\| '_ \\/ -_) '_| \r\n |_|\\_\\___/_||_| |_|  |_\\___|_|_|_|_.__/\\___|_|   \r\n                                                  \r\n");
+            ReservingEntity nonMember = user;
             Console.WriteLine("--- Non-member ---");
             Console.WriteLine("1. Purchase subscription");
             Console.WriteLine("e. Go back");
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
             switch (userInput)
             {
@@ -109,6 +133,7 @@ namespace Gym_Booking_Manager
                     data1.user.UserManagement(nonMember, data1);
                     break;
                 case "e":
+                    data1.SaveToDataBase();
                     RunMenu();
                     break;
                 default:
@@ -118,10 +143,12 @@ namespace Gym_Booking_Manager
             return userInput;
         }
 
-        private static string choiceStaff(Database data1)
+        private static string choiceStaff(Database data1, ReservingEntity user)
         {
-            ReservingEntity staff = data1.userObjects[1];
-            Console.WriteLine("--- Staff ---");
+            Console.Clear();
+            Console.WriteLine("\r\n  _              _        ___ _         __  __ \r\n | |   ___  __ _(_)_ _   / __| |_ __ _ / _|/ _|\r\n | |__/ _ \\/ _` | | ' \\  \\__ \\  _/ _` |  _|  _|\r\n |____\\___/\\__, |_|_||_| |___/\\__\\__,_|_| |_|  \r\n           |___/                               \r\n");
+            ReservingEntity staff = user;
+            Console.WriteLine("");
             Console.WriteLine("1. View group activities");
             Console.WriteLine("2. View equipment");
             Console.WriteLine("3. View space");
@@ -142,6 +169,7 @@ namespace Gym_Booking_Manager
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
             switch (userInput)
             {
@@ -170,16 +198,16 @@ namespace Gym_Booking_Manager
                     data1.MakeResStaff();
                     break;
                 case "9":
-                    // Insert method here
+                    data1.CancelReservation(staff);
                     break;
                 case "10":
-                    // View logfile
+                    data1.ViewLogfile();
                     break;
                 case "11":
                     data1.restricted.SetRestrictedStatus(data1);
                     break;
                 case "12":
-                    data1.user.UserManagement(data1.userObjects[1], data1);
+                    data1.user.UserManagement(staff, data1);
                     break;
                 case "13":
                     data1.schedule.AddTemplateActivity(staff, data1);
@@ -194,6 +222,7 @@ namespace Gym_Booking_Manager
                     data1.ViewReservations(staff);
                     break;
                 case "e":
+                    data1.SaveToDataBase();
                     RunMenu();
                     break;
                 default:
@@ -203,19 +232,22 @@ namespace Gym_Booking_Manager
             return userInput;
         }
 
-        private static string choiceMember(Database data1)
+        private static string choiceMember(Database data1, ReservingEntity user)
         {
-            ReservingEntity member = data1.userObjects[0];
-            Console.WriteLine("--- Member ---");
+            Console.Clear();
+            Console.WriteLine("\r\n  _              _        __  __           _             \r\n | |   ___  __ _(_)_ _   |  \\/  |___ _ __ | |__  ___ _ _ \r\n | |__/ _ \\/ _` | | ' \\  | |\\/| / -_) '  \\| '_ \\/ -_) '_|\r\n |____\\___/\\__, |_|_||_| |_|  |_\\___|_|_|_|_.__/\\___|_|  \r\n           |___/                                         \r\n");
+            ReservingEntity member = user;
+            Console.WriteLine("");
             Console.WriteLine("1. View schedules that you are signed up to");
             Console.WriteLine("2. View and sign up to activity");
             Console.WriteLine("3. Make an individual reservation");
-            Console.WriteLine("4. Edit individual reservation");
+            Console.WriteLine("4. Cancel all reservations");
             Console.WriteLine("5. Cancel Activity");
             Console.WriteLine("e. Go back");
             Console.Write("Enter your choice: ");
             string userInput = Console.ReadLine();
             Console.WriteLine("----------------------------");
+            Console.Clear();
 
 
             switch (userInput)
@@ -230,11 +262,12 @@ namespace Gym_Booking_Manager
                     data1.MakeRes(member);
                     Console.WriteLine();
                     break;
-                case "4":                    // Insert method here                    break;
+                case "4":                    data1.CancelReservation(member);                    break;
                 case "5":
                     data1.schedule.RemoveActivity(member, data1, editInsted: false);
                     break;
                 case "e":
+                    data1.SaveToDataBase();
                     RunMenu();
                     break;
                 default:
