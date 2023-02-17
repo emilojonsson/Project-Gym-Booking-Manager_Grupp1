@@ -141,9 +141,10 @@ namespace Gym_Booking_Manager
 
                 if (spaceBookingComplete == true && trainerBookingComplete == true && equipmentBookingComplete == true)
                 {
-                    //todo printa valen ovanför och bekräfta att användaren vill lägga in dessa
-                    //if (valet true)
+                    
                     {
+                        Console.WriteLine();
+                        Console.WriteLine(" - Activity added! - ");
                         activities.Add(new Activity(activityID, activityDetails, participantLimit, timeSlot, durationMinutes, owner,
                             data.spaceObjects[addedSpace], data.trainerObjects[addedTrainer], data.equipmentObjects[addedEquipment]));
                         bookingNotComplete = false;
